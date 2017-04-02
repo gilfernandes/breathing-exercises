@@ -1,0 +1,32 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#mainDiv {
+    margin: 0;
+    display: flex;
+
+    /* This centers our sketch horizontally. */
+    justify-content: center;
+
+    /* This centers our sketch vertically. */
+    align-items: center;
+}
+
+#buttonDiv {
+    display: flex;
+    margin: 0;
+}
+
+#buttonDiv > button {
+    width: 25%;
+    height: 49px;
+    border: none;
+    background-color: #4bc6d5;
+}
+
+.activeB {
+    background-color: #4167c8 !important;
+}

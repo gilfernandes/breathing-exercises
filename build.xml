@@ -1,0 +1,14 @@
+<project name="virtuescope" default="dist" basedir=".">
+
+    <target name="dist">
+        <delete file="animations.zip" />
+        <zip destfile="animations.zip"
+             basedir="."
+             update="true"
+             excludes=".settings,build.xml,.idea,p5-tutorial.xml"
+        >
+            <exclude name=".buildpath" />
+            <exclude name=".project" />
+        </zip>
+    </target>
+</project>
