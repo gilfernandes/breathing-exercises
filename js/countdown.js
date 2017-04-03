@@ -19,6 +19,7 @@ CountDown.prototype.start = function () {
 CountDown.prototype.reset = function () {
     this.time = this.originalTime;
     countDown.started = false;
+    clearInterval(this.interval);
 };
 
 CountDown.prototype.isExpired = function () {

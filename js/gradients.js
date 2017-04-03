@@ -36,6 +36,10 @@ const gradients = function () {
         }
     };
 
+    res.elipseWithLinearGradient = function() {
+        // TODO: finish this
+    };
+
     return res;
 }();
 
