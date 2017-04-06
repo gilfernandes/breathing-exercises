@@ -1,4 +1,4 @@
-var musicPlayerActive = false;
+var musicPlayerActive = location.href.indexOf("music") > -1;
 
 function Player(files) {
     if(musicPlayerActive) {

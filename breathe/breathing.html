@@ -51,7 +51,7 @@
         this.breathePause = 3;
     }
 
-    var standardBreathing = new Breathing(totalTime, textInhale, 5, 5);
+    var standardBreathing = new Breathing(totalTime, textInhale, 4, 4);
 
     var countDown = new CountDown(standardBreathing.breathePause);
 
@@ -59,7 +59,7 @@
 
     var progress;
 
-    var buttonBar = new ButtonBar();
+    var buttonBar = new ButtonBar(standardBreathing.inhaleTime, standardBreathing.exhaleTime);
 
     var player;
 
@@ -70,14 +70,11 @@
 
     var startCounter = function () {
         counter.start(function () {
-            this.counter.counter++;
+            counter.counter++;
         });
     };
-    function setup() {
 
-        window.onblur = function () {
-            stopAnimation();
-        };
+    function setup() {
 
         calcMaxSize();
         var canvas = createBreathingCanvas();
@@ -148,10 +145,11 @@
     };
 
     var animateEllipse = function () {
-        if (ballWidth > maxWidth) {
+        // limiting the circle size
+        if (ballWidth > maxWidth || counter.counter > standardBreathing.inhaleTime) {
             waitAfterInhale();
         }
-        else if (ballHeight < minHeight) {
+        else if (ballHeight < minHeight || counter.counter > standardBreathing.exhaleTime) {
             waitAfterExhale();
         }
         incrementDecrement();
