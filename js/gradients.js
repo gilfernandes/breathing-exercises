@@ -43,11 +43,11 @@ const gradients = function () {
     return res;
 }();
 
-const gradientColors = {
-    startBack: color(0x3c, 0x5d, 0xa0),
-    endBack: color(0xff),
-    drawBack: function () {
-        gradients.setGradient(0, 0, width, height, gradientColors.startBack, gradientColors.endBack, gradients.Y_AXIS);
-    }
-};
+// const gradientColors = {
+//     startBack: color(0x3c, 0x5d, 0xa0),
+//     endBack: color(0xff),
+//     drawBack: function () {
+//         gradients.setGradient(0, 0, width, height, gradientColors.startBack, gradientColors.endBack, gradients.Y_AXIS);
+//     }
+// };
 
