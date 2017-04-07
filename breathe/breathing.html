@@ -95,14 +95,8 @@
     }
     function draw() {
         distPerFrame = calcFrameRate();
-        const gradientColors = {
-            startBack: color(0x3c, 0x5d, 0xa0),
-            endBack: color(0xff),
-            drawBack: function () {
-                gradients.setGradient(0, 0, width, height, gradientColors.startBack, gradientColors.endBack, gradients.Y_AXIS);
-            }
-        };
-        gradientColors.drawBack();
+
+        background(color(0x3c, 0x5d, 0xa0));
 
         translate(width * 0.5, height * 0.5);
 
