@@ -32,7 +32,6 @@
     const textHold = "Hold";
 
     var totalTime = 120;
-    var dir = 1;
     var distPerFrame;
 
     var breathingInterval;
@@ -54,10 +53,11 @@
     function BreathBall(width, height) {
         this.width = width;
         this.height = height;
+        this.dir = 1;
     }
 
     BreathBall.prototype.move = function() {
-        const active = dir !== 0;
+        const active = this.dir !== 0;
         if ((this.width > maxWidth || counter.counter > standardBreathing.inhaleTime) && active) {
             waitAfterInhale();
         }
@@ -76,8 +76,8 @@
     };
 
     BreathBall.prototype.incrementDecrement = function () {
-        if(dir !== 0) {
-            this.height = this.width += dir * distPerFrame;
+        if(this.dir !== 0) {
+            this.height = this.width += this.dir * distPerFrame;
         }
     };
 
@@ -185,7 +185,7 @@
 
         var canvas = createBreathingCanvas();
         initProgress(canvas);
-        dir = 1;
+        breathBall.dir = 1;
         stopAnimation();
         standardBreathing = new Breathing(totalTime, textInhale, inhaleTime, exhaleTime);
         calcMaxSize();
@@ -214,10 +214,10 @@
 
     var waitAfterInhale = function () {
         standardBreathing.text = textHold;
-        dir = 0;
+        breathBall.dir = 0;
         setTimeout(function() {
             counter.reset();
-            dir = -1;
+            breathBall.dir = -1;
             breathBall.reduceSize();
             standardBreathing.text = textExhale;
         }, standardBreathing.breathePause * 1000);
@@ -225,10 +225,10 @@
 
     var waitAfterExhale = function () {
         standardBreathing.text = textHold;
-        dir = 0;
+        breathBall.dir = 0;
         setTimeout(function() {
             counter.reset();
-            dir = 1;
+            breathBall.dir = 1;
             breathBall.augmentSize();
             standardBreathing.text = textInhale;
         }, standardBreathing.breathePause * 1000);
