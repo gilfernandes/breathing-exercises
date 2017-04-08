@@ -23,7 +23,6 @@
 </div>
 <script>
 
-    var maxWidth = 400;
     var startWidth = 50;
     var minHeight = startWidth;
     const buttonDivHeight = 50;
@@ -51,15 +50,16 @@
         this.breathePause = 3;
     }
 
-    function BreathBall(width, height) {
+    function BreathBall(width, height, maxWidth) {
         this.width = width;
         this.height = height;
         this.dir = 1;
+        this.maxWidth = maxWidth;
     }
 
     BreathBall.prototype.move = function() {
         const active = this.dir !== 0;
-        if ((this.width > maxWidth || counter.counter > standardBreathing.inhaleTime) && active) {
+        if ((this.width > this.maxWidth || counter.counter > standardBreathing.inhaleTime) && active) {
             waitAfterInhale();
         }
         else if ((this.height < minHeight  || counter.counter > standardBreathing.inhaleTime) && active) {
@@ -69,7 +69,7 @@
     };
 
     BreathBall.prototype.reduceSize = function() {
-        this.width = this.height = maxWidth -  1;
+        this.width = this.height = this.maxWidth -  1;
     };
 
     BreathBall.prototype.augmentSize = function() {
@@ -121,7 +121,7 @@
 
         window.onresize = function () { // Adapt the layout on resize
             canvas.size(window.innerWidth, window.innerHeight - buttonDivHeight);
-            maxWidth = calcMaxWidth(window.innerWidth, window.innerHeight);
+            breathBall.maxWidth = calcMaxWidth(window.innerWidth, window.innerHeight);
         };
 
         startCounter();
@@ -165,9 +165,9 @@
     };
 
     var calcMaxSize = function () {
-        maxWidth = calcMaxWidth(window.innerWidth, window.innerHeight);
+        var maxWidth = calcMaxWidth(window.innerWidth, window.innerHeight);
         startWidth = minHeight = maxWidth - 100;
-        breathBall = new BreathBall(startWidth, startWidth);
+        breathBall = new BreathBall(startWidth, startWidth, maxWidth);
     };
 
     var fillText = function () {
@@ -210,7 +210,7 @@
 
     var calcFrameRate = function () {
         const frameR = frameRate();
-        return breatheCalculations.calcDistance(standardBreathing.exhaleTime, maxWidth - startWidth, (frameR | 0) === 0 ? 60 : frameR);
+        return breatheCalculations.calcDistance(standardBreathing.exhaleTime, breathBall.maxWidth - startWidth, (frameR | 0) === 0 ? 60 : frameR);
     };
 
     var waitAfterInhale = function () {
