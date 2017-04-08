@@ -24,7 +24,6 @@
 <script>
 
     var startWidth = 50;
-    var minHeight = startWidth;
     const buttonDivHeight = 50;
 
     const textInhale = "Breathe in";
@@ -52,9 +51,8 @@
         this.breathePause = 3;
     }
 
-    function BreathBall(width, height, maxWidth) {
+    function BreathBall(width, maxWidth) {
         this.width = width;
-        this.height = height;
         this.dir = 1;
         this.maxWidth = maxWidth;
     }
@@ -64,23 +62,23 @@
         if ((this.width > this.maxWidth || counter.counter > standardBreathing.inhaleTime) && active) {
             waitAfterInhale();
         }
-        else if ((this.height < minHeight || counter.counter > standardBreathing.inhaleTime) && active) {
+        else if ((this.width < startWidth || counter.counter > standardBreathing.inhaleTime) && active) {
             waitAfterExhale();
         }
         this.incrementDecrement();
     };
 
     BreathBall.prototype.reduceSize = function () {
-        this.width = this.height = this.maxWidth - 1;
+        this.width = this.maxWidth - 1;
     };
 
     BreathBall.prototype.augmentSize = function () {
-        this.height = this.width + minHeight + 5;
+        this.width = startWidth + 2;
     };
 
     BreathBall.prototype.incrementDecrement = function () {
         if (this.dir !== 0) {
-            this.height = this.width += this.dir * distPerFrame;
+            this.width += this.dir * distPerFrame;
         }
     };
 
@@ -188,8 +186,8 @@
 
     var calcMaxSize = function () {
         var maxWidth = calcMaxWidth(window.innerWidth, window.innerHeight);
-        startWidth = minHeight = maxWidth - 100;
-        breathBall = new BreathBall(startWidth, startWidth, maxWidth);
+        startWidth = maxWidth - 100;
+        breathBall = new BreathBall(startWidth, maxWidth);
     };
 
     var fillText = function () {
