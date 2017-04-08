@@ -75,7 +75,7 @@
     };
 
     BreathBall.prototype.augmentSize = function () {
-        this.height = this.width + minHeight + 5
+        this.height = this.width + minHeight + 5;
     };
 
     BreathBall.prototype.incrementDecrement = function () {
@@ -150,7 +150,7 @@
 
         player.playRandom();
 
-        breatheText = new BreatheText(255, standardBreathing.textSize, CENTER, BOTTOM);
+        breatheText = new BreatheText(255, standardBreathing.textSize, CENTER, CENTER);
     }
 
     function draw() {
@@ -249,7 +249,6 @@
     var waitAfterExhale = function () {
         standardBreathing.text = textHold;
         breathBall.dir = 0;
-        breathBall.augmentSize();
         setTimeout(function () {
             counter.reset();
             breathBall.dir = 1;
