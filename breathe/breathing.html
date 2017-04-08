@@ -227,6 +227,7 @@
     var waitAfterExhale = function () {
         standardBreathing.text = textHold;
         breathBall.dir = 0;
+        breathBall.augmentSize();
         setTimeout(function() {
             counter.reset();
             breathBall.dir = 1;
