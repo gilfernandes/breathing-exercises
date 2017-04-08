@@ -38,6 +38,8 @@
 
     var breatheText;
 
+    var ctx;
+
     function Breathing(time, text, inhaleTime, exhaleTime) {
         this.time = time;
         this.text = text;
@@ -57,33 +59,51 @@
         this.maxWidth = maxWidth;
     }
 
-    BreathBall.prototype.move = function() {
+    BreathBall.prototype.move = function () {
         const active = this.dir !== 0;
         if ((this.width > this.maxWidth || counter.counter > standardBreathing.inhaleTime) && active) {
             waitAfterInhale();
         }
-        else if ((this.height < minHeight  || counter.counter > standardBreathing.inhaleTime) && active) {
+        else if ((this.height < minHeight || counter.counter > standardBreathing.inhaleTime) && active) {
             waitAfterExhale();
         }
         this.incrementDecrement();
     };
 
-    BreathBall.prototype.reduceSize = function() {
-        this.width = this.height = this.maxWidth -  1;
+    BreathBall.prototype.reduceSize = function () {
+        this.width = this.height = this.maxWidth - 1;
     };
 
-    BreathBall.prototype.augmentSize = function() {
+    BreathBall.prototype.augmentSize = function () {
         this.height = this.width + minHeight + 5
     };
 
     BreathBall.prototype.incrementDecrement = function () {
-        if(this.dir !== 0) {
+        if (this.dir !== 0) {
             this.height = this.width += this.dir * distPerFrame;
         }
     };
 
-    BreathBall.prototype.display = function() {
-        gradients.gradialRadient(0, 0, color(255), color(0x3c, 0x5d, 0xa0), this.width / 2);
+    BreathBall.prototype.display = function () {
+
+        var rotation1 = map(50, 0, 100, 0, this.width);
+        var rotation2 = map(50, 0, 100, 0, this.width);
+        var location = map(50, 0, 100, 0, this.width);
+        var sizeEllipse = this.width / 2;
+        var xEllipse = 0;
+        var yEllipse = 0;
+
+        var startGrad = createVector(xEllipse - sizeEllipse / 2 + rotation1 + location, yEllipse + sizeEllipse / 2 - rotation2 - location);
+        var endGrad = createVector(xEllipse + sizeEllipse / 2 - rotation1 - location, yEllipse - sizeEllipse / 2 + rotation2 + location);
+
+        //ellipse
+        var gradient = ctx.createLinearGradient(startGrad.x, startGrad.y, endGrad.x, endGrad.y);
+        gradient.addColorStop(0, "#3c5da0");
+        gradient.addColorStop(1, "#ffffff");
+        ctx.beginPath();
+        ctx.ellipse(xEllipse, yEllipse, sizeEllipse, sizeEllipse, 45 * Math.PI / 180, 0, 2 * Math.PI);
+        ctx.fillStyle = gradient;
+        ctx.fill();
     };
 
     var breathBall;
@@ -112,7 +132,9 @@
     function setup() {
 
         calcMaxSize();
+
         var canvas = createBreathingCanvas();
+        ctx = canvas.drawingContext;
         initProgress(canvas);
 
         updateTimer();
@@ -216,7 +238,7 @@
     var waitAfterInhale = function () {
         standardBreathing.text = textHold;
         breathBall.dir = 0;
-        setTimeout(function() {
+        setTimeout(function () {
             counter.reset();
             breathBall.dir = -1;
             breathBall.reduceSize();
@@ -228,7 +250,7 @@
         standardBreathing.text = textHold;
         breathBall.dir = 0;
         breathBall.augmentSize();
-        setTimeout(function() {
+        setTimeout(function () {
             counter.reset();
             breathBall.dir = 1;
             breathBall.augmentSize();
