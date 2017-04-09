@@ -4,35 +4,46 @@ function Grid(rows, cols, colorSize, colours) {
     this.colorSize = colorSize;
     this.coloured = [];
     this.colours = colours;
+    this.noColours = false;
 }
 
 Grid.prototype.changeColor = function() {
+    if(!this.noColours) {
+        function generateRowAndCol() {
+            var fieldNumber = parseInt(random(0, this.rows * this.cols), 10);
+            var row = parseInt(fieldNumber / this.cols, 10);
+            var col = fieldNumber % this.cols;
+            return {row: row, col: col};
+        }
 
-    function generateRowAndCol() {
-        var fieldNumber = parseInt(random(0, this.rows * this.cols), 10);
-        var row = parseInt(fieldNumber / this.cols, 10);
-        var col = fieldNumber % this.cols;
-        return {row: row, col: col};
-    }
-
-    for(var i = 0; i < this.colorSize; i++) {
-        var __ret = generateRowAndCol.call(this);
-        var row = __ret.row;
-        var col = __ret.col;
-        var exists = false;
-        for(var j = this.coloured.length - 1; j >= 0; j--) {
-            if(col === this.coloured[j].col && row === this.coloured[j].row) {
-                exists = true;
-                break;
+        for (var i = 0; i < this.colorSize; i++) {
+            var __ret = generateRowAndCol.call(this);
+            var row = __ret.row;
+            var col = __ret.col;
+            var exists = false;
+            for (var j = this.coloured.length - 1; j >= 0; j--) {
+                if (col === this.coloured[j].col && row === this.coloured[j].row) {
+                    exists = true;
+                    break;
+                }
+            }
+            if (!exists) {
+                this.coloured[i] = {row: row, col: col};
+            }
+            else {
+                i--; // Retry
             }
         }
-        if(!exists) {
-            this.coloured[i] = {row: row, col: col};
-        }
-        else {
-            i--; // Retry
-        }
     }
+};
+
+Grid.prototype.removeColours = function() {
+    this.coloured = [];
+    this.noColours = true;
+};
+
+Grid.prototype.activateColours = function() {
+    this.noColours = false;
 };
 
 Grid.prototype.display = function() {
@@ -55,7 +66,6 @@ Grid.prototype.display = function() {
 };
 
 Grid.prototype.randomColour = function() {
-    const random2 = 0;
-    console.log(parseInt(random(0, 2), 10));
+    const random2 = parseInt(random(0, 2), 10);
     return color(this.colours[random2]);
 };

@@ -7,6 +7,31 @@ html, body {
     display: flex;
 }
 
-canvas {
+canvas, #buttonDiv {
     margin: auto auto;
+}
+
+#buttonDiv {
+    width: 100px;
+}
+
+#buttonDiv button {
+    margin: 20px 0 0 0;
+    width: 100%;
+}
+
+#mainMessage {
+    font-family: 'Indie Flower', cursive;
+    text-align: center;
+}
+
+#colourDiv {
+    width: 100%;
+    text-align: center;
+}
+
+#colourDiv > button {
+    width: 20%;
+    border: 0;
+    height: 40px;
 }
