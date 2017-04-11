@@ -1,3 +1,5 @@
+const colourDiv = "colourDiv";
+
 function GameControls(grid) {
     this.startButton = null;
     this.animationOn = true;
@@ -13,6 +15,7 @@ GameControls.prototype.init = function() {
     this.startButton = createButton("Start").parent(buttonDivId);
     const gc = this;
 
+
     this.startButton.mousePressed(function() {
         gc.animationOn = false;
         noLoop();
@@ -26,9 +29,8 @@ GameControls.prototype.init = function() {
             setTimeout(function() {
                 gc.emptyGrid();
                 gc.writeMessage("<p>Draw the pattern by clicking first on the colour and then on the grid boxes.</p>");
-                const colourDiv = "colourDiv";
+                gc.removeColorDiv();
                 gc.colourDiv = gc.createDivWithId(colourDiv);
-                console.log(this.colourDiv);
                 gc.colourButtons = [];
                 gc.grid.colours.forEach(function(c) {
                     const button = createButton("").parent(colourDiv);
@@ -80,8 +82,11 @@ GameControls.prototype.createDivWithId = function(id) {
 };
 
 GameControls.prototype.removeColorDiv = function() {
-    if(this.colourDiv !== null) {
-        this.colourDiv.remove();
+    const colourDivElem = document.getElementById(colourDiv);
+    console.log(colourDivElem);
+    if(colourDivElem !== null) {
+        colourDivElem.parentNode.removeChild(colourDivElem);
+        console.log("Remove Colour div");
     }
 };
 
