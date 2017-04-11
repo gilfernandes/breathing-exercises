@@ -5,6 +5,8 @@ function Grid(rows, cols, colorSize, colours) {
     this.coloured = [];
     this.colours = colours;
     this.noColours = false;
+    this.drawClick = false;
+    this.clickColor = color(100, 100, 100);
 }
 
 Grid.prototype.changeColor = function() {
@@ -47,20 +49,33 @@ Grid.prototype.activateColours = function() {
 };
 
 Grid.prototype.display = function() {
-    var elementWidth = (width - 1) / this.cols;
-    var elementHeight = (height - 1) / this.rows;
-    var grid = this;
+    const elementWidth = (width - 1) / this.cols;
+    const elementHeight = (height - 1) / this.rows;
+    const grid = this;
     for (var x = 0; x < this.rows; x++) {
         for (var y = 0; y < this.cols; y++) {
             var colorFill = color(255);
-            this.coloured.forEach(function(rowCol) {
-                if(rowCol.row === x && rowCol.col === y) {
-                    colorFill = grid.randomColour();
+            const xa = elementWidth * x + 1;
+            const ya = elementHeight * y + 1;
+
+            if(!this.drawClick) {
+                this.coloured.forEach(function (rowCol) {
+                    if (rowCol.row === x && rowCol.col === y) {
+                        colorFill = grid.randomColour();
+                    }
+                });
+            }
+            else { // Draw the clicks
+                const xb = xa + elementWidth - 1;
+                const yb = ya + elementWidth - 1;
+                if(mouseX > xa && mouseY > ya && mouseX < xb && mouseY < yb) {
+                    colorFill = this.clickColor;
+                    this.drawClick = false;
                 }
-            });
+            }
             fill(colorFill);
             noStroke();
-            rect(elementWidth * x + 1, elementHeight * y + 1, elementWidth - 1, elementHeight-1);
+            rect(xa, ya, elementWidth - 1, elementHeight - 1);
         }
     }
 };
@@ -68,4 +83,17 @@ Grid.prototype.display = function() {
 Grid.prototype.randomColour = function() {
     const random2 = parseInt(random(0, 2), 10);
     return color(this.colours[random2]);
+};
+
+Grid.prototype.mouseRelease = function() {
+    if(this.drawClick) {
+        this.coloured = [];
+        loop();
+        noLoop();
+    }
+};
+
+Grid.prototype.activateClickMode = function(clickColor) {
+    this.drawClick = true;
+    this.clickColor = clickColor;
 };

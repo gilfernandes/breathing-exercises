@@ -19,8 +19,6 @@
 </div>
 <script>
 
-
-
     var grid;
 
     var gameControls;
@@ -32,11 +30,16 @@
     };
 
     function setup() {
-        createMemoryCanvas();
+        canvas = createMemoryCanvas();
         noLoop();
         grid = new Grid(3, 3, 2, ["#ff0000", "#00ff00"]);
-        gameControls = new GameControls();
+        gameControls = new GameControls(grid);
         gameControls.init();
+        canvas.mouseReleased(function () {
+            if(!gameControls.animationOn) {
+                grid.mouseRelease();
+            }
+        });
     }
 
     function draw() {

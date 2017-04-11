@@ -1,46 +1,52 @@
-function GameControls() {
+function GameControls(grid) {
     this.startButton = null;
     this.animationOn = true;
     this.message = null;
     this.colourButtons = null;
+    this.colourDiv = null;
+    this.grid = grid;
 }
 
 GameControls.prototype.init = function() {
     const buttonDivId = "buttonDiv";
     this.createDivWithId(buttonDivId);
     this.startButton = createButton("Start").parent(buttonDivId);
-    var gc = this;
+    const gc = this;
 
     this.startButton.mousePressed(function() {
         gc.animationOn = false;
         noLoop();
         gc.writeMessage("<p>Memorize the next pattern and then draw it after it disappears</p>");
         gc.emptyGrid();
+        gc.removeColorDiv();
         setTimeout(function() {
-            grid.activateColours();
+            gc.grid.activateColours();
             loop();
             noLoop();
             setTimeout(function() {
                 gc.emptyGrid();
                 gc.writeMessage("<p>Draw the pattern by clicking first on the colour and then on the grid boxes.</p>");
                 const colourDiv = "colourDiv";
-                gc.createDivWithId(colourDiv);
-                this.colourButtons = [];
-                grid.colours.forEach(c => {
+                gc.colourDiv = gc.createDivWithId(colourDiv);
+                console.log(this.colourDiv);
+                gc.colourButtons = [];
+                gc.grid.colours.forEach(function(c) {
                     const button = createButton("").parent(colourDiv);
-                    this.colourButtons.push(button);
+                    gc.colourButtons.push(button);
                     button.style("background-color: " + c);
+                    button.mousePressed(function(e) {
+                        const colourArray = e.srcElement.style.backgroundColor.replace(/[^\d,]/g, '').split(',');
+                        gc.grid.activateClickMode(color(colourArray[0], colourArray[1], colourArray[2]));
+                    });
                 });
                 createDiv("");
             }, 5000);
-        }, 5000);
-
-
+        }, 2000);
     })
 };
 
 GameControls.prototype.emptyGrid = function() {
-    grid.removeColours();
+    this.grid.removeColours();
     loop();
     noLoop();
 };
@@ -69,6 +75,13 @@ GameControls.prototype.writeMessage = function(html) {
 };
 
 GameControls.prototype.createDivWithId = function(id) {
-    var div = createDiv("");
+    const div = createDiv("");
     return div.attribute("id", id);
 };
+
+GameControls.prototype.removeColorDiv = function() {
+    if(this.colourDiv !== null) {
+        this.colourDiv.remove();
+    }
+};
+
