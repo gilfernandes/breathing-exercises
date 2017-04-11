@@ -1,4 +1,4 @@
-function Grid(rows, cols, colorSize, colours) {
+function Grid(rows, cols, colorSize, colours, gameHistory) {
     this.rows = rows;
     this.cols = cols;
     this.colorSize = colorSize;
@@ -8,6 +8,7 @@ function Grid(rows, cols, colorSize, colours) {
     this.drawClick = false;
     this.clickColor = color(100, 100, 100);
     this.clickHistory = [];
+    this.gameHistory = gameHistory;
 }
 
 Grid.prototype.changeColor = function() {
@@ -54,6 +55,7 @@ Grid.prototype.display = function() {
     const elementWidth = (width - 1) / this.cols;
     const elementHeight = (height - 1) / this.rows;
     const grid = this;
+    const historyElements = [];
     for (var x = 0; x < this.rows; x++) {
         for (var y = 0; y < this.cols; y++) {
             var colorFill = color(255);
@@ -64,6 +66,7 @@ Grid.prototype.display = function() {
                 this.coloured.forEach(function (rowCol) {
                     if (rowCol.row === x && rowCol.col === y) {
                         colorFill = grid.randomColour();
+                        historyElements.push({col: x, row: y, color: colorFill});
                     }
                 });
             }
@@ -74,6 +77,7 @@ Grid.prototype.display = function() {
                     const coords = this.clickHistory[i];
                     if (coords.mouseX > xa && coords.mouseY > ya && coords.mouseX < xb && coords.mouseY < yb) {
                         colorFill = coords.clickColor;
+                        historyElements.push({col: x, row: y, color: colorFill});
                     }
                 }
             }
@@ -82,6 +86,8 @@ Grid.prototype.display = function() {
             rect(xa, ya, elementWidth - 1, elementHeight - 1);
         }
     }
+    console.log(this.gameHistory);
+    this.gameHistory.drawHistoryInsert(historyElements);
     this.drawClick = false;
 };
 
