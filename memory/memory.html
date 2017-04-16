@@ -45,10 +45,13 @@
         grid = new Grid(3, 3, 2, ["#ff0000", "#00ff00", "#0000ff"], gameHistory, successStory);
         gameControls = new GameControls(grid, gameHistory, successStory);
         gameControls.init();
-        canvas.mousePressed(function () {
+        canvas.mouseReleased(function () {
             if(!gameControls.animationOn) {
                 grid.mouseRelease();
             }
+        });
+        canvas.touchStarted(function() {
+            return false;
         });
     }
 
