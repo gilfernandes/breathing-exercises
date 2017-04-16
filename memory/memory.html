@@ -30,6 +30,8 @@
 
     var successStory;
 
+    var preventMouseDouble = false;
+
     const createMemoryCanvas = function () {
         const width = window.innerWidth < window.innerHeight ? window.innerWidth * 0.75 : window.innerHeight * 0.75;
         const canvas = createCanvas(width, width);
@@ -46,9 +48,13 @@
         gameControls = new GameControls(grid, gameHistory, successStory);
         gameControls.init();
 
-        canvas.touchEnded(function() {
-            if (!gameControls.animationOn) {
-                grid.mouseRelease();
+        canvas.mouseReleased(function() {
+            if(!preventMouseDouble) {
+                preventMouseDouble = true;
+                if (!gameControls.animationOn) {
+                    grid.mouseRelease();
+                }
+                setTimeout(function() {preventMouseDouble = false}, 500);
             }
         });
     }
