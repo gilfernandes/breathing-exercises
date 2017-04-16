@@ -20,7 +20,7 @@ SuccessStory.prototype.countLastSuccesses = function () {
 };
 
 SuccessStory.prototype.progressLevel = function(fun) {
-    if(this.countLastSuccesses() >= this.numberOfSuccessesToProceed) {
+    if(this.countLastSuccesses() > 0 && this.countLastSuccesses() % this.numberOfSuccessesToProceed === 0) {
         fun();
     }
 };
