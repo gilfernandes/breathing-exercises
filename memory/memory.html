@@ -46,7 +46,7 @@
         gameControls = new GameControls(grid, gameHistory, successStory);
         gameControls.init();
 
-        canvas.touchStarted(function() {
+        canvas.touchEnded(function() {
             if (!gameControls.animationOn) {
                 grid.mouseRelease();
             }
