@@ -1,4 +1,4 @@
-function Grid(rows, cols, colorSize, colours, gameHistory) {
+function Grid(rows, cols, colorSize, colours, gameHistory, successStory) {
     this.rows = rows;
     this.cols = cols;
     this.colorSize = colorSize;
@@ -9,7 +9,14 @@ function Grid(rows, cols, colorSize, colours, gameHistory) {
     this.clickColor = color(100, 100, 100);
     this.clickHistory = [];
     this.gameHistory = gameHistory;
+    this.gameControls = null;
+    this.successStory = successStory;
+    this.resultPanel = new ResultPanel();
 }
+
+Grid.prototype.setGameControls = function(gameControls) {
+    this.gameControls = gameControls;
+};
 
 Grid.prototype.changeColor = function() {
     if(!this.noColours) {
@@ -21,9 +28,9 @@ Grid.prototype.changeColor = function() {
         }
 
         for (var i = 0; i < this.colorSize; i++) {
-            var __ret = generateRowAndCol.call(this);
-            var row = __ret.row;
-            var col = __ret.col;
+            const __ret = generateRowAndCol.call(this);
+            const row = __ret.row;
+            const col = __ret.col;
             var exists = false;
             for (var j = this.coloured.length - 1; j >= 0; j--) {
                 if (col === this.coloured[j].col && row === this.coloured[j].row) {
@@ -86,14 +93,12 @@ Grid.prototype.display = function() {
             rect(xa, ya, elementWidth - 1, elementHeight - 1);
         }
     }
-    console.log(this.gameHistory);
     this.gameHistory.drawHistoryInsert(historyElements);
-    this.drawClick = false;
+    // this.drawClick = false;
 };
 
 Grid.prototype.randomColour = function() {
     const randomVar = parseInt(random(0, this.colours.length), 10);
-    console.log(this.colours);
     return color(this.colours[randomVar]);
 };
 
@@ -103,6 +108,72 @@ Grid.prototype.mouseRelease = function() {
         this.clickHistory.push({mouseX: mouseX, mouseY: mouseY, clickColor: this.clickColor});
         loop();
         noLoop();
+        this.checkGuess();
+    }
+};
+
+Grid.prototype.checkGuess = function() {
+    const drawHistory = this.gameHistory.drawHistory;
+
+    function findLastGuessTarget() {
+        var guess = null;
+        for (var i = drawHistory.length - 1; i >= 0; i--) {
+            const entry = drawHistory[i];
+            if (entry.guess) {
+                guess = entry;
+                break;
+            }
+        }
+        return guess;
+    }
+
+    const guess = findLastGuessTarget();
+    const lastTry = drawHistory[drawHistory.length - 1];
+
+    function checkCorrect() {
+        const correctArray = [];
+        guess.forEach(function (g) {
+            var correct = false;
+            for (var j = 0; j < lastTry.length; j++) {
+                const lt = lastTry[j];
+                correct = g.row === lt.row && g.col === lt.col
+                    && g.color.levels.every(function (level, i) {
+                        return lt.color.levels[i] === level
+                    });
+                if (correct) {
+                    break;
+                }
+            }
+            correctArray.push(correct);
+        });
+        return correctArray;
+    }
+
+    function processSuccessError(grid) {
+        const correctArray = checkCorrect();
+        const success = correctArray.every(function(b) {return b});
+        successStory.pushResult(success);
+        if(success) {
+            this.gameControls.printSuccess();
+        }
+        else {
+            this.gameControls.printError();
+        }
+        successStory.progressLevel(function() {
+            if(grid.colorSize + 1 < (grid.rows * grid.cols) / 2) {
+                grid.colorSize += 1;
+            }
+            else {
+                grid.colorSize = 2;
+                grid.cols = grid.rows += 1;
+            }
+        });
+        grid.resultPanel.update(successStory.successCount(), successStory.failCount());
+    }
+
+    if(guess.length === lastTry.length) {
+        this.drawClick = false;
+        processSuccessError(this);
     }
 };
 

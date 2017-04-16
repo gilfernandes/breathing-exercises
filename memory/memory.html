@@ -10,6 +10,8 @@
     <script language="javascript" type="text/javascript" src="../js/memory/grid.js"></script>
     <script language="javascript" type="text/javascript" src="../js/memory/gameControls.js"></script>
     <script language="javascript" type="text/javascript" src="../js/memory/history.js"></script>
+    <script language="javascript" type="text/javascript" src="../js/memory/successStory.js"></script>
+    <script language="javascript" type="text/javascript" src="../js/memory/resultPanel.js"></script>
 
     <!-- this line removes any default padding and style. you might only need one of these values set. -->
     <link rel="stylesheet" type="text/css" href="../assets/css/memory.css">
@@ -26,8 +28,10 @@
 
     var gameHistory;
 
-    var createMemoryCanvas = function () {
-        const width = window.innerWidth < window.innerHeight ? window.innerWidth * 0.8 : window.innerHeight * 0.8;
+    var successStory;
+
+    const createMemoryCanvas = function () {
+        const width = window.innerWidth < window.innerHeight ? window.innerWidth * 0.75 : window.innerHeight * 0.75;
         const canvas = createCanvas(width, width);
         canvas.parent("#mainDiv");
         return canvas;
@@ -37,8 +41,9 @@
         canvas = createMemoryCanvas();
         noLoop();
         gameHistory = new GameHistory();
-        grid = new Grid(4, 4, 2, ["#ff0000", "#00ff00", "#0000ff"], gameHistory);
-        gameControls = new GameControls(grid);
+        successStory = new SuccessStory(2);
+        grid = new Grid(3, 3, 2, ["#ff0000", "#00ff00", "#0000ff"], gameHistory, successStory);
+        gameControls = new GameControls(grid, gameHistory, successStory);
         gameControls.init();
         canvas.mouseReleased(function () {
             if(!gameControls.animationOn) {

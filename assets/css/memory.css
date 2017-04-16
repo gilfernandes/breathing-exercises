@@ -23,6 +23,7 @@ canvas, #buttonDiv {
 #mainMessage {
     font-family: 'Indie Flower', cursive;
     text-align: center;
+    font-size: 1.5em;
 }
 
 #colourDiv {
@@ -34,4 +35,34 @@ canvas, #buttonDiv {
     width: 20%;
     border: 0;
     height: 40px;
+}
+
+#buttonDiv {
+    width: 100%;
+    text-align: center;
+}
+
+#buttonDiv > button {
+    width: 25%;
+    font-size: 1.5em;
+}
+
+.success {
+    color: green;
+    font-weight: bold;
+}
+
+.fail {
+    color: darkred;
+    font-weight: bold;
+}
+
+#resultPanel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    padding: 1em;
+    font-size: 1.5em;
+    background-color: aliceblue;
+    font-family: 'Indie Flower', cursive;
 }
