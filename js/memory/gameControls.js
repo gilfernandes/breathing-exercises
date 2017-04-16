@@ -46,7 +46,7 @@ function handleStartButtonClick(gc) {
                         gc.colourButtons.push(button);
                         button.style("background-color: " + c);
                         button.mousePressed(function (e) {
-                            const colourArray = e.srcElement.style.backgroundColor.replace(/[^\d,]/g, '').split(',');
+                            const colourArray = e.target.style.backgroundColor.replace(/[^\d,]/g, '').split(',');
                             gc.grid.activateClickMode(color(colourArray[0], colourArray[1], colourArray[2]));
                         });
                     });
