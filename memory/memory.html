@@ -49,15 +49,16 @@
         gameControls.init();
 
         canvas.mouseReleased(function () {
-            createDiv("<p class='debug'>mouseRelease</p>");
+
             if(!preventDouble) {
+                preventDouble = true;
+                createDiv("<p class='debug'>mouseRelease</p>");
                 if (!gameControls.animationOn) {
                     grid.mouseRelease();
                 }
-                preventDouble = true;
                 setTimeout(function() {
                     preventDouble = false;
-                }, 200);
+                }, 3000);
             }
         });
         canvas.touchStarted(function() {
