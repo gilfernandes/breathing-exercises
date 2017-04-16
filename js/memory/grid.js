@@ -185,6 +185,8 @@ Grid.prototype.checkGuess = function() {
     }
 
     removeAdjacentDuplicates();
+    // TODO: remove
+    createDiv(JSON.stringify(drawHistory[drawHistory.length - 1]));
 
     const guess = findLastGuessTarget();
     const lastTry = drawHistory[drawHistory.length - 1];
