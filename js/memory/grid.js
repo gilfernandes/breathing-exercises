@@ -115,6 +115,18 @@ Grid.prototype.mouseRelease = function() {
 Grid.prototype.checkGuess = function() {
     const drawHistory = this.gameHistory.drawHistory;
 
+    function removeAdjacentDuplicates() {
+        var last = drawHistory[drawHistory.length - 1];
+        var previousDraw = null;
+        for (var i = last.length - 1; i >= 0; i--) {
+            const currentDraw = last[i];
+            if(previousDraw !== null && !currentDraw.guess && previousDraw.col === currentDraw.col && previousDraw.row === currentDraw.row) {
+                last.splice(i, 1);
+            }
+            previousDraw = currentDraw;
+        }
+    }
+
     function findLastGuessTarget() {
         var guess = null;
         for (var i = drawHistory.length - 1; i >= 0; i--) {
@@ -127,8 +139,11 @@ Grid.prototype.checkGuess = function() {
         return guess;
     }
 
-    const guess = findLastGuessTarget();
-    const lastTry = drawHistory[drawHistory.length - 1];
+    function sameColor(col1, col2) {
+        return col1.levels.every(function (level, i) {
+            return col2.levels[i] === level;
+        });
+    }
 
     function checkCorrect() {
         const correctArray = [];
@@ -137,9 +152,7 @@ Grid.prototype.checkGuess = function() {
             for (var j = 0; j < lastTry.length; j++) {
                 const lt = lastTry[j];
                 correct = g.row === lt.row && g.col === lt.col
-                    && g.color.levels.every(function (level, i) {
-                        return lt.color.levels[i] === level
-                    });
+                    && sameColor(g.color, lt.color);
                 if (correct) {
                     break;
                 }
@@ -170,6 +183,11 @@ Grid.prototype.checkGuess = function() {
         });
         grid.resultPanel.update(successStory.successCount(), successStory.failCount());
     }
+
+    removeAdjacentDuplicates();
+
+    const guess = findLastGuessTarget();
+    const lastTry = drawHistory[drawHistory.length - 1];
 
     if(guess.length === lastTry.length) {
         this.drawClick = false;
