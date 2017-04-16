@@ -49,6 +49,7 @@
         gameControls.init();
 
         canvas.mouseReleased(function () {
+            createDiv("<p class='debug'>mouseRelease</p>");
             if(!preventDouble) {
                 if (!gameControls.animationOn) {
                     grid.mouseRelease();
@@ -58,6 +59,12 @@
                     preventDouble = false;
                 }, 200);
             }
+        });
+        canvas.touchStarted(function() {
+            createDiv("<p class='debug'>touchStarted</p>");
+        });
+        canvas.touchStarted(function() {
+            createDiv("<p class='debug'>touchEnded</p>");
         });
     }
 
