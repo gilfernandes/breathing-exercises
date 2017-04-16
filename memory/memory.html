@@ -18,7 +18,6 @@
 
 </head>
 <body>
-<h1>Test on mobile</h1>
 <div id="mainDiv">
 </div>
 <script>
@@ -30,6 +29,8 @@
     var gameHistory;
 
     var successStory;
+
+    var preventDouble = false;
 
     const createMemoryCanvas = function () {
         const width = window.innerWidth < window.innerHeight ? window.innerWidth * 0.75 : window.innerHeight * 0.75;
@@ -46,13 +47,17 @@
         grid = new Grid(3, 3, 2, ["#ff0000", "#00ff00", "#0000ff"], gameHistory, successStory);
         gameControls = new GameControls(grid, gameHistory, successStory);
         gameControls.init();
+
         canvas.mouseReleased(function () {
-            if(!gameControls.animationOn) {
-                grid.mouseRelease();
+            if(!preventDouble) {
+                if (!gameControls.animationOn) {
+                    grid.mouseRelease();
+                }
+                preventDouble = true;
+                setTimeout(function() {
+                    preventDouble = false;
+                }, 200);
             }
-        });
-        canvas.touchStarted(function() {
-            return false;
         });
     }
 
