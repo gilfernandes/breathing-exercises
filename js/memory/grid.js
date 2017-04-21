@@ -12,6 +12,7 @@ function Grid(rows, cols, colorSize, colours, gameHistory, successStory) {
     this.gameControls = null;
     this.successStory = successStory;
     this.resultPanel = new ResultPanel();
+    this.progress = false;
 }
 
 Grid.prototype.setGameControls = function(gameControls) {
@@ -55,6 +56,7 @@ Grid.prototype.removeColours = function() {
 };
 
 Grid.prototype.activateColours = function() {
+    this.drawClick = false;
     this.noColours = false;
 };
 
@@ -94,7 +96,6 @@ Grid.prototype.display = function() {
         }
     }
     this.gameHistory.drawHistoryInsert(historyElements);
-    // this.drawClick = false;
 };
 
 Grid.prototype.randomColour = function() {
@@ -172,15 +173,7 @@ Grid.prototype.checkGuess = function() {
         else {
             this.gameControls.printError();
         }
-        successStory.progressLevel(function() {
-            if(grid.colorSize + 1 < (grid.rows * grid.cols) / 2) {
-                grid.colorSize += 1;
-            }
-            else {
-                grid.colorSize = 2;
-                grid.cols = grid.rows += 1;
-            }
-        });
+        grid.progress = true;
         grid.resultPanel.update(successStory.successCount(), successStory.failCount());
     }
 
@@ -190,8 +183,24 @@ Grid.prototype.checkGuess = function() {
     const lastTry = drawHistory[drawHistory.length - 1];
 
     if(guess.length === lastTry.length) {
-        this.drawClick = false;
         processSuccessError(this);
+    }
+};
+
+Grid.prototype.progressLevel = function() {
+    console.log("progress: " + this.progress);
+    if(this.progress) {
+        const grid = this;
+        successStory.progressLevel(function () {
+            if (grid.colorSize + 1 < (grid.rows * grid.cols) / 2) {
+                grid.colorSize += 1;
+            }
+            else {
+                grid.colorSize = 2;
+                grid.cols = grid.rows += 1;
+            }
+        });
+        grid.progress = false;
     }
 };
 

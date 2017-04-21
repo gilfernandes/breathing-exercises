@@ -46,6 +46,8 @@
         gameControls = new GameControls(grid, gameHistory, successStory);
         gameControls.init();
 
+        gameControls.animate();
+
         canvas.mouseReleased(function () {
             if (!gameControls.animationOn) {
                 grid.mouseRelease();
@@ -57,7 +59,6 @@
         background(0);
         grid.changeColor();
         grid.display();
-        gameControls.animate();
     }
 
 
