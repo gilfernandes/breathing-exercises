@@ -34,7 +34,7 @@ canvas, #buttonDiv {
 #colourDiv > button {
     width: 20%;
     border: 0;
-    height: 8em;
+    height: 4em;
 }
 
 #buttonDiv {
@@ -65,4 +65,18 @@ canvas, #buttonDiv {
     font-size: 2em;
     background-color: aliceblue;
     font-family: 'Indie Flower', cursive;
+}
+
+/* Portrait and Landscape */
+@media screen
+and (max-width: 1024px) {
+    #colourDiv > button {
+        height: 8em;
+    }
+    #mainMessage {
+        font-size: 3em;
+    }
+    #buttonDiv > button {
+        font-size: 3em;
+    }
 }
