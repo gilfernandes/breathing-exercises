@@ -30,6 +30,8 @@
 
     var successStory;
 
+    var doubleClickLock;
+
     const createMemoryCanvas = function () {
         const width = window.innerWidth < window.innerHeight ? window.innerWidth * 0.75 : window.innerHeight * 0.75;
         const canvas = createCanvas(width, width);
@@ -49,8 +51,12 @@
         gameControls.animate();
 
         canvas.mouseReleased(function () {
-            if (!gameControls.animationOn) {
-                grid.mouseRelease();
+            if(!doubleClickLock) {
+                doubleClickLock = true;
+                if (!gameControls.animationOn) {
+                    grid.mouseRelease();
+                }
+                setTimeout(function() {doubleClickLock = false}, 400);
             }
         });
     }

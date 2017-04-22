@@ -69,7 +69,7 @@ GameControls.prototype.quizStart = function() {
 GameControls.prototype.printSuccess = function () {
     this.removeColorDiv();
     this.writeMessage("<p class='success' id='successMessage'>Well done! Your guess is correct!</p><p id='successCountdown'></p>");
-    let counter = 5;
+    let counter = 3;
     const gc = this;
     const countdown = setInterval(function() {
         document.getElementById("successCountdown").innerHTML = "" + counter--;

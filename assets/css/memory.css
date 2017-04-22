@@ -34,7 +34,7 @@ canvas, #buttonDiv {
 #colourDiv > button {
     width: 20%;
     border: 0;
-    height: 40px;
+    height: 8em;
 }
 
 #buttonDiv {
