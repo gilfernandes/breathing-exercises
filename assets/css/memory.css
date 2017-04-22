@@ -85,6 +85,11 @@ and (max-width: 1024px) and (orientation: portrait) {
     }
     #mainMessage {
         font-size: 3em;
+        height: 5em;
+    }
+
+    #mainMessage > p {
+        margin-bottom: 0;
     }
     #buttonDiv > button {
         font-size: 3em;
