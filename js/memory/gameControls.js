@@ -26,54 +26,66 @@ function handleStartButtonClick(gc) {
     const grid = this.grid;
     startButton.mousePressed(function () {
         gc.stopAnimation();
-        quizStart();
+        gc.quizStart();
     });
-    function quizStart() {
 
-        grid.progressLevel();
-        gc.writeMessage("<p>Memorize this pattern and then draw it after it disappears</p>");
-        gc.emptyGrid();
-        loop();
-        noLoop();
-
-        gc.removeColorDiv();
-        gc.grid.activateColours();
-        loop();
-        noLoop();
-
-        setTimeout(function () {
-            gc.gameHistory.markGuessDrawHistory();
-            gc.emptyGrid();
-            loop();
-            noLoop();
-            gc.writeMessage("<p>Draw the pattern by clicking first on the colour and then on the grid boxes.</p>");
-            gc.removeColorDiv();
-            gc.colourDiv = gc.createDivWithId(colourDiv);
-            gc.colourButtons = [];
-            gc.grid.colours.forEach(function (c) {
-                const button = createButton("").parent(colourDiv);
-                gc.colourButtons.push(button);
-                button.style("background-color: " + c);
-                button.mousePressed(function (e) {
-                    const colourArray = e.target.style.backgroundColor.replace(/[^\d,]/g, '').split(',');
-                    gc.grid.activateClickMode(color(colourArray[0], colourArray[1], colourArray[2]));
-                });
-            });
-            createDiv("");
-        }, 5000);
-    }
 }
 
-// Not is use. Can be removed
-GameControls.prototype.printSuccess = function () {
+GameControls.prototype.quizStart = function() {
+    grid.progressLevel();
+    this.writeMessage("<p>Memorize this pattern and then draw it after it disappears</p>");
+    this.emptyGrid();
+    redraw();
+
     this.removeColorDiv();
-    this.writeMessage("<p class='success'>Well done! Your guess is correct!</p>")
+    this.grid.activateColours();
+    redraw();
+
+    const gc = this;
+
+    setTimeout(function () {
+        gc.gameHistory.markGuessDrawHistory();
+        gc.emptyGrid();
+        redraw();
+        gc.writeMessage("<p>Draw the pattern by clicking first on the colour and then on the grid boxes.</p>");
+        gc.removeColorDiv();
+        gc.colourDiv = gc.createDivWithId(colourDiv);
+        gc.colourButtons = [];
+        gc.grid.colours.forEach(function (c) {
+            const button = createButton("").parent(colourDiv);
+            gc.colourButtons.push(button);
+            button.style("background-color: " + c);
+            button.mousePressed(function (e) {
+                const colourArray = e.target.style.backgroundColor.replace(/[^\d,]/g, '').split(',');
+                gc.grid.activateClickMode(color(colourArray[0], colourArray[1], colourArray[2]));
+
+            });
+        });
+        createDiv("");
+        gc.hideStartButton();
+    }, 5000);
 };
 
-// Not is use. Can be removed
+GameControls.prototype.printSuccess = function () {
+    this.removeColorDiv();
+    this.writeMessage("<p class='success' id='successMessage'>Well done! Your guess is correct!</p><p id='successCountdown'></p>");
+    let counter = 5;
+    const gc = this;
+    const countdown = setInterval(function() {
+        document.getElementById("successCountdown").innerHTML = "" + counter--;
+        if(counter < 0) {
+            clearInterval(countdown);
+            gc.removeElement('successMessage');
+            gc.removeElement('successCountdown');
+            gc.quizStart();
+        }
+    }, 1000);
+};
+
 GameControls.prototype.printError = function () {
     this.removeColorDiv();
-    this.writeMessage("<p class='fail'>Oops! That was not the right pattern. Try again</p>")
+    this.writeMessage("<p class='fail'>Oops! That was not the right pattern. Try again</p>");
+    this.showStartButton();
 };
 
 GameControls.prototype.emptyGrid = function () {
@@ -121,5 +133,13 @@ GameControls.prototype.removeElement = function (elementId) {
     if (elem !== null) {
         elem.parentNode.removeChild(elem);
     }
+};
+
+GameControls.prototype.hideStartButton = function() {
+    document.getElementById("buttonDiv").style["display"] = "none";
+};
+
+GameControls.prototype.showStartButton = function() {
+    document.getElementById("buttonDiv").style["display"] = "block";
 };
 

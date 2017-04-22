@@ -188,7 +188,6 @@ Grid.prototype.checkGuess = function() {
 };
 
 Grid.prototype.progressLevel = function() {
-    console.log("progress: " + this.progress);
     if(this.progress) {
         const grid = this;
         successStory.progressLevel(function () {
