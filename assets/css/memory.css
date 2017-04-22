@@ -4,7 +4,11 @@ html, body {
 }
 
 #mainDiv {
-    display: flex;
+    margin-top: 0;
+}
+
+#mainDiv, canvas {
+    display: block;
 }
 
 canvas, #buttonDiv {
@@ -50,6 +54,7 @@ canvas, #buttonDiv {
 .success {
     color: green;
     font-weight: bold;
+    margin-bottom: 0;
 }
 
 .fail {
@@ -57,7 +62,12 @@ canvas, #buttonDiv {
     font-weight: bold;
 }
 
+#successCountdown {
+    margin-top: 0;
+}
+
 #resultPanel {
+    display: none;
     position: fixed;
     top: 0;
     right: 0;
@@ -69,7 +79,7 @@ canvas, #buttonDiv {
 
 /* Portrait and Landscape */
 @media screen
-and (max-width: 1024px) {
+and (max-width: 1024px) and (orientation: portrait) {
     #colourDiv > button {
         height: 8em;
     }
@@ -78,5 +88,11 @@ and (max-width: 1024px) {
     }
     #buttonDiv > button {
         font-size: 3em;
+    }
+    #mainDiv {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
     }
 }

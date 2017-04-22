@@ -49,7 +49,7 @@ GameControls.prototype.quizStart = function() {
         redraw();
         gc.writeMessage("<p>Draw the pattern by clicking first on the colour and then on the grid boxes.</p>");
         gc.removeColorDiv();
-        gc.colourDiv = gc.createDivWithId(colourDiv);
+        gc.colourDiv = gc.createDivWithId(colourDiv).parent("mainDiv");
         gc.colourButtons = [];
         gc.grid.colours.forEach(function (c) {
             const button = createButton("").parent(colourDiv);
@@ -61,7 +61,6 @@ GameControls.prototype.quizStart = function() {
 
             });
         });
-        createDiv("");
         gc.hideStartButton();
     }, 5000);
 };
@@ -95,8 +94,7 @@ GameControls.prototype.emptyGrid = function () {
 GameControls.prototype.animate = function () {
     if (this.animationOn) {
         this.animationInterval = setInterval(function () {
-            loop();
-            noLoop();
+            redraw();
         }, 2000);
     }
 };
@@ -112,7 +110,7 @@ GameControls.prototype.writeMessage = function (html) {
     if (!this.message) {
         const messageId = "mainMessage";
         this.message = createDiv("<p>Memorize the next pattern and then draw it after it disappears</p>")
-            .attribute("id", messageId);
+            .attribute("id", messageId).parent("mainDiv");
     }
     else {
         document.getElementById(this.message.id()).innerHTML = html;
@@ -120,7 +118,7 @@ GameControls.prototype.writeMessage = function (html) {
 };
 
 GameControls.prototype.createDivWithId = function (id) {
-    const div = createDiv("");
+    const div = createDiv("").parent("mainDiv");
     return div.attribute("id", id);
 };
 
