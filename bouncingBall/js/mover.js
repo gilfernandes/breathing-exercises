@@ -3,13 +3,22 @@ function Mover(maxX, maxY) {
     this.maxY = maxY;
     this.pos = createVector(random(0, this.maxX), random(0, this.maxY));
     this.speed = createVector(random(0.5, 2), random(2, 4));
-    this.acceleration = createVector(-0.001, 0.1);
+    this.acceleration = createVector(-0.001, 0.001);
+    this.dir = createVector(0, 0);
+    this.mouse = null;
 }
 
 Mover.prototype.move = function() {
+    if(this.mouse) {
+        this.dir = p5.Vector.sub(this.mouse, this.pos);
+        this.dir.normalize();
+        this.dir.mult(random(0, 0.6));
+    }
+    this.acceleration = this.dir;
     this.speed.add(this.acceleration);
+    this.speed.limit(10);
     this.pos.add(this.speed);
-    this.checkEdges();
+    // this.checkEdges();
 };
 
 Mover.prototype.checkEdges = function() {

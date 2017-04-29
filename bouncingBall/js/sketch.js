@@ -1,6 +1,6 @@
 let movers;
 
-const quantityMovers = 47;
+const quantityMovers = 50;
 
 let cake;
 
@@ -11,8 +11,13 @@ function setup() {
     for(let i = 0; i < quantityMovers; i++) {
         movers.push(new Mover(window.innerWidth, window.innerHeight));
     }
-    createCanvas(window.innerWidth, window.innerHeight);
-
+    let canvas = createCanvas(window.innerWidth, window.innerHeight);
+    canvas.mouseMoved(function () {
+        let mouse = createVector(mouseX, mouseY);
+        movers.forEach(function(m) {
+            m.mouse = mouse;
+        });
+    });
 }
 
 function draw() {

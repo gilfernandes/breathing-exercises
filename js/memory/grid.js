@@ -28,12 +28,12 @@ Grid.prototype.changeColor = function() {
             return {row: row, col: col};
         }
 
-        for (var i = 0; i < this.colorSize; i++) {
+        for (let i = 0; i < this.colorSize; i++) {
             const __ret = generateRowAndCol.call(this);
             const row = __ret.row;
             const col = __ret.col;
-            var exists = false;
-            for (var j = this.coloured.length - 1; j >= 0; j--) {
+            let exists = false;
+            for (let j = this.coloured.length - 1; j >= 0; j--) {
                 if (col === this.coloured[j].col && row === this.coloured[j].row) {
                     exists = true;
                     break;
@@ -168,10 +168,10 @@ Grid.prototype.checkGuess = function() {
         const success = correctArray.every(function(b) {return b});
         successStory.pushResult(success);
         if(success) {
-            this.gameControls.printSuccess();
+            grid.gameControls.printSuccess();
         }
         else {
-            this.gameControls.printError();
+            grid.gameControls.printError();
         }
         grid.progress = true;
         grid.resultPanel.update(successStory.successCount(), successStory.failCount());
