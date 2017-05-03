@@ -1,4 +1,4 @@
-function Mover(maxX, maxY) {
+function Mover(maxX, maxY, sprite) {
     this.maxX = maxX;
     this.maxY = maxY;
     this.pos = createVector(random(0, this.maxX), random(0, this.maxY));
@@ -6,6 +6,7 @@ function Mover(maxX, maxY) {
     this.acceleration = createVector(-0.001, 0.001);
     this.dir = createVector(0, 0);
     this.mouse = null;
+    this.sprite = sprite;
 }
 
 Mover.prototype.move = function() {
@@ -35,5 +36,5 @@ Mover.prototype.draw = function () {
     stroke(0);
     fill(175);
     // ellipse(this.pos.x, this.pos.y, 16, 16);
-    image(cake, this.pos.x, this.pos.y);
+    this.sprite.draw(this.pos.x, this.pos.y);
 };

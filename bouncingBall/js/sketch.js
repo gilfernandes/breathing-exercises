@@ -2,14 +2,12 @@ let movers;
 
 const quantityMovers = 50;
 
-let cake;
-
 function setup() {
 
     movers = [];
-    cake = loadImage("assets/images/cake.png");
+    const images = ["assets/images/cake.png", "assets/images/bee-small.png"];
     for(let i = 0; i < quantityMovers; i++) {
-        movers.push(new Mover(window.innerWidth, window.innerHeight));
+        movers.push(new Mover(window.innerWidth, window.innerHeight, new Sprite(images[i % 2])));
     }
     let canvas = createCanvas(window.innerWidth, window.innerHeight);
     canvas.mouseMoved(function () {
