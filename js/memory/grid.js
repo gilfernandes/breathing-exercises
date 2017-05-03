@@ -65,9 +65,9 @@ Grid.prototype.display = function() {
     const elementHeight = (height - 1) / this.rows;
     const grid = this;
     const historyElements = [];
-    for (var x = 0; x < this.rows; x++) {
-        for (var y = 0; y < this.cols; y++) {
-            var colorFill = color(255);
+    for (let x = 0; x < this.rows; x++) {
+        for (let y = 0; y < this.cols; y++) {
+            let colorFill = color(40, 126, 125);
             const xa = elementWidth * x + 1;
             const ya = elementHeight * y + 1;
 
@@ -82,7 +82,7 @@ Grid.prototype.display = function() {
             else { // Draw the clicks
                 const xb = xa + elementWidth - 1;
                 const yb = ya + elementWidth - 1;
-                for(var i = 0; i < this.clickHistory.length; i++) {
+                for(let i = 0; i < this.clickHistory.length; i++) {
                     const coords = this.clickHistory[i];
                     if (coords.mouseX > xa && coords.mouseY > ya && coords.mouseX < xb && coords.mouseY < yb) {
                         colorFill = coords.clickColor;
@@ -90,12 +90,16 @@ Grid.prototype.display = function() {
                     }
                 }
             }
-            fill(colorFill);
-            noStroke();
-            rect(xa, ya, elementWidth - 1, elementHeight - 1);
+            this.drawPrimitive(colorFill, xa, ya, elementWidth, elementHeight);
         }
     }
     this.gameHistory.drawHistoryInsert(historyElements);
+};
+
+Grid.prototype.drawPrimitive = function(colorFill, xa, ya, elementWidth, elementHeight) {
+    fill(colorFill);
+    noStroke();
+    ellipse(xa + elementWidth / 2, ya + elementWidth / 2, (elementWidth - 1) * 0.50);
 };
 
 Grid.prototype.randomColour = function() {

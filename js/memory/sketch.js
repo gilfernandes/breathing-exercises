@@ -39,7 +39,7 @@ function setup() {
 }
 
 function draw() {
-    background(0);
+    background(255);
     grid.changeColor();
     grid.display();
 }
