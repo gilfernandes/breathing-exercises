@@ -16,8 +16,7 @@ Mover.prototype.applyForce = function (force) {
 };
 
 Mover.prototype.isInside = function (liquid) {
-    return this.location.x > liquid.x && this.location.x < liquid.x + liquid.w
-        && this.location.y > liquid.y && this.location.y < liquid.y + liquid.h;
+    return liquid.isInside(this.location);
 };
 
 Mover.prototype.drag = function (liquid) {
@@ -31,10 +30,13 @@ Mover.prototype.drag = function (liquid) {
 };
 
 Mover.prototype.move = function () {
-    this.velocity.add(this.acceleration);
-    this.location.add(this.velocity);
-    this.acceleration.mult(0);
-    // this.checkEdges();
+    if (!this.mouseOnTop()) {
+        this.velocity.add(this.acceleration);
+        this.location.add(this.velocity);
+        this.acceleration.mult(0);
+    } else {
+        this.location = createVector(mouseX, mouseY);
+    }
 };
 
 Mover.prototype.checkEdges = function () {
@@ -54,9 +56,14 @@ Mover.prototype.checkEdges = function () {
     }
 };
 
+Mover.prototype.mouseOnTop = function () {
+    return (this.mass * 16 > dist(mouseX, mouseY, this.location.x, this.location.y)) && pressedMouse;
+};
+
 Mover.prototype.draw = function () {
     stroke(0);
     fill(175);
-    ellipse(this.location.x, this.location.y, this.mass * 16, this.mass * 16);
+    const radius = this.mass * 16;
+    ellipse(this.location.x, this.location.y, radius, radius);
     // this.sprite.draw(this.location.x, this.location.y, this.sprite.sprite.width + this.mass, this.sprite.sprite.height + this.mass);
 };

@@ -2,6 +2,8 @@ let movers;
 
 let liquid;
 
+let pressedMouse = false;
+
 function setup() {
 
     movers = [];
@@ -10,10 +12,17 @@ function setup() {
         movers.push(new Mover(window.innerWidth, window.innerHeight, new Sprite(images[i % 2]), random(2, 10)));
     }
     let canvas = createCanvas(window.innerWidth, window.innerHeight);
-    canvas.mousePressed(function() {
-        movers.push(new Mover(window.innerWidth, window.innerHeight, new Sprite(images[0]), random(2, 10), createVector(mouseX, mouseY)));
-    });
     liquid = new Liquid(0, height / 2, width, height / 2, 0.1, color(145));
+    canvas.mousePressed(function() {
+        pressedMouse = true;
+        const mouseVec = createVector(mouseX, mouseY);
+        if(!liquid.isInside(mouseVec)) {
+            movers.push(new Mover(window.innerWidth, window.innerHeight, new Sprite(images[0]), random(2, 10), mouseVec));
+        }
+    });
+    canvas.mouseReleased(function () {
+        pressedMouse = false;
+    });
 }
 
 function draw() {
