@@ -4,12 +4,18 @@ let liquid;
 
 let pressedMouse = false;
 
+const imagePath = "assets/images/flowers";
+
+const images = ["bouquet_red.png", "bouquet_red_roses.png", "bouquet_yellow.png", "white_red_bouquet.png"];
+
+const amountOfImages = 30;
+
 function setup() {
 
     movers = [];
-    const images = ["assets/images/cake.png", "assets/images/bee-small.png"];
-    for(let i = 0; i < 50; i++) {
-        movers.push(new Mover(window.innerWidth, window.innerHeight, new Sprite(images[i % 2]), random(2, 10)));
+    for(let i = 0; i < amountOfImages; i++) {
+        const image = imagePath + "/" + images[i % images.length];
+        movers.push(new Mover(window.innerWidth, window.innerHeight, new Sprite(image), random(2, 10)));
     }
     let canvas = createCanvas(window.innerWidth, window.innerHeight);
     liquid = new Liquid(0, height / 2, width, height / 2, 0.1, color(145));
@@ -17,12 +23,14 @@ function setup() {
         pressedMouse = true;
         const mouseVec = createVector(mouseX, mouseY);
         if(!liquid.isInside(mouseVec)) {
-            movers.push(new Mover(window.innerWidth, window.innerHeight, new Sprite(images[0]), random(2, 10), mouseVec));
+            let rand = int(random(images.length));
+            movers.push(new Mover(window.innerWidth, window.innerHeight, new Sprite(imagePath + "/" + images[rand]), random(2, 10), mouseVec));
         }
     });
     canvas.mouseReleased(function () {
         pressedMouse = false;
     });
+    imageMode(CENTER);
 }
 
 function draw() {

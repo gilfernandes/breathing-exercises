@@ -64,6 +64,6 @@ Mover.prototype.draw = function () {
     stroke(0);
     fill(175);
     const radius = this.mass * 16;
-    ellipse(this.location.x, this.location.y, radius, radius);
-    // this.sprite.draw(this.location.x, this.location.y, this.sprite.sprite.width + this.mass, this.sprite.sprite.height + this.mass);
+    //ellipse(this.location.x, this.location.y, radius, radius);
+    this.sprite.draw(this.location.x, this.location.y, this.sprite.sprite.width + this.mass, this.sprite.sprite.height + this.mass);
 };
