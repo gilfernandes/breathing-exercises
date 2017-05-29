@@ -18,11 +18,12 @@ ScoreDisplay.prototype.setMessage = function (movers) {
 };
 
 ScoreDisplay.prototype.display = function () {
+    strokeWeight(0);
     textSize(32);
     text(this.remainingMessage, this.x, this.y);
     text(this.collidedMessage, this.x, this.y + 40);
     textSize(16);
-    text(this.statusMessage, this.x, this.y + 80);
+    text(this.statusMessage, this.x, this.y + 70);
 };
 
 ScoreDisplay.prototype.changeStatusMessage = function (statusMessage) {
