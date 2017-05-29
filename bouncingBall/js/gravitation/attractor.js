@@ -1,22 +1,17 @@
-function Attractor(mass) {
+function Attractor(mass, sprite) {
     this.mass = mass;
-    this.location = createVector(width / 2, height / 2);
-    this.G = 11;
+    this.location = createVector(width / 4, height / 2);
+    this.G = 15;
     this.dragging = false;
     this.rollover = false;
     this.dragOffset = createVector(0.0, 0.0);
+    this.sprite = sprite;
 }
-
-Attractor.prototype.display = function () {
-    stroke(0);
-    fill(175, 200);
-    ellipse(this.location.x, this.location.y, this.mass * 2, this.mass * 2);
-};
 
 Attractor.prototype.attract = function (m) {
     const force = p5.Vector.sub(this.location, m.location);
     let d = force.mag();
-    d = this.constrain(d, 50, 300.0);
+    d = this.constrain(d, 50, 150.0);
     force.normalize();
     let strength = (this.G * this.mass * m.mass) / (d * d);
     force.mult(strength);
@@ -45,7 +40,7 @@ Attractor.prototype.display = function () {
     else {
         fill(175, 200);
     }
-    ellipse(this.location.x, this.location.y, this.mass * 2, this.mass * 2);
+    this.sprite.draw(this.location.x, this.location.y, this.sprite.sprite.width / 2, this.sprite.sprite.height / 2);
 };
 
 Attractor.prototype.mouseClickDist = function (mx, my) {

@@ -2,11 +2,15 @@ let movers;
 
 let a;
 
-const numMovers = 50;
+let scoreDisplay;
+
+let food;
+
+const numMovers = 100;
 
 function setup() {
     createCanvas(window.innerWidth, window.innerHeight);
-    a = new Attractor(40);
+    a = new Attractor(40, new Sprite("assets/images/onca_crianca.png"));
     movers = [];
     const baseDist = 50;
     xoff = 0;
@@ -25,20 +29,21 @@ function setup() {
         yoff += 0.06;
         xred += 0.03;
         yred += 0.03;
-        console.log(distChange);
-        movers.push(new Mover(createVector(width / 2 + baseDist + distChange, height / 2 + baseDist + distChange),
+        movers.push(new Mover(createVector(width / 4 + baseDist + distChange, height / 2 + baseDist + distChange),
             createVector(0.2, 0),
             createVector(-2, 2), col));
     }
+    imageMode(CENTER);
+    scoreDisplay = new ScoreDisplay("", 10, 40);
+    food = new Food(new Sprite("assets/images/burger1.png"), window.innerWidth, scoreDisplay);
 }
 
-function draw() {
-    background(255);
-
-    movers.forEach(function(m) {
+function processMovers() {
+    movers.forEach(function (m) {
         const force = a.attract(m);
         m.applyForce(force);
         m.update();
+        m.detectCollision(food);
         m.checkEdges();
     });
 
@@ -46,9 +51,20 @@ function draw() {
     a.hover(mouseX, mouseY);
 
     a.display();
-    movers.forEach(function(m) {
+    movers.forEach(function (m) {
         m.display();
     });
+}
+function draw() {
+    background(255);
+
+    processMovers();
+
+    scoreDisplay.setMessage(movers);
+    scoreDisplay.display();
+
+    food.move();
+    food.display();
 }
 
 function mousePressed() {
@@ -57,4 +73,12 @@ function mousePressed() {
 
 function mouseReleased() {
     a.stopDragging();
+}
+
+function keyPressed() {
+    if(keyCode === 32) {
+        const aliveMovers = movers.filter(function(m) { return !m.isDead() });
+        const selectedMover = int(random(0, aliveMovers.length));
+        aliveMovers[selectedMover].shootMe();
+    }
 }
