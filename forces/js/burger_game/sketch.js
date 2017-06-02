@@ -6,7 +6,7 @@ let scoreDisplay;
 
 let food;
 
-const numMovers = 100;
+const numMovers = 50;
 
 function setup() {
     createCanvas(window.innerWidth, window.innerHeight);
