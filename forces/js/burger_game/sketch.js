@@ -60,7 +60,7 @@ function draw() {
 
     processMovers();
 
-    scoreDisplay.setMessage(movers);
+    scoreDisplay.setMessage(movers, food);
     scoreDisplay.display();
 
     food.move();

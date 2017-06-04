@@ -6,7 +6,7 @@ function ScoreDisplay(message, x, y) {
     this.y = y;
 }
 
-ScoreDisplay.prototype.setMessage = function (movers) {
+ScoreDisplay.prototype.setMessage = function (movers, food) {
     let dead = movers.length;
     let collidedCount = 0;
     for(let i = 0; i < movers.length; i++) {
@@ -15,6 +15,9 @@ ScoreDisplay.prototype.setMessage = function (movers) {
     }
     this.remainingMessage = `${dead} balls remaining.`;
     this.collidedMessage = `${collidedCount} hits.`;
+    if(dead === 0 && !food.isDead()) {
+        this.changeStatusMessage("Game over!!");
+    }
 };
 
 ScoreDisplay.prototype.display = function () {

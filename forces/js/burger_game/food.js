@@ -60,3 +60,7 @@ Food.prototype.checkOffscreen = function() {
         this.dead = true;
     }
 };
+
+Food.prototype.isDead = function (force) {
+    return this.dead;
+};
