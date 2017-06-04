@@ -5,7 +5,7 @@ P5 based exercises
 
 See [demo](https://gilfernandes.github.io/p5-exercises/memory/memory.html)
 
-## Breathing Eexercises
+## Breathing Exercises
 
 See the [demo](https://gilfernandes.github.io/p5-exercises/breathe/breathing.html)
 
