@@ -77,7 +77,7 @@ GameControls.prototype.quizStart = function() {
 GameControls.prototype.printSuccess = function () {
     this.removeColorDiv();
     this.writeMessage("<p class='success' id='successMessage'>Well done! Your guess is correct!</p><p id='successCountdown'></p>");
-    let counter = 100;
+    let counter = 2;
     const gc = this;
     const countdown = setInterval(function() {
         document.getElementById("successCountdown").innerHTML = "" + counter--;
@@ -92,7 +92,7 @@ GameControls.prototype.printSuccess = function () {
 
 GameControls.prototype.printError = function () {
     this.removeColorDiv();
-    this.writeMessage("<p class='fail'>Oops! That was not the right pattern. Try again</p>");
+    this.writeMessage("<p class='fail'>That was not the right pattern. Try again</p>");
     this.showStartButton();
 };
 

@@ -64,9 +64,17 @@ canvas, #buttonDiv {
 
 .success {
     background-image: url("../images/memory/success.png");
+    background-color: #f2fae3;
+}
+
+.fail {
+    background-image: url("../images/memory/fail.png");
+    background-color: #f2fae3;
+}
+
+.success, .fail {
     background-repeat: no-repeat;
     background-size: 73px, 74px;
-    background-color: #f2fae3;
     height: 50px;
     border-radius: 50px;
     color: black;
@@ -74,15 +82,12 @@ canvas, #buttonDiv {
     width: 100%;
     text-align: center;
     padding: 18px 0 0 5px;
-}
-
-.fail {
-    color: darkred;
-    font-weight: bold;
+    padding-left: 40px;
 }
 
 #successCountdown {
     margin-top: 0;
+    color: white;
 }
 
 #resultPanel {
