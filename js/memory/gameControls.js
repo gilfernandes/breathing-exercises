@@ -1,6 +1,9 @@
 const colourDiv = "colourDiv";
 const buttonDivId = "buttonDiv";
 
+const initialMainMessage = "Memorize the pattern that appears on the screen and tap when it disappears to play this game";
+const redrawPatternMessage = "Please redraw the pattern by first selecting the colour and then the balls";
+
 function GameControls(grid, gameHistory, successStory) {
     this.startButton = null;
     this.checkButton = null;
@@ -17,7 +20,7 @@ function GameControls(grid, gameHistory, successStory) {
 
 GameControls.prototype.init = function () {
     this.createDivWithId(buttonDivId);
-    this.startButton = createButton("Go").parent(buttonDivId);
+    this.startButton = createButton("Begin").parent(buttonDivId);
     handleStartButtonClick.call(this, this);
 };
 
@@ -33,7 +36,7 @@ function handleStartButtonClick(gc) {
 
 GameControls.prototype.quizStart = function() {
     grid.progressLevel();
-    this.writeMessage("<p>Memorize this pattern and then draw it after it disappears</p>");
+    this.writeMessage(initialMainMessage);
     this.emptyGrid();
     redraw();
 
@@ -47,14 +50,20 @@ GameControls.prototype.quizStart = function() {
         gc.gameHistory.markGuessDrawHistory();
         gc.emptyGrid();
         redraw();
-        gc.writeMessage("<p>Draw the pattern by clicking first on the colour and then on the grid boxes.</p>");
+        gc.writeMessage(`<p>${redrawPatternMessage}</p>`);
         gc.removeColorDiv();
         gc.colourDiv = gc.createDivWithId(colourDiv).parent("mainDiv");
         gc.colourButtons = [];
-        gc.grid.colours.forEach(function (c) {
+        gc.grid.colours.forEach(function (c, i, a) {
             const button = createButton("").parent(colourDiv);
             gc.colourButtons.push(button);
             button.style("background-color: " + c);
+            if(i === 0) {
+                button.class("firstButton");
+            }
+            else if(i === a.length - 1) {
+                button.class("lastButton");
+            }
             button.mousePressed(function (e) {
                 const colourArray = e.target.style.backgroundColor.replace(/[^\d,]/g, '').split(',');
                 gc.grid.activateClickMode(color(colourArray[0], colourArray[1], colourArray[2]));
@@ -68,7 +77,7 @@ GameControls.prototype.quizStart = function() {
 GameControls.prototype.printSuccess = function () {
     this.removeColorDiv();
     this.writeMessage("<p class='success' id='successMessage'>Well done! Your guess is correct!</p><p id='successCountdown'></p>");
-    let counter = 2;
+    let counter = 100;
     const gc = this;
     const countdown = setInterval(function() {
         document.getElementById("successCountdown").innerHTML = "" + counter--;
@@ -107,13 +116,13 @@ GameControls.prototype.stopAnimation = function() {
 };
 
 GameControls.prototype.writeMessage = function (html) {
-    if (!this.message) {
-        const messageId = "mainMessage";
-        this.message = createDiv("<p>Memorize the next pattern and then draw it after it disappears</p>")
-            .attribute("id", messageId).parent("mainDiv");
+    const $mainMessage = $("#mainMessage");
+    if ($mainMessage.length === 0) {
+        this.message = $("#mainDiv").prepend(
+            `<p id="mainMessage">Memorize the pattern that appears on the screen and tap when it disappears to play this game</p>`);
     }
     else {
-        document.getElementById(this.message.id()).innerHTML = html;
+        $mainMessage.html(html);
     }
 };
 

@@ -3,6 +3,12 @@ html, body {
     padding: 0;
 }
 
+h1 {
+    text-align: center;
+    padding-top: 50px;
+    font-size: 3em;
+}
+
 #mainDiv {
     margin-top: 0;
 }
@@ -25,7 +31,7 @@ canvas, #buttonDiv {
 }
 
 #mainMessage {
-    font-family: 'Indie Flower', cursive;
+    font-family: sans-serif;
     text-align: center;
     font-size: 2em;
 }
@@ -49,12 +55,25 @@ canvas, #buttonDiv {
 #buttonDiv > button {
     width: 25%;
     font-size: 2em;
+    background-color: #45d0d7;
+    border: 0;
+    color: white;
+    border-radius: 50px;
+    height: 50px;
 }
 
 .success {
-    color: green;
-    font-weight: bold;
+    background-image: url("../images/memory/success.png");
+    background-repeat: no-repeat;
+    background-size: 73px, 74px;
+    background-color: #f2fae3;
+    height: 50px;
+    border-radius: 50px;
+    color: black;
     margin-bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding: 18px 0 0 5px;
 }
 
 .fail {
@@ -80,24 +99,47 @@ canvas, #buttonDiv {
 /* Portrait and Landscape */
 @media screen
 and (max-width: 1024px) and (orientation: portrait) {
+
+    #colourDiv {
+        margin: 90px 0
+    }
+
     #colourDiv > button {
-        height: 8em;
+        height: 6em;
+        width: 30%;
     }
     #mainMessage {
-        font-size: 3em;
+        font-size: 2em;
         height: 5em;
+        margin: 60px auto 0 auto;
     }
 
     #mainMessage > p {
         margin-bottom: 0;
     }
-    #buttonDiv > button {
-        font-size: 3em;
+
+    #buttonDiv, #buttonDiv > button {
+        width: 95%;
+        margin: 40px auto;
     }
+
+    #buttonDiv > button {
+        background-color: #45d0d7;
+        border: 0;
+        color: white;
+        border-radius: 50px;
+        height: 80px;
+    }
+
+    .firstButton {
+        border-radius: 50px 0 0 50px;
+    }
+
+    .lastButton {
+        border-radius: 0 50px 50px 0;
+    }
+
     #mainDiv {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        margin: 20px 10%
     }
 }

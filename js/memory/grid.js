@@ -67,7 +67,7 @@ Grid.prototype.display = function() {
     const historyElements = [];
     for (let x = 0; x < this.rows; x++) {
         for (let y = 0; y < this.cols; y++) {
-            let colorFill = color(40, 126, 125);
+            let colorFill = color("#45b9c6");
             const xa = elementWidth * x + 1;
             const ya = elementHeight * y + 1;
 
@@ -121,9 +121,9 @@ Grid.prototype.checkGuess = function() {
     const drawHistory = this.gameHistory.drawHistory;
 
     function removeAdjacentDuplicates() {
-        var last = drawHistory[drawHistory.length - 1];
-        var previousDraw = null;
-        for (var i = last.length - 1; i >= 0; i--) {
+        let last = drawHistory[drawHistory.length - 1];
+        let previousDraw = null;
+        for (let i = last.length - 1; i >= 0; i--) {
             const currentDraw = last[i];
             if(previousDraw !== null && !currentDraw.guess && previousDraw.col === currentDraw.col && previousDraw.row === currentDraw.row) {
                 last.splice(i, 1);
@@ -133,8 +133,8 @@ Grid.prototype.checkGuess = function() {
     }
 
     function findLastGuessTarget() {
-        var guess = null;
-        for (var i = drawHistory.length - 1; i >= 0; i--) {
+        let guess = null;
+        for (let i = drawHistory.length - 1; i >= 0; i--) {
             const entry = drawHistory[i];
             if (entry.guess) {
                 guess = entry;
@@ -153,8 +153,8 @@ Grid.prototype.checkGuess = function() {
     function checkCorrect() {
         const correctArray = [];
         guess.forEach(function (g) {
-            var correct = false;
-            for (var j = 0; j < lastTry.length; j++) {
+            let correct = false;
+            for (let j = 0; j < lastTry.length; j++) {
                 const lt = lastTry[j];
                 correct = g.row === lt.row && g.col === lt.col
                     && sameColor(g.color, lt.color);
