@@ -67,7 +67,6 @@ GameControls.prototype.quizStart = function() {
             button.mousePressed(function (e) {
                 const colourArray = e.target.style.backgroundColor.replace(/[^\d,]/g, '').split(',');
                 gc.grid.activateClickMode(color(colourArray[0], colourArray[1], colourArray[2]));
-
             });
         });
         gc.hideStartButton();
@@ -76,8 +75,8 @@ GameControls.prototype.quizStart = function() {
 
 GameControls.prototype.printSuccess = function () {
     this.removeColorDiv();
-    this.writeMessage("<p class='success' id='successMessage'>Well done! Your guess is correct!</p><p id='successCountdown'></p>");
-    let counter = 2;
+    this.writeMessage("<p class='success' id='successMessage'><span>Well done! Your guess is correct!</span></p><p id='successCountdown'></p>");
+    let counter = 3;
     const gc = this;
     const countdown = setInterval(function() {
         document.getElementById("successCountdown").innerHTML = "" + counter--;
@@ -92,7 +91,7 @@ GameControls.prototype.printSuccess = function () {
 
 GameControls.prototype.printError = function () {
     this.removeColorDiv();
-    this.writeMessage("<p class='fail'>That was not the right pattern. Try again</p>");
+    this.writeMessage("<p class='fail'><span>That was not the right pattern. Try again</span></p>");
     this.showStartButton();
 };
 

@@ -78,7 +78,7 @@ canvas, #buttonDiv {
 
 .fail {
     background-image: url("../images/memory/fail.png");
-    background-color: #f2fae3;
+    background-color: #fce4e1;
 }
 
 .success, .fail {
@@ -90,8 +90,14 @@ canvas, #buttonDiv {
     margin-bottom: 0;
     width: 100%;
     text-align: center;
-    padding: 18px 0 0 5px;
-    padding-left: 40px;
+    padding: 18px 0 0 40px;
+    background-position-x: 2px;
+    background-position-y: 100px;
+}
+
+.success span, .fail span {
+    padding-top: 60px;
+    display: block;
 }
 
 #successCountdown {
