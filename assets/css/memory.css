@@ -157,7 +157,7 @@ canvas, #buttonDiv {
 #footerProgress {
     position: fixed;
     bottom: 0;
-    height: 20px;
+    height: 40px;
     background-color: darkblue;
     width: 100%
 }
