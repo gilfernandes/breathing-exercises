@@ -50,7 +50,7 @@ GameControls.prototype.quizStart = function() {
         gc.gameHistory.markGuessDrawHistory();
         gc.emptyGrid();
         redraw();
-        gc.writeMessage(`<p>${redrawPatternMessage}</p>`);
+        gc.writeMessage(`${redrawPatternMessage}`);
         gc.removeColorDiv();
         gc.colourDiv = gc.createDivWithId(colourDiv).parent("mainDiv");
         gc.colourButtons = [];
