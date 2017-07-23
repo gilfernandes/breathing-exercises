@@ -143,8 +143,8 @@ canvas, #buttonDiv {
     padding: 12px 3px 0 6px;
 }
 
-#resultPanelGrid sep {
-    padding-top: 2px
+#resultPanelGrid .sep {
+    padding-top: 18px
 }
 
 #yourScore {
