@@ -3,6 +3,16 @@ html, body {
     padding: 0;
 }
 
+body {
+    font-family: FilsonProBook, sans-serif;
+}
+
+/* Fonts */
+@font-face {
+    font-family: FilsonProBook;
+    src: url("../fonts/Filson_Pro_Book/Mostardesign_FilsonProBook.otf") format("opentype");
+}
+
 h1 {
     text-align: center;
     padding-top: 50px;
@@ -31,7 +41,7 @@ canvas, #buttonDiv {
 }
 
 #mainMessage {
-    font-family: sans-serif;
+    font-family: FilsonProBook, sans-serif;
     text-align: center;
     font-size: 2em;
 }
@@ -59,7 +69,6 @@ canvas, #buttonDiv {
     border: 0;
     color: white;
     border-radius: 50px;
-    height: 50px;
 }
 
 .success {
@@ -98,7 +107,7 @@ canvas, #buttonDiv {
     padding: 1em;
     font-size: 2em;
     background-color: aliceblue;
-    font-family: 'Indie Flower', cursive;
+    font-family: FilsonProBook, cursive;
 }
 
 /* Portrait and Landscape */
@@ -132,8 +141,10 @@ and (max-width: 1024px) and (orientation: portrait) {
         background-color: #45d0d7;
         border: 0;
         color: white;
-        border-radius: 50px;
-        height: 80px;
+        border-radius: 100px;
+        /* height: 80px; */
+        padding: 35px 0;
+        font-size: 2.5rem;
     }
 
     .firstButton {
@@ -148,3 +159,4 @@ and (max-width: 1024px) and (orientation: portrait) {
         margin: 20px 10%
     }
 }
+

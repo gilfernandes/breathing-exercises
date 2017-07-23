@@ -1,6 +1,6 @@
 const movers = [];
 
-const moversLimit = 20;
+const moversLimit = 10;
 
 function setup() {
     let canvas = createCanvas(window.innerWidth, window.innerHeight);
