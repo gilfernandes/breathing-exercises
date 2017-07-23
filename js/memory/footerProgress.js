@@ -1,7 +1,7 @@
 function FooterProgress() {
     this.originalWidth = 100;
     this.width = this.originalWidth;
-    this.timeStep = 100;
+    this.timeStep = 50;
     this.remainingTime = 0;
 }
 
