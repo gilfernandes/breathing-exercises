@@ -16,6 +16,7 @@ function GameControls(grid, gameHistory, successStory) {
     this.successStory = successStory;
     this.grid.setGameControls(this);
     this.animationInterval = null;
+    this.footerProgress = new FooterProgress();
 }
 
 GameControls.prototype.init = function () {
@@ -45,6 +46,7 @@ GameControls.prototype.quizStart = function() {
     redraw();
 
     const gc = this;
+    const secondsWait = 5;
 
     setTimeout(function () {
         gc.gameHistory.markGuessDrawHistory();
@@ -70,7 +72,9 @@ GameControls.prototype.quizStart = function() {
             });
         });
         gc.hideStartButton();
-    }, 5000);
+        gc.footerProgress.reset();
+    }, secondsWait * 1000);
+    this.footerProgress.startDescending(secondsWait);
 };
 
 GameControls.prototype.printSuccess = function () {

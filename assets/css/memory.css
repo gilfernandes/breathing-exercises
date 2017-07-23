@@ -154,6 +154,14 @@ canvas, #buttonDiv {
     margin-top: 3px;
 }
 
+#footerProgress {
+    position: fixed;
+    bottom: 0;
+    height: 4px;
+    background-color: darkblue;
+    width: 100%
+}
+
 /* Portrait and Landscape */
 @media screen
 and (max-width: 1024px) and (orientation: portrait) {
