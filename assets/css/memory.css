@@ -123,8 +123,8 @@ and (max-width: 1024px) and (orientation: portrait) {
         width: 30%;
     }
     #mainMessage {
-        font-size: 2.25rem;
-        line-height: 1.5;
+        font-size: 2.15rem;
+        line-height: 1.3;
         margin: 60px auto 2rem auto;
     }
 
