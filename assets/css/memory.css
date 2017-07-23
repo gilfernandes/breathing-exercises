@@ -110,14 +110,44 @@ canvas, #buttonDiv {
 }
 
 #resultPanel {
-    display: none;
     position: fixed;
     top: 0;
     right: 0;
     padding: 1em;
     font-size: 2em;
-    background-color: aliceblue;
     font-family: FilsonProBook, cursive;
+}
+
+#resultPanel .successful {
+    background-color: #8adce2;
+}
+
+#resultPanel .failed {
+    background-color: #eeeeee;
+}
+
+#resultPanel .successful, #resultPanel .failed {
+    border-radius: 60px;
+    margin: 1px 1px;
+    padding: 13px 23px;
+}
+
+#resultPanelGrid {
+    display: flex;
+    margin: -15px 0 0 0;
+}
+
+#resultPanelGrid span {
+    width: 20px;
+    text-align: center;
+    padding: 12px 3px 0 6px;
+}
+
+#yourScore {
+    font-size: 22px;
+    color: #abd3d5;
+    text-align: center;
+    margin-top: 3px;
 }
 
 /* Portrait and Landscape */
