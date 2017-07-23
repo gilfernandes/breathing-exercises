@@ -129,7 +129,7 @@ canvas, #buttonDiv {
 #resultPanel .successful, #resultPanel .failed {
     border-radius: 60px;
     margin: 1px 1px;
-    padding: 13px 23px;
+    padding: 13px 20px;
 }
 
 #resultPanelGrid {
@@ -143,8 +143,12 @@ canvas, #buttonDiv {
     padding: 12px 3px 0 6px;
 }
 
+#resultPanelGrid sep {
+    padding-top: 2px
+}
+
 #yourScore {
-    font-size: 22px;
+    font-size: 24px;
     color: #abd3d5;
     text-align: center;
     margin-top: 3px;
