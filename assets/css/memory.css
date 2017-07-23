@@ -16,7 +16,7 @@ body {
 h1 {
     text-align: center;
     padding-top: 50px;
-    font-size: 3em;
+    font-size: 4rem;
 }
 
 #mainDiv {
@@ -123,9 +123,9 @@ and (max-width: 1024px) and (orientation: portrait) {
         width: 30%;
     }
     #mainMessage {
-        font-size: 2em;
-        height: 5em;
-        margin: 60px auto 0 auto;
+        font-size: 2.25rem;
+        line-height: 1.5;
+        margin: 60px auto 2rem auto;
     }
 
     #mainMessage > p {
@@ -144,7 +144,7 @@ and (max-width: 1024px) and (orientation: portrait) {
         border-radius: 100px;
         /* height: 80px; */
         padding: 35px 0;
-        font-size: 2.5rem;
+        font-size: 3.5rem;
     }
 
     .firstButton {
