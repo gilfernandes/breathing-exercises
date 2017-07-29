@@ -163,8 +163,7 @@ canvas, #buttonDiv {
 }
 
 /* Portrait and Landscape */
-@media screen
-and (max-width: 1024px) and (orientation: portrait) {
+@media screen and (max-width: 1024px) and (orientation: portrait) {
 
     #colourDiv {
         margin: 90px 0
@@ -191,7 +190,6 @@ and (max-width: 1024px) and (orientation: portrait) {
         border: 0;
         color: white;
         border-radius: 100px;
-        /* height: 80px; */
         padding: 35px 0;
         font-size: 3.5rem;
     }
@@ -206,6 +204,26 @@ and (max-width: 1024px) and (orientation: portrait) {
 
     #mainDiv {
         margin: 20px 10%
+    }
+}
+
+/* For iPhone 5 */
+@media screen and (device-aspect-ratio: 40/71) {
+
+    #buttonDiv > button {
+        background-color: #45d0d7;
+        border: 0;
+        color: white;
+        border-radius: 100px;
+        padding: 25px 0;
+        font-size: 3rem;
+    }
+
+    #mainMessage, #mainMessage > p {
+        font-size: 42px !important;
+        height: 225px;
+        line-height: 1.2;
+        margin: 55px auto 2rem -14px;
     }
 }
 
