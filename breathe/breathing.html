@@ -26,7 +26,7 @@
 <script>
 
     let startWidth = 50; // TODO: put this variable into the BreatheBall class.
-    const buttonDivHeight = 150;
+    const buttonDivHeight = window.innerHeight * 0.25;
 
     const textInhale = "Breathe in";
     const textExhale = "Breathe out";
@@ -61,7 +61,7 @@
 
     let progress;
 
-    let buttonBar = new ButtonBar(standardBreathing.inhaleTime, standardBreathing.exhaleTime);
+    let buttonBar = new ButtonBar(standardBreathing.inhaleTime, standardBreathing.exhaleTime, buttonDivHeight);
 
     let player;
 
