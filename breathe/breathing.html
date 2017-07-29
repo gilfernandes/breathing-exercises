@@ -21,12 +21,13 @@
 
 </head>
 <body>
+<div id="messageDiv"></div>
 <div id="mainDiv">
 </div>
 <script>
 
     let startWidth = 50; // TODO: put this variable into the BreatheBall class.
-    const buttonDivHeight = window.innerHeight * 0.15;
+    const buttonDivHeight = window.innerHeight * 0.2;
 
     const textInhale = "Breathe in";
     const textExhale = "Breathe out";
@@ -79,6 +80,8 @@
     function setup() {
 
         createBreatheBall();
+        breatheText = new BreatheText(color(0x4b, 0xc6, 0xd5), standardBreathing.textSize, window.innerHeight * 0.2);
+        breatheText.initDiv();
 
         let canvas = createBreathingCanvas();
         ctx = canvas.drawingContext;
@@ -97,8 +100,6 @@
 
         player.playRandom();
 
-        breatheText = new BreatheText(color(0x4b, 0xc6, 0xd5), standardBreathing.textSize, CENTER, CENTER, 0,
-            - window.innerHeight / 3);
     }
 
     function draw() {
@@ -120,7 +121,7 @@
     }
 
     let createBreathingCanvas = function () {
-        let canvas = createCanvas(window.innerWidth, window.innerHeight - buttonDivHeight);
+        let canvas = createCanvas(window.innerWidth, window.innerHeight - breatheText.height - buttonDivHeight);
         canvas.parent("#mainDiv");
         return canvas;
     };

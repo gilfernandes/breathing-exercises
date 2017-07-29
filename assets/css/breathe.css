@@ -2,6 +2,13 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
+    font-family: FilsonProBook, sans-serif;
+}
+
+/* Fonts */
+@font-face {
+    font-family: FilsonProBook;
+    src: url("../fonts/Filson_Pro_Book/Mostardesign_FilsonProBook.otf") format("opentype");
 }
 
 #mainDiv {
@@ -24,6 +31,12 @@ html, body {
     width: 25%;
     border: none;
     background-color: #4bc6d5;
+}
+
+#counter, #breatheMessage {
+    padding-top: 4%;
+    font-size: 4.5rem;
+    text-align: center;
 }
 
 .activeB {

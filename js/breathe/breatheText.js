@@ -1,16 +1,17 @@
-function BreatheText(color, textSize, hAlign, vAlign, textX, textY) {
+function BreatheText(color, textSize, height) {
     this.color = color;
-    this.hAlign = hAlign;
-    this.vAlign = vAlign;
     this.textSize = textSize;
-    this.textX = textX;
-    this.textY = textY;
+    this.height = height;
 }
 
+BreatheText.prototype.initDiv = function () {
+    const messageDivId = "messageDiv";
+    createDiv("<div id='counter'></div>").parent(messageDivId);
+    createDiv("<div id='breatheMessage'></div>").parent(messageDivId);
+    document.getElementById(messageDivId).style="height: " + this.height + "px";
+};
+
 BreatheText.prototype.displayText = function (message) {
-    // textSize(this.textSize);
-    // fill(color(this.color));
-    // textAlign(this.hAlign, this.vAlign);
-    // text(message, this.textX, this.textY);
-    // text(counter.counter, this.textX, this.textY - 100);
+    document.getElementById("counter").innerHTML = counter.counter;
+    document.getElementById("breatheMessage").innerHTML = message;
 };
