@@ -7,14 +7,10 @@ function BreatheText(color, textSize, hAlign, vAlign, textX, textY) {
     this.textY = textY;
 }
 
-BreatheText.prototype.print = function (textToPrint) {
-    textSize(this.textSize);
-    fill(color(this.color));
-    textAlign(this.hAlign, this.vAlign);
-    text(textToPrint, this.textX, this.textY);
-};
-
 BreatheText.prototype.displayText = function (message) {
-    this.print(message);
-    text(counter.counter, this.textX, this.textY - 100);
+    // textSize(this.textSize);
+    // fill(color(this.color));
+    // textAlign(this.hAlign, this.vAlign);
+    // text(message, this.textX, this.textY);
+    // text(counter.counter, this.textX, this.textY - 100);
 };
