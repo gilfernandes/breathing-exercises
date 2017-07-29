@@ -8,12 +8,14 @@
 
     <script language="javascript" type="text/javascript" src="../js/p5/empty-example/sketch.js"></script>
     <script language="javascript" type="text/javascript" src="../js/breathe/gradients.js"></script>
+    <script language="javascript" type="text/javascript" src="../js/breathe/breatheBall.js"></script>
     <script language="javascript" type="text/javascript" src="../js/breathe/breatheCalculations.js"></script>
     <script language="javascript" type="text/javascript" src="../js/breathe/progress.js"></script>
     <script language="javascript" type="text/javascript" src="../js/breathe/buttonBar.js"></script>
     <script language="javascript" type="text/javascript" src="../js/breathe/soundPlayer.js"></script>
     <script language="javascript" type="text/javascript" src="../js/breathe/counter.js"></script>
     <script language="javascript" type="text/javascript" src="../js/breathe/breatheText.js"></script>
+    <script language="javascript" type="text/javascript" src="../js/common/sprite.js"></script>
     <!-- this line removes any default padding and style. you might only need one of these values set. -->
     <link rel="stylesheet" type="text/css" href="../assets/css/breathe.css">
 
@@ -42,7 +44,7 @@
     function Breathing(time, text, inhaleTime, exhaleTime) {
         this.time = time;
         this.text = text;
-        this.maxTextSize = 20;
+        this.maxTextSize = window.innerWidth < 1024 ? 64 : 24;
         this.textSize = this.maxTextSize;
         this.interval = 125;
         this.step = 0.125;
@@ -51,77 +53,24 @@
         this.breathePause = 3;
     }
 
-    function BreathBall(width, maxWidth) {
-        this.width = width;
-        this.dir = 1;
-        this.maxWidth = maxWidth;
-    }
+    let breathBall;
 
-    BreathBall.prototype.move = function () {
-        const active = this.dir !== 0;
-        if ((this.width > this.maxWidth || counter.counter > standardBreathing.inhaleTime) && active) {
-            waitAfterInhale();
-        }
-        else if ((this.width < startWidth || counter.counter > standardBreathing.inhaleTime) && active) {
-            waitAfterExhale();
-        }
-        this.incrementDecrement();
-    };
+    let standardBreathing = new Breathing(totalTime, textInhale, 4, 4);
 
-    BreathBall.prototype.reduceSize = function () {
-        this.width = this.maxWidth - 1;
-    };
+    let counter = new Counter();
 
-    BreathBall.prototype.augmentSize = function () {
-        this.width = startWidth + 2;
-    };
+    let progress;
 
-    BreathBall.prototype.incrementDecrement = function () {
-        if (this.dir !== 0) {
-            this.width += this.dir * distPerFrame;
-        }
-    };
+    let buttonBar = new ButtonBar(standardBreathing.inhaleTime, standardBreathing.exhaleTime);
 
-    BreathBall.prototype.display = function () {
-
-        const rotation1 = map(50, 0, 100, 0, this.width);
-        const rotation2 = map(50, 0, 100, 0, this.width);
-        const location = map(50, 0, 100, 0, this.width);
-        const sizeEllipse = this.width / 2;
-        const xEllipse = 0;
-        const yEllipse = 0;
-
-        var startGrad = createVector(xEllipse - sizeEllipse / 2 + rotation1 + location, yEllipse + sizeEllipse / 2 - rotation2 - location);
-        var endGrad = createVector(xEllipse + sizeEllipse / 2 - rotation1 - location, yEllipse - sizeEllipse / 2 + rotation2 + location);
-
-        //ellipse
-        var gradient = ctx.createLinearGradient(startGrad.x, startGrad.y, endGrad.x, endGrad.y);
-        gradient.addColorStop(0, "#3c5da0");
-        gradient.addColorStop(1, "#ffffff");
-        ctx.beginPath();
-        ctx.ellipse(xEllipse, yEllipse, sizeEllipse, sizeEllipse, 45 * Math.PI / 180, 0, 2 * Math.PI);
-        ctx.fillStyle = gradient;
-        ctx.fill();
-    };
-
-    var breathBall;
-
-    var standardBreathing = new Breathing(totalTime, textInhale, 4, 4);
-
-    var counter = new Counter();
-
-    var progress;
-
-    var buttonBar = new ButtonBar(standardBreathing.inhaleTime, standardBreathing.exhaleTime);
-
-    var player;
+    let player;
 
     function preload() {
         player = new Player(["../assets/sound/e_eyesee_word_of_silence_track_07.ogg",
             "../assets/sound/e_jewel_purpose_track_06.ogg"]);
     }
 
-    var startCounter = function () {
+    let startCounter = function () {
         counter.start(function () {
             counter.counter++;
         });
@@ -129,9 +78,9 @@
 
     function setup() {
 
-        calcMaxSize();
+        createBreatheBall();
 
-        var canvas = createBreathingCanvas();
+        let canvas = createBreathingCanvas();
         ctx = canvas.drawingContext;
         initProgress(canvas);
 
@@ -148,13 +97,14 @@
 
         player.playRandom();
 
-        breatheText = new BreatheText(255, standardBreathing.textSize, CENTER, CENTER);
+        breatheText = new BreatheText(color(0x4b, 0xc6, 0xd5), standardBreathing.textSize, CENTER, CENTER, 0,
+            - window.innerHeight / 3);
     }
 
     function draw() {
         distPerFrame = calcFrameRate();
 
-        background(color(0x3c, 0x5d, 0xa0));
+        background(color(0xff, 0xff, 0xff));
 
         translate(width * 0.5, height * 0.5);
 
@@ -162,11 +112,11 @@
 
         breathBall.move();
 
-        breathBall.display();
+        breathBall.displayImage();
 
         progress.fillProgress(width);
 
-        fillText();
+        breatheText.displayText(standardBreathing.text);
     }
 
     let createBreathingCanvas = function () {
@@ -182,19 +132,13 @@
 
     let calcMaxWidth = function (width, height) {
         const widthBiggerHeight = width > height;
-        return widthBiggerHeight ? height - 150 : width - 150;
+        return widthBiggerHeight ? height : width;
     };
 
-    let calcMaxSize = function () {
+    let createBreatheBall = function () {
         let maxWidth = calcMaxWidth(window.innerWidth, window.innerHeight);
-        startWidth = maxWidth - maxWidth * 0.25;
+        startWidth = maxWidth - maxWidth * 0.75;
         breathBall = new BreathBall(startWidth, maxWidth);
-    };
-
-    let fillText = function () {
-
-        breatheText.print(standardBreathing.text);
-        text(counter.counter, 0, -100);
     };
 
     let stopAnimation = function () {
@@ -210,7 +154,7 @@
         breathBall.dir = 1;
         stopAnimation();
         standardBreathing = new Breathing(totalTime, textInhale, inhaleTime, exhaleTime);
-        calcMaxSize();
+        createBreatheBall();
         loop();
         updateTimer();
         player.restartRandom();
