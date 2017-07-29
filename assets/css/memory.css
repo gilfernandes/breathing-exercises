@@ -77,7 +77,7 @@ canvas, #buttonDiv {
 }
 
 .fail {
-    background-image: url("../images/memory/fail.png");
+    background-image: url("../images/memory/icon-cross.png");
     background-color: #fce4e1;
 }
 
