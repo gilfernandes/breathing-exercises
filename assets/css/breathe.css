@@ -22,7 +22,7 @@ html, body {
 
 #buttonDiv > button {
     width: 25%;
-    height: 49px;
+    height: 147px;
     border: none;
     background-color: #4bc6d5;
 }
@@ -31,14 +31,8 @@ html, body {
     background-color: #4167c8 !important;
 }
 
-@media (min-device-width: 500px)  {
+@media screen and (max-width: 1024px) and (orientation: portrait) {
     #buttonDiv > button {
-        font-size: 16px;
-    }
-}
-
-@media (min-device-width: 300px) and (max-device-width: 500px) {
-    #buttonDiv > button {
-        font-size: 24px;
+        font-size: 3rem;
     }
 }

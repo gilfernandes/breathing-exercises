@@ -5,7 +5,7 @@ function ButtonBar(inhaleTime, exhaleTime) {
 }
 
 ButtonBar.prototype.createButtons = function () {
-    var div = createDiv("");
+    let div = createDiv("");
     const buttonDivId = "buttonDiv";
     div.attribute("id", buttonDivId);
     const buttonBar = this;
