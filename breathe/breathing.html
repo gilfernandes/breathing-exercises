@@ -84,6 +84,7 @@
         breatheText.initDiv();
 
         let canvas = createBreathingCanvas();
+
         ctx = canvas.drawingContext;
         initProgress(canvas);
 
@@ -115,20 +116,13 @@
 
         breathBall.displayImage();
 
-        progress.fillProgress(width);
-
         breatheText.displayText(standardBreathing.text);
     }
 
     let createBreathingCanvas = function () {
-        let canvas = createCanvas(window.innerWidth, window.innerHeight - breatheText.height - buttonDivHeight);
+        let canvas = createCanvas(window.innerWidth, window.innerHeight - breatheText.height - buttonDivHeight - progressHeigth());
         canvas.parent("#mainDiv");
         return canvas;
-    };
-
-    let initProgress = function (canvas) {
-        progress = new Progress(0, standardBreathing.time, canvas.width);
-        progress.setProgressbarGraphics(createGraphics(canvas.width, progress.progressHeight));
     };
 
     let calcMaxWidth = function (width, height) {
@@ -148,9 +142,9 @@
         noLoop();
     };
 
-    var restartAnimation = function (inhaleTime, exhaleTime) {
+    let restartAnimation = function (inhaleTime, exhaleTime) {
 
-        var canvas = createBreathingCanvas();
+        let canvas = createBreathingCanvas();
         initProgress(canvas);
         breathBall.dir = 1;
         stopAnimation();
@@ -162,11 +156,11 @@
         startCounter();
     };
 
-    var updateTimer = function () {
+    let updateTimer = function () {
         breathingInterval = setInterval(function () {
             standardBreathing.time -= standardBreathing.step;
             var number = standardBreathing.time;
-            progress = new Progress(number, totalTime, width, progress.progressbarGraphics);
+            progress.setProperties(number, totalTime, width, progress.progressbarGraphics);
             if (number < 0) {
                 clearInterval(breathingInterval);
                 noLoop();
