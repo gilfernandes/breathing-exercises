@@ -43,6 +43,10 @@ html, body {
     background-color: #4167c8 !important;
 }
 
+#defaultCanvas1 {
+    width: 99%;
+}
+
 @media screen and (max-width: 1024px) and (orientation: portrait) {
     #buttonDiv > button {
         font-size: 3rem;

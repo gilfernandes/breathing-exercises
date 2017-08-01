@@ -2,7 +2,11 @@ function BreathBall(width, maxWidth) {
     this.width = width;
     this.dir = 1;
     this.maxWidth = maxWidth;
-    this.sprite = new Sprite("../assets/images/breathe/Bee-yogi_th.jpg");
+    this.sprite = new Sprite("../assets/images/breathe/Chrysanthemum.jpg");
+    this.theta = 0;
+    this.noiseX = 0;
+    this.noiseXVelocity = 0.003;
+    this.YDiff = random(0, 5);
 }
 
 BreathBall.prototype.move = function () {
@@ -29,8 +33,15 @@ BreathBall.prototype.incrementDecrement = function () {
         this.width += this.dir * distPerFrame;
     }
 };
+BreathBall.prototype.drawInit = function() {
+    background(color(0xff, 0xff, 0xff));
+    noStroke();
+};
+
 
 BreathBall.prototype.display = function () {
+
+    this.drawInit();
 
     const rotation1 = map(50, 0, 100, 0, this.width);
     const rotation2 = map(50, 0, 100, 0, this.width);
@@ -53,7 +64,27 @@ BreathBall.prototype.display = function () {
 };
 
 BreathBall.prototype.displayImage = function () {
+    this.drawInit();
     const radius = this.width;
     const posX = -radius / 2;
     this.sprite.draw(posX, posX, radius, radius)
+};
+
+BreathBall.prototype.changeLighting = function() {
+    if(this.noiseX > 1 || this.noiseX < 0) {
+        this.noiseXVelocity *= -1;
+    }
+    this.noiseX += this.noiseXVelocity;
+};
+
+BreathBall.prototype.display3D = function () {
+    this.drawInit();
+    ambientLight(map(this.noiseX, 0, 1, 200, 255), map(this.noiseX, 0, 1, 150, 255), map(this.noiseX, 0, 1, 100, 255));
+    rotateY(map(noise(this.theta, this.theta), 0, 1, 0, 0.05) + this.YDiff );
+    rotateZ(this.theta);
+    rotateX(this.theta);
+    texture(this.sprite.sprite);
+    sphere(this.width * 0.4);
+    this.theta += 0.001;
+    this.changeLighting();
 };

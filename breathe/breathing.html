@@ -106,21 +106,15 @@
     function draw() {
         distPerFrame = calcFrameRate();
 
-        background(color(0xff, 0xff, 0xff));
-
-        translate(width * 0.5, height * 0.5);
-
-        noStroke();
-
         breathBall.move();
 
-        breathBall.displayImage();
+        breathBall.display3D();
 
         breatheText.displayText(standardBreathing.text);
     }
 
     let createBreathingCanvas = function () {
-        let canvas = createCanvas(window.innerWidth, window.innerHeight - breatheText.height - buttonDivHeight - progressHeigth());
+        let canvas = createCanvas(window.innerWidth, window.innerHeight - breatheText.height - buttonDivHeight - progressHeigth(), WEBGL);
         canvas.parent("#mainDiv");
         return canvas;
     };
@@ -132,7 +126,7 @@
 
     let createBreatheBall = function () {
         let maxWidth = calcMaxWidth(window.innerWidth, window.innerHeight);
-        startWidth = maxWidth - maxWidth * 0.3;
+        startWidth = maxWidth - maxWidth * 0.6;
         breathBall = new BreathBall(startWidth, maxWidth);
     };
 
@@ -144,7 +138,6 @@
 
     let restartAnimation = function (inhaleTime, exhaleTime) {
 
-        let canvas = createBreathingCanvas();
         initProgress(canvas);
         breathBall.dir = 1;
         stopAnimation();
@@ -159,7 +152,7 @@
     let updateTimer = function () {
         breathingInterval = setInterval(function () {
             standardBreathing.time -= standardBreathing.step;
-            var number = standardBreathing.time;
+            let number = standardBreathing.time;
             progress.setProperties(number, totalTime, width, progress.progressbarGraphics);
             if (number < 0) {
                 clearInterval(breathingInterval);
@@ -168,7 +161,7 @@
         }, standardBreathing.interval);
     };
 
-    var calcFrameRate = function () {
+    let calcFrameRate = function () {
         const frameR = frameRate();
         return breatheCalculations.calcDistance(standardBreathing.exhaleTime, breathBall.maxWidth - startWidth, (frameR | 0) === 0 ? 60 : frameR);
     };
