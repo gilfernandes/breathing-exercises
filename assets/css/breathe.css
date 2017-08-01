@@ -45,6 +45,7 @@ html, body {
 
 #defaultCanvas1 {
     width: 99%;
+    margin-bottom: -3px;
 }
 
 @media screen and (max-width: 1024px) and (orientation: portrait) {

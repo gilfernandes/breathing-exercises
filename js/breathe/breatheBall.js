@@ -4,8 +4,10 @@ function BreathBall(width, maxWidth) {
     this.maxWidth = maxWidth;
     this.sprite = new Sprite("../assets/images/breathe/sky1.jpg");
     this.theta = 0;
-    this.noiseX = 0;
-    this.noiseXVelocity = 0.003;
+    this.noiseRed = 0;
+    this.noiseBlue = 10;
+    this.noiseRedVelocity = 0.003;
+    this.noiseBlueVelocity = 0.04;
     this.YDiff = random(0, 5);
 }
 
@@ -71,19 +73,26 @@ BreathBall.prototype.displayImage = function () {
 };
 
 BreathBall.prototype.changeLighting = function() {
-    if(this.noiseX > 1 || this.noiseX < 0) {
-        this.noiseXVelocity *= -1;
+    if(this.noiseRed > 1 || this.noiseRed < 0) {
+        this.noiseRedVelocity *= -1;
     }
-    this.noiseX += this.noiseXVelocity;
+    if(this.noiseRed > 1 || this.noiseBlueVelocitynoiseBlueVelocity < 0) {
+        this.noiseBlueVelocity *= -1;
+    }
+    this.noiseRed += this.noiseRedVelocity;
+    this.noiseBlue += this.noiseBlueVelocity;
 };
 
 BreathBall.prototype.display3D = function () {
     this.drawInit();
-    ambientLight(map(this.noiseX, 0, 1, 200, 255), map(this.noiseX, 0, 1, 200, 255), map(this.noiseX, 0, 1, 200, 255));
+    ambientLight(map(this.noiseRed, 0, 1, 10, 150), map(this.noiseRed, 0, 1, 40, 100), map(this.noiseBlue, 0, 1, 250, 255));
+    let dirY = (mouseY / height - 0.5) *2;
+    let dirX = (mouseX / width - 0.5) *2;
+    directionalLight(50, 60, 70, dirX, -dirY, 0.5);
     rotateY(map(noise(this.theta, this.theta), 0, 1, 0, 0.05) + this.YDiff );
     rotateZ(this.theta);
     rotateX(this.theta);
-    texture(this.sprite.sprite);
+    // texture(this.sprite.sprite);
     sphere(this.width * 0.4);
     this.theta += 0.003;
     this.changeLighting();
