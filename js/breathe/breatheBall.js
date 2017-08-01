@@ -2,7 +2,7 @@ function BreathBall(width, maxWidth) {
     this.width = width;
     this.dir = 1;
     this.maxWidth = maxWidth;
-    this.sprite = new Sprite("../assets/images/breathe/Chrysanthemum.jpg");
+    this.sprite = new Sprite("../assets/images/breathe/sky1.jpg");
     this.theta = 0;
     this.noiseX = 0;
     this.noiseXVelocity = 0.003;
@@ -79,7 +79,7 @@ BreathBall.prototype.changeLighting = function() {
 
 BreathBall.prototype.display3D = function () {
     this.drawInit();
-    ambientLight(map(this.noiseX, 0, 1, 200, 255), map(this.noiseX, 0, 1, 150, 255), map(this.noiseX, 0, 1, 100, 255));
+    ambientLight(map(this.noiseX, 0, 1, 200, 255), map(this.noiseX, 0, 1, 200, 255), map(this.noiseX, 0, 1, 200, 255));
     rotateY(map(noise(this.theta, this.theta), 0, 1, 0, 0.05) + this.YDiff );
     rotateZ(this.theta);
     rotateX(this.theta);
