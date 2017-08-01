@@ -126,7 +126,7 @@
 
     let createBreatheBall = function () {
         let maxWidth = calcMaxWidth(window.innerWidth, window.innerHeight);
-        startWidth = maxWidth - maxWidth * 0.6;
+        startWidth = maxWidth - maxWidth * 0.5;
         breathBall = new BreathBall(startWidth, maxWidth);
     };
 
@@ -166,7 +166,7 @@
         return breatheCalculations.calcDistance(standardBreathing.exhaleTime, breathBall.maxWidth - startWidth, (frameR | 0) === 0 ? 60 : frameR);
     };
 
-    var waitAfterInhale = function () {
+    let waitAfterInhale = function () {
         standardBreathing.text = textHold;
         breathBall.dir = 0;
         setTimeout(function () {
@@ -177,7 +177,7 @@
         }, standardBreathing.breathePause * 1000);
     };
 
-    var waitAfterExhale = function () {
+    let waitAfterExhale = function () {
         standardBreathing.text = textHold;
         breathBall.dir = 0;
         setTimeout(function () {

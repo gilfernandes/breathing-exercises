@@ -85,6 +85,6 @@ BreathBall.prototype.display3D = function () {
     rotateX(this.theta);
     texture(this.sprite.sprite);
     sphere(this.width * 0.4);
-    this.theta += 0.001;
+    this.theta += 0.003;
     this.changeLighting();
 };
