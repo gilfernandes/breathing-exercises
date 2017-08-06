@@ -6,9 +6,16 @@ function BreatheText(color, textSize, height) {
 
 BreatheText.prototype.initDiv = function () {
     const messageDivId = "messageDiv";
-    createDiv("<div id='counter'></div>").parent(messageDivId);
-    createDiv("<div id='breatheMessage'></div>").parent(messageDivId);
-    document.getElementById(messageDivId).style="height: " + this.height + "px";
+    const counterDiv = createDiv("<div id='counter'></div>");
+    const messageDivIdExists = document.getElementById(messageDivId);
+    if(messageDivIdExists) {
+        counterDiv.parent(messageDivId);
+    }
+    const breatheMessageDiv = createDiv("<div id='breatheMessage'></div>");
+    if(messageDivIdExists) {
+        breatheMessageDiv.parent(messageDivId);
+        document.getElementById(messageDivId).style="height: " + this.height + "px";
+    }
 };
 
 BreatheText.prototype.displayText = function (message) {

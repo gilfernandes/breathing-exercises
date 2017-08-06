@@ -6,8 +6,10 @@ function BreathBall(width, maxWidth) {
     this.theta = 0;
     this.noiseRed = 0;
     this.noiseBlue = 10;
+    this.noiseGreen = 20;
     this.noiseRedVelocity = 0.003;
     this.noiseBlueVelocity = 0.04;
+    this.noiseGreenVelocity = 0.03;
     this.YDiff = random(0, 5);
 }
 
@@ -76,16 +78,20 @@ BreathBall.prototype.changeLighting = function() {
     if(this.noiseRed > 1 || this.noiseRed < 0) {
         this.noiseRedVelocity *= -1;
     }
-    if(this.noiseRed > 1 || this.noiseBlueVelocitynoiseBlueVelocity < 0) {
+    if(this.noiseBlue > 1 || this.noiseBlue < 0) {
         this.noiseBlueVelocity *= -1;
+    }
+    if(this.noiseGreen > 1 || this.noiseGreen < 0) {
+        this.noiseGreenVelocity *= -1;
     }
     this.noiseRed += this.noiseRedVelocity;
     this.noiseBlue += this.noiseBlueVelocity;
+    this.noiseGreen += this.noiseGreenVelocity;
 };
 
 BreathBall.prototype.display3D = function () {
     this.drawInit();
-    ambientLight(map(this.noiseRed, 0, 1, 10, 150), map(this.noiseRed, 0, 1, 40, 100), map(this.noiseBlue, 0, 1, 250, 255));
+    ambientLight(map(this.noiseRed, 0, 1, 10, 150), map(this.noiseGreen, 0, 1, 40, 100), map(this.noiseBlue, 0, 1, 250, 255));
     let dirY = (mouseY / height - 0.5) *2;
     let dirX = (mouseX / width - 0.5) *2;
     directionalLight(50, 60, 70, dirX, -dirY, 0.5);
@@ -95,5 +101,17 @@ BreathBall.prototype.display3D = function () {
     // texture(this.sprite.sprite);
     sphere(this.width * 0.4);
     this.theta += 0.003;
+    this.changeLighting();
+};
+
+BreathBall.prototype.display3DWithCanvas = function (canvas) {
+    canvas.background(color(0xff, 0xff, 0xff));
+    canvas.noStroke();
+    // canvas.ambientLight(map(this.noiseRed, 0, 1, 10, 150), map(this.noiseRed, 0, 1, 40, 100), map(this.noiseBlue, 0, 1, 250, 255));
+    canvas.ambientLight(map(this.noiseRed, 0, 1, 10, 150), map(this.noiseRed, 0, 1, 40, 100), map(this.noiseBlue, 0, 1, 250, 255));
+    canvas.pointLight(200, 200, 200, 100, 100, 0);
+    canvas.ambientMaterial(0, 250, 250);
+    canvas.sphere(this.width * 0.4);
+
     this.changeLighting();
 };

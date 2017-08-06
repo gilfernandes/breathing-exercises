@@ -173,6 +173,7 @@ canvas, #buttonDiv {
         height: 9em;
         width: 30%;
     }
+
     #mainMessage, #mainMessage > p {
         font-size: 46px !important;
         height: 250px;
@@ -222,6 +223,26 @@ canvas, #buttonDiv {
     #mainMessage, #mainMessage > p {
         font-size: 42px !important;
         height: 225px;
+        line-height: 1.2;
+        margin: 55px auto 2rem -14px;
+    }
+}
+
+/* For iPhone 6 */
+@media only screen
+and (min-device-width: 375px)
+and (max-device-width: 667px)
+and (width: 375px)
+and (height: 559px)
+and (orientation: portrait)
+and (color: 8)
+and (device-aspect-ratio: 375/667)
+and (aspect-ratio: 375/559)
+and (device-pixel-ratio: 2)
+and (-webkit-min-device-pixel-ratio: 2) {
+    #mainMessage, #mainMessage > p {
+        font-size: 42px !important;
+        height: 220px;
         line-height: 1.2;
         margin: 55px auto 2rem -14px;
     }
