@@ -73,6 +73,9 @@ html, body {
 #breatheSeconds {
     font-size: 3rem;
     padding: 0.5em;
+    appearance:none;
+    -moz-appearance:none; /* Firefox */
+    -webkit-appearance:none; /* Safari and Chrome */
 }
 
 @media screen and (max-width: 1024px) and (orientation: portrait) {
