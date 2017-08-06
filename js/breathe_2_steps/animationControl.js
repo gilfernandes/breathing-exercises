@@ -1,6 +1,6 @@
 let progress;
 
-let totalTime = 120;
+let totalTime = 20;
 
 const textInhale = "Breathe in";
 const textExhale = "Breathe out";
@@ -94,6 +94,15 @@ AnimationControl.prototype.calcFrameRate = function (canvas) {
     return breatheCalculations.calcDistance(standardBreathing.exhaleTime, breathBall.maxWidth - startWidth, (frameR | 0) === 0 ? 60 : frameR);
 };
 
+AnimationControl.prototype.stopAnimation = function(canvas) {
+    if(typeof progress !== "undefined" && progress.missingTime <= 0) {
+        canvas.noLoop();
+        createButton("Restart").id("restartButton").mousePressed(function() {
+            location.reload();
+        });
+    }
+};
+
 let initMainCanvas = function( p ) {
 
     p.setup = function() {
@@ -109,5 +118,6 @@ let initMainCanvas = function( p ) {
         breathBall.move();
         breathBall.display3DWithCanvas(p);
         breatheText.displayText(standardBreathing.text);
+        buttonBar.animationControl.stopAnimation(p);
     };
 };

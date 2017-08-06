@@ -48,6 +48,17 @@ html, body {
     margin-bottom: -4px;
 }
 
+#restartButton {
+    position:absolute;
+    bottom:0;
+    width: 100%;
+    height: 10%;
+    font-size: 3rem;
+    background-color: #4bc6d5;
+    border: 0;
+    font-weight: bold;
+}
+
 @media screen and (max-width: 1024px) and (orientation: portrait) {
     #buttonDiv > button {
         font-size: 3rem;
