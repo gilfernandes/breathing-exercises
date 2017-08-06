@@ -3,9 +3,11 @@ const buttonDivHeight = window.innerHeight * 0.2;
 
 let ctx;
 
-let buttonBar = new ButtonBar(standardBreathing.inhaleTime, standardBreathing.exhaleTime, buttonDivHeight, new AnimationControl());
+let buttonBar = new ButtonBar(buttonDivHeight, new AnimationControl());
 
-let player;
+let player; // Not used
+
+let breatheForm = new BreatheForm();
 
 function preload() {
     player = new Player(["../assets/sound/e_eyesee_word_of_silence_track_07.ogg",
@@ -23,6 +25,7 @@ function setup() {
         document.getElementById("defaultCanvas0").style = "display: none";
     }());
     buttonBar.createButtons();
+    breatheForm.createForm();
     noLoop();
 }
 

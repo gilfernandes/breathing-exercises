@@ -1,6 +1,6 @@
 let progress;
 
-let totalTime = 20;
+let totalTime = 120;
 
 const textInhale = "Breathe in";
 const textExhale = "Breathe out";
@@ -18,6 +18,8 @@ let distPerFrame;
 
 let breatheText;
 
+let standardBreathing;
+
 function Breathing(time, text, inhaleTime, exhaleTime) {
     this.time = time;
     this.text = text;
@@ -30,12 +32,14 @@ function Breathing(time, text, inhaleTime, exhaleTime) {
     this.breathePause = 3;
 }
 
-let standardBreathing = new Breathing(totalTime, textInhale, 4, 4);
-
 function AnimationControl() {
 }
 
 AnimationControl.prototype.startAnimation = function(inhaleTime, exhaleTime) {
+
+    totalTime = breatheForm.getSeconds();
+    standardBreathing = new Breathing(totalTime, totalTime, 4, 4);
+    breatheForm.hideForm();
     this.stopAnimation();
     this.createBreatheBall();
     this.initProgress(inhaleTime, exhaleTime);

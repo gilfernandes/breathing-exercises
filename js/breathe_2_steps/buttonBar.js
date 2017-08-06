@@ -1,7 +1,5 @@
-function ButtonBar(inhaleTime, exhaleTime, buttonHeight, animationControl) {
+function ButtonBar(buttonHeight, animationControl) {
     this.allButtons = [];
-    this.inhaleTime = inhaleTime;
-    this.exhaleTime = exhaleTime;
     this.buttonHeight = buttonHeight;
     this.divId = "buttonDiv";
     this.animationControl = animationControl;
@@ -51,5 +49,5 @@ ButtonBar.prototype.startAnimation = function(inhaleTime, exhaleTime) {
 };
 
 ButtonBar.prototype.hideBar = function() {
-    document.getElementById(this.divId).style = "display: none";
+    document.getElementById(this.divId).style.display = "none";
 };
