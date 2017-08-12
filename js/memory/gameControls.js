@@ -31,6 +31,7 @@ function handleStartButtonClick(gc) {
     startButton.mousePressed(function () {
         gc.stopAnimation();
         gc.quizStart();
+        gc.hideStartButton();
     });
 
 }

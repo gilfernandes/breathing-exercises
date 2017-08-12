@@ -32,6 +32,7 @@ html, body {
     border: none;
     background-color: #4bc6d5;
     font-size: 3rem;
+    min-height: 2rem;
 }
 
 #counter, #breatheMessage {
