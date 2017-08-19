@@ -22,6 +22,11 @@ html, body {
     align-items: center;
 }
 
+#progressCanvas {
+    position: absolute;
+    top: 0;
+}
+
 #buttonDiv {
     display: block;
     margin: 30px 0 0 0;

@@ -31,7 +31,7 @@ let progressHeigth = function() {
 let initProgressCanvas = function( p ) {
 
     p.setup = function() {
-        p.createCanvas(window.innerWidth, progressHeigth());
+        p.createCanvas(window.innerWidth, progressHeigth()).id("progressCanvas");
         p.background(255);
     };
 
