@@ -187,7 +187,7 @@ canvas, #buttonDiv {
 
     #buttonDiv, #buttonDiv > button {
         width: 95%;
-        margin: 40px auto;
+        margin: 40px auto 0 auto;
     }
 
     #buttonDiv > button {
