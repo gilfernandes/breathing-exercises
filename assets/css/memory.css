@@ -170,7 +170,7 @@ canvas, #buttonDiv {
 @media screen and (max-width: 1024px) and (orientation: portrait) {
 
     #colourDiv {
-        margin: 90px 0
+        margin: 90px 0 0 0
     }
 
     #colourDiv > button {
