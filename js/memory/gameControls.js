@@ -75,7 +75,7 @@ GameControls.prototype.quizStart = function() {
         gc.hideStartButton();
         gc.footerProgress.reset();
     }, secondsWait * 1000);
-    this.footerProgress.startDescending(secondsWait);
+    // this.footerProgress.startDescending(secondsWait);
 };
 
 GameControls.prototype.printSuccess = function () {
