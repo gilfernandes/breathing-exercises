@@ -90,5 +90,12 @@ html, body {
 @media screen and (max-width: 1024px) and (orientation: portrait) {
     #buttonDiv > button {
         font-size: 3rem;
+        width: 25%;
+        border: none;
+        background-color: #4bc6d5;
+        min-height: 210px;
+        display: block;
+        margin: 7px auto;
+        border-radius: 116px;
     }
 }
