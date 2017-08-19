@@ -9,10 +9,7 @@ ButtonBar.prototype.createButtons = function () {
     let div = createDiv("");
     div.attribute("id", this.divId);
     const buttonBar = this;
-    const heightInPixels = "height: " + this.buttonHeight + "px";
     const button4 = createButton("4s").id("4s");
-    document.getElementById("4s").style = heightInPixels;
-    document.getElementById(this.divId).style = heightInPixels;
     this.allButtons.push(button4.parent(this.divId).mousePressed(function () {
         buttonBar.highlightButton(buttonBar.allButtons[0]);
         buttonBar.startAnimation(4, 4);

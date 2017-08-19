@@ -23,8 +23,8 @@ html, body {
 }
 
 #buttonDiv {
-    display: flex;
-    margin: 0;
+    display: block;
+    margin: 30px 0 0 0;
 }
 
 #buttonDiv > button {
@@ -32,7 +32,10 @@ html, body {
     border: none;
     background-color: #4bc6d5;
     font-size: 3rem;
-    min-height: 2rem;
+    min-height: 193px;
+    display: block;
+    margin: 7px auto;
+    border-radius: 116px;
 }
 
 #counter, #breatheMessage {
