@@ -19,6 +19,10 @@ h1 {
     font-size: 4rem;
 }
 
+#mainTitle {
+    display: none;
+}
+
 #mainDiv {
     margin-top: 0;
 }
@@ -204,7 +208,7 @@ canvas, #buttonDiv {
     }
 
     #mainDiv {
-        margin: 20px 10%
+        margin: 130px 10%
     }
 }
 

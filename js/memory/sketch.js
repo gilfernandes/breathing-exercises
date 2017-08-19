@@ -21,6 +21,7 @@ function setup() {
     noLoop();
     gameHistory = new GameHistory();
     successStory = new SuccessStory(2);
+    new Parameters().processTitle();
     grid = new Grid(4, 4, 2, ["#84ce00", "#ffb901", "#de2000"], gameHistory, successStory);
     gameControls = new GameControls(grid, gameHistory, successStory);
     gameControls.init();
