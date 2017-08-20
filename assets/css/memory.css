@@ -25,6 +25,7 @@ h1 {
 
 #mainDiv {
     margin-top: 0;
+    height: 100vh;
 }
 
 #mainDiv, canvas {
