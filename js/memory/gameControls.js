@@ -70,6 +70,11 @@ GameControls.prototype.quizStart = function() {
             button.mousePressed(function (e) {
                 const colourArray = e.target.style.backgroundColor.replace(/[^\d,]/g, '').split(',');
                 gc.grid.activateClickMode(color(colourArray[0], colourArray[1], colourArray[2]));
+                let allButtons = document.getElementById("colourDiv").getElementsByTagName("button");
+                for (let i = 0; i < allButtons.length; i++) {
+                    allButtons[i].style.filter = "brightness(100%)";
+                }
+                button.elt.style.filter = "brightness(50%)";
             });
         });
         gc.hideStartButton();

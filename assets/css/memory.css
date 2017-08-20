@@ -57,8 +57,11 @@ canvas, #buttonDiv {
 
 #colourDiv > button {
     width: 20%;
-    border: 0;
     height: 4em;
+}
+
+#colourDiv > button:active {
+    filter: brightness(40%);
 }
 
 #buttonDiv {
