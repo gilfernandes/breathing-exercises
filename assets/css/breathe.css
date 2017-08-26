@@ -50,9 +50,9 @@ html, body {
     text-align: center;
 }
 
-.activeB {
-    background-color: #4167c8 !important;
-}
+/*.activeB {*/
+    /*background-color: #4167c8 !important;*/
+/*}*/
 
 #defaultCanvas1 {
     width: 99%;
