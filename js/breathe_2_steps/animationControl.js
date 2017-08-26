@@ -33,14 +33,14 @@ function Breathing(time, text, inhaleTime, exhaleTime) {
 }
 
 function AnimationControl() {
+    this.p5MainCanvas = null;
+    this.stopped = true;
 }
 
 AnimationControl.prototype.startAnimation = function(inhaleTime, exhaleTime) {
-
     totalTime = breatheForm.getSeconds();
     standardBreathing = new Breathing(totalTime, totalTime, 4, 4);
     breatheForm.hideForm();
-    this.stopAnimation();
     this.createBreatheBall();
     this.initProgress(inhaleTime, exhaleTime);
     this.updateTimer();
@@ -50,9 +50,18 @@ AnimationControl.prototype.startAnimation = function(inhaleTime, exhaleTime) {
 AnimationControl.prototype.initProgress = function (inhaleTime, exhaleTime) {
     const progressHeigth2 = progressHeigth();
     progress = new Progress(standardBreathing.time, standardBreathing.time, window.innerWidth, null, progressHeigth2);
-    new p5(initProgressCanvas);
     standardBreathing = new Breathing(totalTime, textInhale, inhaleTime, exhaleTime);
-    new p5(initMainCanvas);
+    this.stopped = false;
+    if(domUtils.exists("progressCanvas")) { // Restart
+        domUtils.show("progressCanvas");
+        domUtils.show("mainCanvas");
+        breatheText.initDiv();
+        this.p5MainCanvas.loop();
+    }
+    else { // First start
+        new p5(initProgressCanvas);
+        new p5(initMainCanvas);
+    }
 };
 
 AnimationControl.prototype.createBreatheBall = function () {
@@ -67,24 +76,22 @@ AnimationControl.prototype.calcMaxWidth = function (width, height) {
     return widthBiggerHeight ? height : width;
 };
 
-AnimationControl.prototype.stopAnimation = function () {
-    if(typeof breathingInterval !== "undefined") {
-        clearInterval(breathingInterval);
-        counter.stop();
-        noLoop();
-    }
-};
-
 AnimationControl.prototype.updateTimer = function () {
+    const animControl = this;
     breathingInterval = setInterval(function () {
         standardBreathing.time -= standardBreathing.step;
         let number = standardBreathing.time;
         progress.setProperties(number, totalTime, window.innerWidth, progress.progressbarGraphics);
         if (number < 0) {
-            clearInterval(breathingInterval);
-            noLoop();
+            animControl.stopCounters();
+            animControl.stopped = true;
         }
     }, standardBreathing.interval);
+};
+
+AnimationControl.prototype.stopCounters = function() {
+    counter.stop();
+    clearInterval(breathingInterval);
 };
 
 AnimationControl.prototype.startCounter = function () {
@@ -100,21 +107,54 @@ AnimationControl.prototype.calcFrameRate = function (canvas) {
 
 AnimationControl.prototype.stopAnimation = function(canvas) {
     if(typeof progress !== "undefined" && progress.missingTime <= 0) {
-        canvas.noLoop();
-        createButton("Restart").id("restartButton").mousePressed(function() {
-            location.reload();
-        });
+        if(typeof canvas !== "undefined") {
+            canvas.noLoop();
+        }
+        const animationControl = this;
+        if(document.getElementById("restartButton")) {
+            this.show("restartButton");
+        }
+        else {
+            createButton("Restart").id("restartButton").mousePressed(function () {
+                animationControl.goBackToMenu();
+            });
+        }
     }
+};
+
+AnimationControl.prototype.goBackToMenu = function() {
+
+    this.hide("counter");
+    this.hide("breatheMessage");
+    this.hide("restartButton");
+    for(let i = 0; i < document.getElementsByTagName("canvas").length; i++) {
+        document.getElementsByTagName("canvas")[i].style.display = "none";
+    }
+    function show(id) {
+        document.getElementById(id).style.display = "block";
+    }
+    this.show("buttonDiv");
+    this.show("breatheForm");
+    this.stopCounters();
+};
+
+AnimationControl.prototype.hide = function (id) {
+    domUtils.hide(id);
+};
+
+AnimationControl.prototype.show = function (id) {
+    domUtils.show(id);
 };
 
 let initMainCanvas = function( p ) {
 
     p.setup = function() {
         const size = buttonBar.animationControl.calcMaxWidth(window.innerWidth, window.innerHeight);
-        p.createCanvas(size, size, WEBGL);
+        p.createCanvas(size, size, WEBGL).id("mainCanvas");
         p.background(255);
         breatheText = new BreatheText(color(0x4b, 0xc6, 0xd5), standardBreathing.textSize, window.innerHeight * 0.2);
         breatheText.initDiv();
+        animationControl.p5MainCanvas = p;
     };
 
     p.draw = function() {

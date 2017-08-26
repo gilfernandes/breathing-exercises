@@ -3,7 +3,9 @@ const buttonDivHeight = window.innerHeight * 0.2;
 
 let ctx;
 
-let buttonBar = new ButtonBar(buttonDivHeight, new AnimationControl());
+const animationControl = new AnimationControl();
+
+let buttonBar = new ButtonBar(buttonDivHeight, animationControl);
 
 let player; // Not used
 
@@ -33,10 +35,12 @@ let waitAfterInhale = function () {
     standardBreathing.text = textHold;
     breathBall.dir = 0;
     setTimeout(function () {
-        counter.reset();
-        breathBall.dir = -1;
-        breathBall.reduceSize();
-        standardBreathing.text = textExhale;
+        if(!animationControl.stopped) {
+            counter.reset();
+            breathBall.dir = -1;
+            breathBall.reduceSize();
+            standardBreathing.text = textExhale;
+        }
     }, standardBreathing.breathePause * 1000);
 };
 
@@ -44,9 +48,11 @@ let waitAfterExhale = function () {
     standardBreathing.text = textHold;
     breathBall.dir = 0;
     setTimeout(function () {
-        counter.reset();
-        breathBall.dir = 1;
-        breathBall.augmentSize();
-        standardBreathing.text = textInhale;
+        if(!animationControl.stopped) {
+            counter.reset();
+            breathBall.dir = 1;
+            breathBall.augmentSize();
+            standardBreathing.text = textInhale;
+        }
     }, standardBreathing.breathePause * 1000);
 };
