@@ -5,6 +5,9 @@ function Counter() {
 }
 
 Counter.prototype.start = function (fun) {
+    if(this.interval) {
+        this.stop();
+    }
     this.interval = setInterval(fun, 1000);
     this.fun = fun;
 };

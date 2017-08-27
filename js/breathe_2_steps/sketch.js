@@ -18,7 +18,9 @@ function preload() {
 
 let startCounter = function () {
     counter.start(function () {
-        counter.counter++;
+        if(!animationControl.stopped) {
+            counter.counter++;
+        }
     });
 };
 
