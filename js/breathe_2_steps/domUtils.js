@@ -1,11 +1,15 @@
 const domUtils = (function () {
     const pub = {};
     pub.hide = function (id) {
-        document.getElementById(id).style.display = "none";
+        if(this.exists(id)) {
+            document.getElementById(id).style.display = "none";
+        }
     };
 
     pub.show = function (id) {
-        document.getElementById(id).style.display = "block";
+        if(this.exists(id)) {
+            document.getElementById(id).style.display = "block";
+        }
     };
 
     pub.exists = function(id) {

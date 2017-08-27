@@ -115,9 +115,10 @@ AnimationControl.prototype.stopAnimation = function(canvas) {
             this.show("restartButton");
         }
         else {
-            createButton("Restart").id("restartButton").mousePressed(function () {
-                animationControl.goBackToMenu();
-            });
+            animationControl.goBackToMenu();
+            // createButton("Restart").id("restartButton").mousePressed(function () {
+            //     animationControl.goBackToMenu();
+            // });
         }
     }
 };
