@@ -11,6 +11,7 @@ function BreathBall(width, maxWidth) {
     this.noiseBlueVelocity = 0.04;
     this.noiseGreenVelocity = 0.03;
     this.YDiff = random(0, 5);
+    this.detailFactor = 1.5;
 }
 
 BreathBall.prototype.move = function () {
@@ -111,7 +112,8 @@ BreathBall.prototype.display3DWithCanvas = function (canvas) {
     canvas.ambientLight(map(this.noiseRed, 0, 1, 10, 150), map(this.noiseRed, 0, 1, 40, 100), map(this.noiseBlue, 0, 1, 250, 255));
     canvas.pointLight(200, 200, 200, 100, 100, 0);
     canvas.ambientMaterial(0, 250, 250);
-    canvas.sphere(this.width * 0.4);
+
+    canvas.sphere(this.width * 0.4, 24 * this.detailFactor, 16 * this.detailFactor);
 
     this.changeLighting();
 };
