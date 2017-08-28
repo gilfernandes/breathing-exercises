@@ -11,6 +11,10 @@ let player; // Not used
 
 let breatheForm = new BreatheForm();
 
+let pauseTimeoutInhale;
+
+let pauseTimeoutExhale;
+
 function preload() {
     player = new Player(["../assets/sound/e_eyesee_word_of_silence_track_07.ogg",
         "../assets/sound/e_jewel_purpose_track_06.ogg"]);
@@ -36,8 +40,8 @@ function setup() {
 let waitAfterInhale = function () {
     standardBreathing.text = textHold;
     breathBall.dir = 0;
-    setTimeout(function () {
-        if(!animationControl.stopped) {
+    pauseTimeoutInhale = setTimeout(function () {
+        if(!animationControl.stopped && breathBall !== null) {
             counter.reset();
             breathBall.dir = -1;
             breathBall.reduceSize();
@@ -49,8 +53,8 @@ let waitAfterInhale = function () {
 let waitAfterExhale = function () {
     standardBreathing.text = textHold;
     breathBall.dir = 0;
-    setTimeout(function () {
-        if(!animationControl.stopped) {
+    pauseTimeoutExhale = setTimeout(function () {
+        if(!animationControl.stopped && breathBall !== null) {
             counter.reset();
             breathBall.dir = 1;
             breathBall.augmentSize();

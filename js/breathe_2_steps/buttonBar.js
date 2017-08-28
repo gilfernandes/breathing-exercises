@@ -9,28 +9,17 @@ ButtonBar.prototype.createButtons = function () {
     let div = createDiv("");
     div.attribute("id", this.divId);
     const buttonBar = this;
-    const button4 = createButton("4s").id("4s");
-    this.allButtons.push(button4.parent(this.divId).mousePressed(function () {
-        buttonBar.highlightButton(buttonBar.allButtons[0]);
-        buttonBar.startAnimation(4, 4);
-    }));
-    this.allButtons.push(createButton("5s").parent(this.divId).mousePressed(function () {
-        buttonBar.highlightButton(buttonBar.allButtons[1]);
-        buttonBar.startAnimation(5, 5);
-    }));
-    this.allButtons.push(createButton("8s").parent(this.divId).mousePressed(function () {
-        buttonBar.startAnimation(8, 8);
-        buttonBar.highlightButton(buttonBar.allButtons[2]);
-    }));
-    this.allButtons.push(createButton("10s").parent(this.divId).mousePressed(function () {
-        buttonBar.startAnimation(10, 10);
-        buttonBar.highlightButton(buttonBar.allButtons[3]);
-    }));
-    this.allButtons.push(createButton("12s").parent(this.divId).mousePressed(function () {
-        buttonBar.startAnimation(12, 12);
-        buttonBar.highlightButton(buttonBar.allButtons[4]);
-    }));
-    buttonBar.highlightButton(buttonBar.allButtons[0]);
+    function createMenuButton(seconds, position) {
+        buttonBar.allButtons.push(createButton(seconds + "s").id(seconds + "s").parent(buttonBar.divId).mousePressed(function () {
+            buttonBar.highlightButton(buttonBar.allButtons[position]);
+            buttonBar.startAnimation(seconds, seconds);
+        }));
+    }
+    createMenuButton(4, 0);
+    createMenuButton(5, 1);
+    createMenuButton(8, 2);
+    createMenuButton(10, 3);
+    createMenuButton(12, 4);
 };
 
 ButtonBar.prototype.highlightButton = function (activeButton) {
