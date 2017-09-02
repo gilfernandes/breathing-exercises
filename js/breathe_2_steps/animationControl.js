@@ -1,4 +1,4 @@
-let progress;
+let knightRider = new KnightRider(window.innerWidth / 5, 30, window.innerWidth);
 
 let totalTime = 120;
 
@@ -20,6 +20,8 @@ let breatheText;
 
 let standardBreathing;
 
+let startButton = new StartButton();
+
 function Breathing(time, text, inhaleTime, exhaleTime) {
     this.time = time;
     this.text = text;
@@ -35,6 +37,7 @@ function Breathing(time, text, inhaleTime, exhaleTime) {
 function AnimationControl() {
     this.p5MainCanvas = null;
     this.stopped = true;
+    startButton = new StartButton(this);
 }
 
 AnimationControl.prototype.startAnimation = function (inhaleTime, exhaleTime) {
@@ -42,14 +45,14 @@ AnimationControl.prototype.startAnimation = function (inhaleTime, exhaleTime) {
     standardBreathing = new Breathing(totalTime, totalTime, 4, 4);
     breatheForm.hideForm();
     this.createBreatheBall();
-    this.initProgress(inhaleTime, exhaleTime);
+    this.initAnimation(inhaleTime, exhaleTime);
     this.updateTimer();
     this.startCounter();
+    startButton.show();
+
 };
 
-AnimationControl.prototype.initProgress = function (inhaleTime, exhaleTime) {
-    const progressHeigth2 = progressHeigth();
-    progress = new Progress(standardBreathing.time, standardBreathing.time, window.innerWidth, null, progressHeigth2);
+AnimationControl.prototype.initAnimation = function (inhaleTime, exhaleTime) {
     standardBreathing = new Breathing(totalTime, textInhale, inhaleTime, exhaleTime);
     this.stopped = false;
     if (domUtils.exists("progressCanvas")) { // Restart
@@ -59,8 +62,8 @@ AnimationControl.prototype.initProgress = function (inhaleTime, exhaleTime) {
         this.p5MainCanvas.loop();
     }
     else { // First start
-        new p5(initProgressCanvas);
-        new p5(initMainCanvas);
+        new p5(initKnightRiderCanvas);
+        this.mainCanvas = new p5(initMainCanvas);
     }
 };
 
@@ -81,7 +84,7 @@ AnimationControl.prototype.updateTimer = function () {
     breathingInterval = setInterval(function () {
         standardBreathing.time -= standardBreathing.step;
         let number = standardBreathing.time;
-        progress.setProperties(number, totalTime, window.innerWidth, progress.progressbarGraphics);
+        // progress.setProperties(number, totalTime, window.innerWidth, progress.progressbarGraphics);
         if (number < 0) {
             animControl.stopCounters();
             animControl.stopped = true;
@@ -101,27 +104,34 @@ AnimationControl.prototype.startCounter = function () {
 };
 
 AnimationControl.prototype.calcFrameRate = function (canvas) {
-    const frameR = canvas.frameRate();
-    return breatheCalculations.calcDistance(standardBreathing.exhaleTime, breathBall.maxWidth - startWidth, (frameR | 0) === 0 ? 60 : frameR);
+    if (breathBall !== null) {
+        const frameR = canvas.frameRate();
+        return breatheCalculations.calcDistance(standardBreathing.exhaleTime, breathBall.maxWidth - startWidth, (frameR | 0) === 0 ? 60 : frameR);
+    }
 };
 
-AnimationControl.prototype.stopAnimation = function (canvas) {
-    if (typeof progress !== "undefined" && progress.missingTime <= 0) {
+AnimationControl.prototype.clearAnimation = function (canvas) {
+    console.log("Clearing animation");
+    this.stopped = true;
+    if (pauseTimeoutInhale) {
         clearTimeout(pauseTimeoutInhale);
-        clearTimeout(pauseTimeoutExhale);
-        breathBall = null;
-        if (typeof canvas !== "undefined") {
-            canvas.noLoop();
-        }
-        this.goBackToMenu();
     }
+    if (pauseTimeoutExhale) {
+        clearTimeout(pauseTimeoutExhale);
+    }
+    breathBall = null;
+    if (typeof canvas !== "undefined") {
+        canvas.noLoop();
+    }
+    this.goBackToMenu();
+    knightRider.stop();
 };
 
 AnimationControl.prototype.goBackToMenu = function () {
 
     this.hide("counter");
     this.hide("breatheMessage");
-    this.hide("restartButton");
+    startButton.hide();
     for (let i = 0; i < document.getElementsByTagName("canvas").length; i++) {
         document.getElementsByTagName("canvas")[i].style.display = "none";
     }
@@ -155,10 +165,12 @@ let initMainCanvas = function (p) {
     };
 
     p.draw = function () {
-        distPerFrame = buttonBar.animationControl.calcFrameRate(p);
-        breathBall.move();
-        breathBall.display3DWithCanvas(p);
-        breatheText.displayText(standardBreathing.text);
-        buttonBar.animationControl.stopAnimation(p);
+        if (breathBall !== null) {
+            distPerFrame = buttonBar.animationControl.calcFrameRate(p);
+            breathBall.move();
+            breathBall.display3DWithCanvas(p);
+            breatheText.displayText(standardBreathing.text);
+        }
     };
+
 };

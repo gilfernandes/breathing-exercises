@@ -38,4 +38,5 @@ let initProgressCanvas = function( p ) {
     p.draw = function() {
         progress.fillProgress(p);
     };
+
 };

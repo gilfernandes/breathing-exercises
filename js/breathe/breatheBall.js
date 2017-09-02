@@ -11,7 +11,7 @@ function BreathBall(width, maxWidth) {
     this.noiseBlueVelocity = 0.04;
     this.noiseGreenVelocity = 0.03;
     this.YDiff = random(0, 5);
-    this.detailFactor = 1.5;
+    this.detailFactor = 1.0;
 }
 
 BreathBall.prototype.move = function () {

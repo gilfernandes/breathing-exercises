@@ -20,6 +20,7 @@ function GameControls(grid, gameHistory, successStory) {
 }
 
 GameControls.prototype.init = function () {
+    console.log("init")
     this.createDivWithId(buttonDivId);
     this.startButton = createButton("Begin").id("restartButton").parent(buttonDivId);
     handleStartButtonClick.call(this, this);
