@@ -141,7 +141,7 @@ AnimationControl.prototype.goBackToMenu = function () {
     }
 
     this.show("buttonDiv");
-    this.show("breatheForm");
+    // this.show("breatheForm");
     this.stopCounters();
 };
 
