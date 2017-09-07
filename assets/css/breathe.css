@@ -99,4 +99,7 @@ html, body {
         margin: 7px auto;
         border-radius: 116px;
     }
+    #buttonDiv {
+        padding-top: 30px
+    }
 }
