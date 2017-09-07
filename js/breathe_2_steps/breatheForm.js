@@ -6,7 +6,7 @@ BreatheForm.prototype.createForm = function () {
     let div = createDiv("").id("breatheForm");
     createSpan("Seconds: ").parent("breatheForm");
     let breatheList = createSelect().parent("breatheForm").id("breatheSeconds");
-    ["30", "60", "90", "120", "180", "240"].forEach(function(entry) {
+    ["120", "180", "240"].forEach(function(entry) {
         breatheList.option(entry);
     });
 };

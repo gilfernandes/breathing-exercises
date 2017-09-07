@@ -68,6 +68,14 @@ BreathBall.prototype.display = function () {
     ctx.fill();
 };
 
+BreathBall.prototype.displayWithCanvas = function (canvas) {
+    canvas.background(color(0xff, 0xff, 0xff));
+    canvas.noStroke();
+    canvas.fill(color(0, 0, 255));
+    const radius = this.width * 0.8;
+    canvas.ellipse(canvas.width / 2, canvas.height / 2, radius);
+};
+
 BreathBall.prototype.displayImage = function () {
     this.drawInit();
     const radius = this.width;

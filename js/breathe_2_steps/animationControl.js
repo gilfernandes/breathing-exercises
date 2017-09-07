@@ -41,8 +41,8 @@ function AnimationControl() {
 }
 
 AnimationControl.prototype.startAnimation = function (inhaleTime, exhaleTime) {
-    totalTime = breatheForm.getSeconds();
-    standardBreathing = new Breathing(totalTime, totalTime, 4, 4);
+    // totalTime = breatheForm.getSeconds();
+    standardBreathing = new Breathing(Number.MAX_SAFE_INTEGER, totalTime, 4, 4);
     breatheForm.hideForm();
     this.createBreatheBall();
     this.initAnimation(inhaleTime, exhaleTime);
@@ -157,7 +157,7 @@ let initMainCanvas = function (p) {
 
     p.setup = function () {
         const size = buttonBar.animationControl.calcMaxWidth(window.innerWidth, window.innerHeight);
-        p.createCanvas(size, size, WEBGL).id("mainCanvas");
+        p.createCanvas(size, size).id("mainCanvas");
         p.background(255);
         breatheText = new BreatheText(color(0x4b, 0xc6, 0xd5), standardBreathing.textSize, window.innerHeight * 0.2);
         breatheText.initDiv();
@@ -168,7 +168,7 @@ let initMainCanvas = function (p) {
         if (breathBall !== null) {
             distPerFrame = buttonBar.animationControl.calcFrameRate(p);
             breathBall.move();
-            breathBall.display3DWithCanvas(p);
+            breathBall.displayWithCanvas(p);
             breatheText.displayText(standardBreathing.text);
         }
     };
