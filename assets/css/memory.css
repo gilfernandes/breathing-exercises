@@ -79,14 +79,26 @@ canvas, #buttonDiv {
     border-radius: 50px;
 }
 
-.success {
-    background-image: url("../images/memory/success.png");
-    background-color: #f2fae3;
+.fail {
+    display: flex;
+    background-color: #fce4e1;
 }
 
-.fail {
-    background-image: url("../images/memory/icon-cross.png");
-    background-color: #fce4e1;
+#successIcon {
+    padding: 0.8em 0.2em 0 0.3em;
+}
+
+#failIcon {
+    padding: 1em 0.2em 0 0.3em;
+}
+
+#successText, #errorText {
+    margin: auto 0;
+}
+
+#failIcon img {
+    width: 56px;
+    height: 56px
 }
 
 .success, .fail {
@@ -96,7 +108,7 @@ canvas, #buttonDiv {
     color: black;
     margin-bottom: 0;
     width: 100%;
-    padding: 0.7em 0 0 0;
+    padding: 0.3em 0 0.3em 0;
     background-position-x: 20px;
     text-align: left;
     height: 5em
@@ -107,7 +119,10 @@ canvas, #buttonDiv {
 }
 
 .success {
+    display: flex;
+    background-color: #f2fae3;
     background-position-y: 1.7em;
+    height: 4.5em;
 }
 
 .success span, .fail span {
@@ -127,6 +142,7 @@ canvas, #buttonDiv {
 #successCountdown {
     margin-top: 0;
     color: white;
+    display: none;
 }
 
 #resultPanel {
@@ -199,7 +215,7 @@ canvas, #buttonDiv {
         font-size: 1.2em !important;
         height: 4.5em;
         line-height: 1.3;
-        margin: 4em auto 1rem 0;
+        margin: 4em auto 1.5rem 0;
     }
 
     #buttonDiv, #buttonDiv > button {

@@ -36,7 +36,7 @@ function handleStartButtonClick(gc) {
 
 }
 
-GameControls.prototype.quizStart = function() {
+GameControls.prototype.quizStart = function () {
     grid.progressLevel();
     this.writeMessage(initialMainMessage);
     this.emptyGrid();
@@ -61,10 +61,10 @@ GameControls.prototype.quizStart = function() {
             const button = createButton("").parent(colourDiv);
             gc.colourButtons.push(button);
             button.style("background-color: " + c);
-            if(i === 0) {
+            if (i === 0) {
                 button.class("firstButton");
             }
-            else if(i === a.length - 1) {
+            else if (i === a.length - 1) {
                 button.class("lastButton");
             }
             button.mousePressed(function (e) {
@@ -85,23 +85,27 @@ GameControls.prototype.quizStart = function() {
 
 GameControls.prototype.printSuccess = function () {
     this.removeColorDiv();
-    this.writeMessage("<p class='success' id='successMessage'><span>Well done!<br />Your guess is correct!</span></p><p id='successCountdown'></p>");
-    let counter = 1;
+    this.writeMessage("<div class='success' id='successMessage'><div id='successIcon'><img src='../assets/images/memory/success.png'/></div>" +
+        "<div id='successText'>Well done!<br />Your guess is correct!</div><p id='successCountdown'></p>");
+    let counter = 1000;
     const gc = this;
-    const countdown = setInterval(function() {
-        document.getElementById("successCountdown").innerHTML = "" + counter--;
-        if(counter < 0) {
-            clearInterval(countdown);
-            gc.removeElement('successMessage');
-            gc.removeElement('successCountdown');
-            gc.quizStart();
+    const countdown = setInterval(function () {
+        if(document.getElementById("successCountdown")) {
+            document.getElementById("successCountdown").innerHTML = "" + counter--;
+            if (counter < 0) {
+                clearInterval(countdown);
+                gc.removeElement('successMessage');
+                gc.removeElement('successCountdown');
+                gc.quizStart();
+            }
         }
     }, 1000);
 };
 
 GameControls.prototype.printError = function () {
     this.removeColorDiv();
-    this.writeMessage("<p class='fail'><span>That was not the right pattern.<br />Try again</span></p>");
+    this.writeMessage("<div class='fail'><div id='failIcon'><img src='../assets/images/memory/icon-cross.png'/></div>" +
+        "<div id='errorText'>That was not the right pattern.<br />Try again</div></div>");
     this.showStartButton();
 };
 
@@ -117,8 +121,8 @@ GameControls.prototype.animate = function () {
     }
 };
 
-GameControls.prototype.stopAnimation = function() {
-    if(this.animationOn) {
+GameControls.prototype.stopAnimation = function () {
+    if (this.animationOn) {
         clearInterval(this.animationInterval);
     }
     this.animationOn = false;
@@ -126,13 +130,7 @@ GameControls.prototype.stopAnimation = function() {
 
 GameControls.prototype.writeMessage = function (html) {
     const $mainMessage = $("#mainMessage");
-    if ($mainMessage.length === 0) {
-        this.message = $("#mainDiv").prepend(
-            `<p id="mainMessage">Memorize the pattern that appears on the screen and tap when it disappears to play this game</p>`);
-    }
-    else {
-        $mainMessage.html(html);
-    }
+    $mainMessage.html(html);
 };
 
 GameControls.prototype.createDivWithId = function (id) {
@@ -151,11 +149,11 @@ GameControls.prototype.removeElement = function (elementId) {
     }
 };
 
-GameControls.prototype.hideStartButton = function() {
+GameControls.prototype.hideStartButton = function () {
     document.getElementById("buttonDiv").style["display"] = "none";
 };
 
-GameControls.prototype.showStartButton = function() {
+GameControls.prototype.showStartButton = function () {
     document.getElementById("buttonDiv").style["display"] = "block";
     document.getElementById("restartButton").innerText = "Retry";
 };
