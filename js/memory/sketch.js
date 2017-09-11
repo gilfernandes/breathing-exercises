@@ -9,7 +9,7 @@ let successStory;
 let doubleClickLock;
 
 const createMemoryCanvas = function () {
-    const ratio = 0.75;
+    const ratio = 0.65;
     const width = window.innerWidth < window.innerHeight ? window.innerWidth * ratio : window.innerHeight * ratio;
     const canvas = createCanvas(width, width);
     canvas.parent("#mainDiv");

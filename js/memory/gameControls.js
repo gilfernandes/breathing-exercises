@@ -2,7 +2,7 @@ const colourDiv = "colourDiv";
 const buttonDivId = "buttonDiv";
 
 const initialMainMessage = "Memorize the pattern that appears on the screen and tap when it disappears to play this game";
-const redrawPatternMessage = "Please redraw the pattern by first selecting the colour and then the balls.";
+const redrawPatternMessage = "Please redraw the pattern by first selecting the colour and then the balls";
 
 function GameControls(grid, gameHistory, successStory) {
     this.startButton = null;
