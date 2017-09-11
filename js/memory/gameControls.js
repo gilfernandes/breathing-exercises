@@ -87,7 +87,7 @@ GameControls.prototype.printSuccess = function () {
     this.removeColorDiv();
     this.writeMessage("<div class='success' id='successMessage'><div id='successIcon'><img src='../assets/images/memory/success.png'/></div>" +
         "<div id='successText'>Well done!<br />Your guess is correct!</div><p id='successCountdown'></p>");
-    let counter = 1000;
+    let counter = 1;
     const gc = this;
     const countdown = setInterval(function () {
         if(document.getElementById("successCountdown")) {
