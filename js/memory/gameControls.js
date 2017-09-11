@@ -20,7 +20,6 @@ function GameControls(grid, gameHistory, successStory) {
 }
 
 GameControls.prototype.init = function () {
-    console.log("init")
     this.createDivWithId(buttonDivId);
     this.startButton = createButton("Begin").id("restartButton").parent(buttonDivId);
     handleStartButtonClick.call(this, this);
@@ -87,7 +86,7 @@ GameControls.prototype.quizStart = function() {
 GameControls.prototype.printSuccess = function () {
     this.removeColorDiv();
     this.writeMessage("<p class='success' id='successMessage'><span>Well done!<br />Your guess is correct!</span></p><p id='successCountdown'></p>");
-    let counter = 0;
+    let counter = 1;
     const gc = this;
     const countdown = setInterval(function() {
         document.getElementById("successCountdown").innerHTML = "" + counter--;

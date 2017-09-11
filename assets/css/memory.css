@@ -24,7 +24,7 @@ h1 {
 }
 
 #mainDiv {
-    margin-top: 0;
+    margin-top: 60px;
 }
 
 #mainDiv, canvas {
@@ -57,6 +57,8 @@ canvas, #buttonDiv {
 #colourDiv > button {
     width: 20%;
     height: 4em;
+    border: 0;
+    margin: 10px 0;
 }
 
 #colourDiv > button:active {
@@ -69,7 +71,7 @@ canvas, #buttonDiv {
 }
 
 #buttonDiv > button {
-    width: 25%;
+    width: 50%;
     font-size: 2em;
     background-color: #45d0d7;
     border: 0;
@@ -89,25 +91,37 @@ canvas, #buttonDiv {
 
 .success, .fail {
     background-repeat: no-repeat;
-    background-size: 100px, 100px;
-    height: 50px;
+    background-size: 2em, 2em;
     border-radius: 50px;
     color: black;
     margin-bottom: 0;
     width: 100%;
-    text-align: center;
-    padding: 18px 0 0 40px;
+    padding: 0.7em 0 0 0;
     background-position-x: 20px;
-    background-position-y: 85px;
+    text-align: left;
+    height: 5em
+}
+
+.fail {
+    background-position-y: 2.0em;
+}
+
+.success {
+    background-position-y: 1.7em;
 }
 
 .success span, .fail span {
-    position: relative;
-    top: 45%;
-    transform: translateY(-50%);
     display: block;
-    text-align: left;
-    margin-left: 95px;
+}
+
+.fail span {
+    top: 0.6em;
+    padding: 0.4em 0 0 3.3em;
+}
+
+.success span {
+    top: 0.9em;
+    padding: 0.7em 0 0 3em;
 }
 
 #successCountdown {
@@ -118,9 +132,9 @@ canvas, #buttonDiv {
 #resultPanel {
     position: fixed;
     top: 0;
-    right: 0;
+    right: 1em;
     padding: 1em;
-    font-size: 2em;
+    font-size: 1em;
     font-family: FilsonProBook, cursive;
 }
 
@@ -135,12 +149,12 @@ canvas, #buttonDiv {
 #resultPanel .successful, #resultPanel .failed {
     border-radius: 60px;
     margin: 1px 1px;
-    padding: 15px 25px;
+    padding: 0.5em 0.5em;
 }
 
 #resultPanelGrid {
     display: flex;
-    margin: -15px 0 0 0;
+    margin: -0.5em 0 0 0;
 }
 
 #resultPanelGrid span {
@@ -150,14 +164,14 @@ canvas, #buttonDiv {
 }
 
 #resultPanelGrid .sep {
-    padding-top: 20px
+    padding-top: 0.6em;
 }
 
 #yourScore {
-    font-size: 25px;
+    font-size: 1em;
     color: #abd3d5;
     text-align: center;
-    margin-top: 3px;
+    margin-top: 1px;
 }
 
 #footerProgress {
@@ -172,24 +186,25 @@ canvas, #buttonDiv {
 @media screen and (max-width: 1024px) and (orientation: portrait) {
 
     #colourDiv {
-        margin: 90px 0 0 0
+        margin: 1.7em 0 0 0;
     }
 
     #colourDiv > button {
-        height: 9em;
+        height: 4em;
         width: 30%;
+        border: 0;
     }
 
-    #mainMessage, #mainMessage > p {
-        font-size: 46px !important;
-        height: 250px;
+    #mainMessage {
+        font-size: 1.2em !important;
+        height: 4.5em;
         line-height: 1.3;
-        margin: 60px auto 2rem -14px;
+        margin: 4em auto 3rem 0;
     }
 
     #buttonDiv, #buttonDiv > button {
         width: 95%;
-        margin: 40px auto 0 auto;
+        margin: 0.5em auto 0 auto;
     }
 
     #buttonDiv > button {
@@ -197,12 +212,12 @@ canvas, #buttonDiv {
         border: 0;
         color: white;
         border-radius: 100px;
-        padding: 35px 0;
-        font-size: 3.5rem;
+        padding: 0.5em 0;
+        font-size: 2.0rem;
     }
 
     .firstButton {
-        border-radius: 100px 0 0 100px;
+        border-radius: 3em 0 0 3em;
     }
 
     .lastButton {
@@ -210,7 +225,7 @@ canvas, #buttonDiv {
     }
 
     #mainDiv {
-        margin: 130px 10% 0 10%
+        margin: 1em 10% 0 9%;
     }
 }
 
@@ -221,16 +236,16 @@ canvas, #buttonDiv {
         background-color: #45d0d7;
         border: 0;
         color: white;
-        border-radius: 100px;
-        padding: 25px 0;
-        font-size: 3rem;
+        border-radius: 1em;
+        padding: 0.5em 0;
+        font-size: 2rem;
     }
 
     #mainMessage, #mainMessage > p {
-        font-size: 42px !important;
-        height: 225px;
-        line-height: 1.2;
-        margin: 55px auto 2rem -14px;
+        font-size: 1.2em !important;
+        height: 5em;
+        line-height: 1.3em;
+        margin: 3em auto 2rem 0;
     }
 }
 
@@ -240,10 +255,21 @@ and (min-device-width: 375px)
 and (max-device-width: 667px)
 and (orientation: portrait) {
     #mainMessage, #mainMessage > p {
-        font-size: 36px !important;
-        height: 220px;
+        font-size: 1.2em !important;
+        height: 5em;
         line-height: 1.2;
-        margin: 55px auto 2rem -14px;
+        margin: 3.7em auto 2em 0;
+    }
+}
+
+/* iPhone 5 & 5S in portrait */
+@media only screen
+and (min-device-width : 320px)
+and (max-device-width : 568px)
+and (orientation : portrait) {
+    #mainMessage > p {
+        font-size: 1em !important;
+        margin: 3.8em auto 2em 0;
     }
 }
 
