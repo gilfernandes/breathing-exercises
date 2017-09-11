@@ -245,7 +245,7 @@ canvas, #buttonDiv {
         font-size: 1.2em !important;
         height: 5em;
         line-height: 1.3em;
-        margin: 3em auto 2rem 0;
+        margin: 3em auto 0.5rem 0;
     }
 }
 
