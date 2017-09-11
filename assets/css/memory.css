@@ -199,7 +199,7 @@ canvas, #buttonDiv {
         font-size: 1.2em !important;
         height: 4.5em;
         line-height: 1.3;
-        margin: 4em auto 3rem 0;
+        margin: 4em auto 1rem 0;
     }
 
     #buttonDiv, #buttonDiv > button {
@@ -268,7 +268,7 @@ and (min-device-width : 320px)
 and (max-device-width : 568px)
 and (orientation : portrait) {
     #mainMessage > p {
-        font-size: 1em !important;
+        font-size: 0.9em !important;
         margin: 3.8em auto 2em 0;
     }
 }
