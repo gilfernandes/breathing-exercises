@@ -10,17 +10,6 @@
         @-o-viewport        { height: device-height; }
         @viewport           { height: device-height; }
     </style>
-    <script type="text/javascript">
-        //<![CDATA[
-        if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
-            let msViewportStyle = document.createElement("style");
-            msViewportStyle.appendChild(
-                document.createTextNode("@-ms-viewport{width:auto!important}")
-            );
-            document.getElementsByTagName("head")[0].appendChild(msViewportStyle);
-        }
-        //]]>
-    </script>
 
     <meta charset="UTF-8">
     <script language="javascript" type="text/javascript" src="../js/p5/empty-example/libraries/p5.js"></script>
@@ -41,7 +30,7 @@
     <link rel="stylesheet" type="text/css" href="../assets/css/memory.css">
 
 </head>
-<body>
+<body id="bodyMain">
     <!--<h1 id="mainTitle">Focus Exercise</h1>-->
     <div id="mainDiv">
         <div id="mainMessage">Memorize the pattern that appears on the screen and tap when it disappears to play this game</div>
