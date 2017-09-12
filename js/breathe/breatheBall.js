@@ -38,11 +38,12 @@ BreathBall.prototype.incrementDecrement = function () {
         this.width += this.dir * distPerFrame;
     }
 };
+
 BreathBall.prototype.drawInit = function() {
-    background(color(0xff, 0xff, 0xff));
+    // background(color(0xff, 0xff, 0xff));
+    clear();
     noStroke();
 };
-
 
 BreathBall.prototype.display = function () {
 
@@ -62,6 +63,7 @@ BreathBall.prototype.display = function () {
     let gradient = ctx.createLinearGradient(startGrad.x, startGrad.y, endGrad.x, endGrad.y);
     gradient.addColorStop(0, "#3c5da0");
     gradient.addColorStop(1, "#ffffff");
+    translate(width / 2, height / 2);
     ctx.beginPath();
     ctx.ellipse(xEllipse, yEllipse, sizeEllipse, sizeEllipse, 45 * Math.PI / 180, 0, 2 * Math.PI);
     ctx.fillStyle = gradient;

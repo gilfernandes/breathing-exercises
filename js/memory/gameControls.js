@@ -17,6 +17,7 @@ function GameControls(grid, gameHistory, successStory) {
     this.grid.setGameControls(this);
     this.animationInterval = null;
     this.footerProgress = new FooterProgress();
+    this.imageFolder = "../assets/images/memory";
 }
 
 GameControls.prototype.init = function () {
@@ -85,7 +86,7 @@ GameControls.prototype.quizStart = function () {
 
 GameControls.prototype.printSuccess = function () {
     this.removeColorDiv();
-    this.writeMessage("<div class='success' id='successMessage'><div id='successIcon'><img src='../assets/images/memory/success.png'/></div>" +
+    this.writeMessage("<div class='success' id='successMessage'><div id='successIcon'><img src='" + this.imageFolder + "/success.png'/></div>" +
         "<div id='successText'>Well done!<br />Your guess is correct!</div><p id='successCountdown'></p>");
     let counter = 1;
     const gc = this;
@@ -104,7 +105,7 @@ GameControls.prototype.printSuccess = function () {
 
 GameControls.prototype.printError = function () {
     this.removeColorDiv();
-    this.writeMessage("<div class='fail'><div id='failIcon'><img src='../assets/images/memory/icon-cross.png'/></div>" +
+    this.writeMessage("<div class='fail'><div id='failIcon'><img src='" + this.imageFolder + "/icon-cross.png'/></div>" +
         "<div id='errorText'>That was not the right pattern.<br />Try again</div></div>");
     this.showStartButton();
 };

@@ -82,13 +82,13 @@ function draw() {
 
     breathBall.move();
 
-    breathBall.display3D();
+    breathBall.display();
 
     breatheText.displayText(standardBreathing.text);
 }
 
 let createBreathingCanvas = function () {
-    let canvas = createCanvas(window.innerWidth, window.innerHeight - breatheText.height - buttonDivHeight - progressHeigth(), WEBGL);
+    let canvas = createCanvas(window.innerWidth, window.innerHeight - breatheText.height - buttonDivHeight - progressHeigth());
     canvas.parent("#mainDiv");
     return canvas;
 };
