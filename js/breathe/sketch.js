@@ -88,7 +88,7 @@ function draw() {
 }
 
 let createBreathingCanvas = function () {
-    const canvasHeight = window.innerHeight - breatheText.height - buttonDivHeight;
+    const canvasHeight = window.innerHeight - buttonDivHeight;
     let canvas = createCanvas(window.innerWidth, canvasHeight)
         .id("mainCanvas");
     canvas.parent("#mainDiv");
