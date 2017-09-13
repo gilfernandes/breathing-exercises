@@ -27,10 +27,6 @@ ButtonBar.prototype.createButtons = function () {
         restartAnimation(10, 10);
         buttonBar.highlightButton(buttonBar.allButtons[3]);
     }));
-    this.allButtons.push(createButton("12s").parent(buttonDivId).mousePressed(function () {
-        restartAnimation(12, 12);
-        buttonBar.highlightButton(buttonBar.allButtons[4]);
-    }));
     buttonBar.highlightButton(buttonBar.allButtons[0]);
 };
 

@@ -88,8 +88,11 @@ function draw() {
 }
 
 let createBreathingCanvas = function () {
-    let canvas = createCanvas(window.innerWidth, window.innerHeight - breatheText.height - buttonDivHeight - progressHeigth());
+    const canvasHeight = window.innerHeight - breatheText.height - buttonDivHeight;
+    let canvas = createCanvas(window.innerWidth, canvasHeight)
+        .id("mainCanvas");
     canvas.parent("#mainDiv");
+    document.getElementById("mainCanvas").style.marginTop = (canvasHeight / 2 * -1) + "px";
     return canvas;
 };
 
