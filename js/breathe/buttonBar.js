@@ -27,7 +27,16 @@ ButtonBar.prototype.createButtons = function () {
         restartAnimation(10, 10);
         buttonBar.highlightButton(buttonBar.allButtons[3]);
     }));
-    buttonBar.highlightButton(buttonBar.allButtons[0]);
+
+    function highlightFirst() {
+        buttonBar.highlightButton(buttonBar.allButtons[0]);
+        let defaultButtons = document.getElementsByClassName("activeB");
+        if (defaultButtons.length > 0) {
+            defaultButtons[0].focus();
+        }
+    }
+
+    highlightFirst();
 };
 
 ButtonBar.prototype.highlightButton = function (activeButton) {

@@ -14,7 +14,6 @@ BreatheText.prototype.initDiv = function () {
     const breatheMessageDiv = createDiv("<div id='breatheMessage'></div>");
     if(messageDivIdExists) {
         breatheMessageDiv.parent(messageDivId);
-        document.getElementById(messageDivId).style.height = this.height + "px";
     }
 };
 

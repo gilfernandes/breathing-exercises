@@ -61,7 +61,7 @@ body {
 
 #counter, #breatheMessage {
     padding-top: 0;
-    font-size: 2rem;
+    font-size: 1.5rem;
     text-align: center;
     color: white;
 }
@@ -103,10 +103,14 @@ body {
 #messageDiv {
     position: absolute;
     top: 50%;
-    height: 6em;
-    margin: -3em 0;
+    height: 4em;
+    margin: -2em 0;
     width: 100%;
     z-index: 100;
+}
+
+#buttonDiv > button:active, #buttonDiv > button:focus {
+    background-color: #4cd0d5;
 }
 
 @media screen and (max-width: 1024px) and (orientation: portrait) {
@@ -122,6 +126,9 @@ body {
         border-radius: 0;
         color: white;
     }
+
+
+
     #buttonDiv > button {
         padding-top: 0;
         height: 5em;
