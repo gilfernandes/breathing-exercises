@@ -87,13 +87,10 @@ function draw() {
     breatheText.displayText(standardBreathing.text);
 }
 
-let createBreathingCanvas = function () {
-    const canvasHeight = window.innerHeight - buttonDivHeight;
-    let canvas = createCanvas(window.innerWidth, canvasHeight)
-        .id("mainCanvas");
-    canvas.parent("#mainDiv");
-    document.getElementById("mainCanvas").style.marginTop = (canvasHeight / 2 * -1) + "px";
-    return canvas;
+let createBreatheBall = function () {
+    let maxWidth = calcMaxWidth(canvasWidth(), window.innerHeight);
+    startWidth = maxWidth - maxWidth * 0.5;
+    breathBall = new BreathBall(startWidth, maxWidth);
 };
 
 let calcMaxWidth = function (width, height) {
@@ -101,10 +98,16 @@ let calcMaxWidth = function (width, height) {
     return widthBiggerHeight ? height : width;
 };
 
-let createBreatheBall = function () {
-    let maxWidth = calcMaxWidth(window.innerWidth, window.innerHeight);
-    startWidth = maxWidth - maxWidth * 0.5;
-    breathBall = new BreathBall(startWidth, maxWidth);
+let createBreathingCanvas = function () {
+    const canvasHeight = window.innerHeight - buttonDivHeight;
+    let canvas = createCanvas(canvasWidth(), canvasHeight).id("mainCanvas");
+    canvas.parent("#mainDiv");
+    document.getElementById("mainCanvas").style.marginTop = (canvasHeight / 2 * -1) + "px";
+    return canvas;
+};
+
+let canvasWidth = function () {
+    return window.innerWidth * 0.96;
 };
 
 let stopAnimation = function () {
