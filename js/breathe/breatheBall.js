@@ -12,6 +12,7 @@ function BreathBall(width, maxWidth) {
     this.noiseGreenVelocity = 0.03;
     this.YDiff = random(0, 5);
     this.detailFactor = 1.0;
+    this.multiCircles = new MultiCircles(width, maxWidth, 5);
 }
 
 BreathBall.prototype.move = function () {
@@ -48,6 +49,8 @@ BreathBall.prototype.drawInit = function() {
 BreathBall.prototype.display = function () {
 
     this.drawInit();
+    translate(width / 2, height / 2);
+    this.multiCircles.draw();
 
     const rotation1 = map(50, 0, 100, 0, this.width);
     const rotation2 = map(50, 0, 100, 0, this.width);
@@ -63,7 +66,7 @@ BreathBall.prototype.display = function () {
     let gradient = ctx.createLinearGradient(startGrad.x, startGrad.y, endGrad.x, endGrad.y);
     gradient.addColorStop(0, "#3c5da0");
     gradient.addColorStop(1, "#ffffff");
-    translate(width / 2, height / 2);
+
     ctx.beginPath();
     ctx.ellipse(xEllipse, yEllipse, sizeEllipse, sizeEllipse, 45 * Math.PI / 180, 0, 2 * Math.PI);
     ctx.fillStyle = gradient;
