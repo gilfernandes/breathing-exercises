@@ -12,7 +12,7 @@ function BreathBall(width, maxWidth) {
     this.noiseGreenVelocity = 0.03;
     this.YDiff = random(0, 5);
     this.detailFactor = 1.0;
-    this.multiCircles = new MultiCircles(width, maxWidth, 5);
+    // this.multiCircles = new MultiCircles(width, maxWidth, 5);
 }
 
 BreathBall.prototype.move = function () {
@@ -87,7 +87,7 @@ BreathBall.prototype.displayWithCanvas = function (canvas) {
 
 BreathBall.prototype.displayImage = function () {
     this.drawInitAndTranslate();
-    this.multiCircles.draw();
+    // this.multiCircles.draw();
     const radius = this.width;
     const posX = -radius / 2;
     this.sprite.draw(posX, posX, radius, radius)
