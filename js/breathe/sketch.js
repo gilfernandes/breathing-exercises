@@ -81,7 +81,7 @@ function draw() {
     distPerFrame = calcFrameRate();
 
     breathBall.move();
-    breathBall.display();
+    breathBall.displayImage();
 
     breatheText.displayText(standardBreathing.text);
 }

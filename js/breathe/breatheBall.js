@@ -2,7 +2,7 @@ function BreathBall(width, maxWidth) {
     this.width = width;
     this.dir = 1;
     this.maxWidth = maxWidth;
-    this.sprite = new Sprite("../assets/images/breathe/sky1.jpg");
+    this.sprite = new Sprite("../assets/images/breathe/breathing-bubble-big.png");
     this.theta = 0;
     this.noiseRed = 0;
     this.noiseBlue = 10;
@@ -40,16 +40,20 @@ BreathBall.prototype.incrementDecrement = function () {
     }
 };
 
-BreathBall.prototype.drawInit = function() {
+BreathBall.prototype.drawInit = function () {
     // background(color(0xff, 0xff, 0xff));
     clear();
     noStroke();
 };
 
-BreathBall.prototype.display = function () {
-
+BreathBall.prototype.drawInitAndTranslate = function () {
     this.drawInit();
     translate(width / 2, height / 2);
+};
+
+BreathBall.prototype.display = function () {
+
+    drawInitAndTranslate();
     this.multiCircles.draw();
 
     const rotation1 = map(50, 0, 100, 0, this.width);
@@ -82,20 +86,21 @@ BreathBall.prototype.displayWithCanvas = function (canvas) {
 };
 
 BreathBall.prototype.displayImage = function () {
-    this.drawInit();
+    this.drawInitAndTranslate();
+    this.multiCircles.draw();
     const radius = this.width;
     const posX = -radius / 2;
     this.sprite.draw(posX, posX, radius, radius)
 };
 
-BreathBall.prototype.changeLighting = function() {
-    if(this.noiseRed > 1 || this.noiseRed < 0) {
+BreathBall.prototype.changeLighting = function () {
+    if (this.noiseRed > 1 || this.noiseRed < 0) {
         this.noiseRedVelocity *= -1;
     }
-    if(this.noiseBlue > 1 || this.noiseBlue < 0) {
+    if (this.noiseBlue > 1 || this.noiseBlue < 0) {
         this.noiseBlueVelocity *= -1;
     }
-    if(this.noiseGreen > 1 || this.noiseGreen < 0) {
+    if (this.noiseGreen > 1 || this.noiseGreen < 0) {
         this.noiseGreenVelocity *= -1;
     }
     this.noiseRed += this.noiseRedVelocity;
@@ -106,10 +111,10 @@ BreathBall.prototype.changeLighting = function() {
 BreathBall.prototype.display3D = function () {
     this.drawInit();
     ambientLight(map(this.noiseRed, 0, 1, 10, 150), map(this.noiseGreen, 0, 1, 40, 100), map(this.noiseBlue, 0, 1, 250, 255));
-    let dirY = (mouseY / height - 0.5) *2;
-    let dirX = (mouseX / width - 0.5) *2;
+    let dirY = (mouseY / height - 0.5) * 2;
+    let dirX = (mouseX / width - 0.5) * 2;
     directionalLight(50, 60, 70, dirX, -dirY, 0.5);
-    rotateY(map(noise(this.theta, this.theta), 0, 1, 0, 0.05) + this.YDiff );
+    rotateY(map(noise(this.theta, this.theta), 0, 1, 0, 0.05) + this.YDiff);
     rotateZ(this.theta);
     rotateX(this.theta);
     // texture(this.sprite.sprite);
