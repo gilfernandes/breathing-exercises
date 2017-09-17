@@ -15,6 +15,8 @@ let breatheText;
 
 let ctx;
 
+let breathPause;
+
 function Breathing(time, text, inhaleTime, exhaleTime) {
     this.time = time;
     this.text = text;
@@ -77,6 +79,8 @@ function setup() {
 
     player.playRandom();
 
+    breathPause = new BreathPause();
+
 }
 
 function draw() {
@@ -122,10 +126,10 @@ let stopAnimation = function () {
 };
 
 let restartAnimation = function (inhaleTime, exhaleTime) {
-
+    breathPause.clearTimouts();
+    stopAnimation();
     initProgressCanvas(canvas);
     breathBall.dir = 1;
-    stopAnimation();
     standardBreathing = new Breathing(totalTime, textInhale, inhaleTime, exhaleTime);
     createBreatheBall();
     loop();
@@ -144,28 +148,6 @@ let updateTimer = function () {
             noLoop();
         }
     }, standardBreathing.interval);
-};
-
-let waitAfterInhale = function () {
-    standardBreathing.text = textHold;
-    breathBall.dir = 0;
-    setTimeout(function () {
-        counter.reset();
-        breathBall.dir = -1;
-        breathBall.reduceSize();
-        standardBreathing.text = textExhale;
-    }, standardBreathing.breathePause * 1000);
-};
-
-let waitAfterExhale = function () {
-    standardBreathing.text = textHold;
-    breathBall.dir = 0;
-    setTimeout(function () {
-        counter.reset();
-        breathBall.dir = 1;
-        breathBall.augmentSize();
-        standardBreathing.text = textInhale;
-    }, standardBreathing.breathePause * 1000);
 };
 
 let calcFrameRate = function () {

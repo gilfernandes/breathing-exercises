@@ -18,10 +18,10 @@ function BreathBall(width, maxWidth) {
 BreathBall.prototype.move = function () {
     const active = this.dir !== 0;
     if ((this.width > this.maxWidth || counter.counter > standardBreathing.inhaleTime) && active) {
-        waitAfterInhale();
+        breathPause.waitAfterInhale();
     }
     else if ((this.width < startWidth || counter.counter > standardBreathing.inhaleTime) && active) {
-        waitAfterExhale();
+        breathPause.waitAfterExhale();
     }
     this.incrementDecrement();
 };
