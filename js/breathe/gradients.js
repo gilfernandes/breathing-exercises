@@ -1,5 +1,5 @@
 const gradients = function () {
-    var res = {};
+    const res = {};
 
     res.Y_AXIS = 1;
     res.X_AXIS = 2;

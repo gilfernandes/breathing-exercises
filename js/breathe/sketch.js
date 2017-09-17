@@ -108,12 +108,21 @@ let calcMaxWidth = function (width, height) {
 };
 
 let createBreathingCanvas = function () {
-    const canvasHeight = window.innerHeight - buttonDivHeight;
+    function extractCanvasHeight() {
+        return window.innerHeight > window.innerWidth ? window.innerWidth : window.innerHeight;
+    }
+    const canvasHeight = extractCanvasHeight();
     let canvas = createCanvas(canvasWidth(), canvasHeight).id("mainCanvas");
     canvas.parent("#mainDiv");
+    document.getElementById("mainCanvas").style.position = "absolute";
+    document.getElementById("mainCanvas").style.top = "50%";
+    document.getElementById("mainCanvas").style.left = ((window.innerWidth - canvasWidth()) / 2) + "px";
+    console.log("margin left: " + document.getElementById("mainCanvas").style.left);
     document.getElementById("mainCanvas").style.marginTop = (canvasHeight / 2 * -1) + "px";
     return canvas;
 };
+
+
 
 let canvasWidth = function () {
     return window.innerWidth * 0.96;
