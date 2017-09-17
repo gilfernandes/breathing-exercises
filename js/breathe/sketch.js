@@ -5,7 +5,8 @@ const textInhale = "Breathe in";
 const textExhale = "Breathe out";
 const textHold = "Hold";
 
-let totalTime = 120;
+let totalTime = 100000000.0; // means the breathing exercises never ever stops
+
 let distPerFrame;
 
 let breathingInterval;
