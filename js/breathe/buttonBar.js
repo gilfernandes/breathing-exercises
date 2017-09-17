@@ -3,6 +3,7 @@ function ButtonBar(inhaleTime, exhaleTime, buttonHeight) {
     this.inhaleTime = inhaleTime;
     this.exhaleTime = exhaleTime;
     this.buttonHeight = buttonHeight;
+    this.fadeInActivated = true;
 }
 
 ButtonBar.prototype.createButtons = function () {
@@ -45,3 +46,20 @@ ButtonBar.prototype.highlightButton = function (activeButton) {
     });
     activeButton.addClass("activeB");
 };
+
+ButtonBar.prototype.fadeOut = function (time) {
+    const buttonBar = this;
+    setTimeout(function () {
+        buttonBar.fadeInActivated = false;
+        jQuery("#buttonDiv").fadeOut();
+    }, time);
+};
+
+ButtonBar.prototype.fadeIn = function (time) {
+    if(!this.fadeInActivated) {
+        this.fadeInActivated = true;
+        jQuery("#buttonDiv").fadeIn();
+        this.fadeOut(10000);
+    }
+};
+

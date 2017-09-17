@@ -66,6 +66,7 @@ function setup() {
     updateTimer();
 
     buttonBar.createButtons();
+    buttonBar.fadeOut(5000); // hide the button bar after five seconds.
 
     window.onresize = function () { // Adapt the layout on resize
         canvas.size(window.innerWidth, window.innerHeight - buttonDivHeight);
@@ -85,6 +86,10 @@ function draw() {
     breathBall.displayImage();
 
     breatheText.displayText(standardBreathing.text);
+}
+
+function mousePressed() {
+    buttonBar.fadeIn();
 }
 
 let createBreatheBall = function () {
