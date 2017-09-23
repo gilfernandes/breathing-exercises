@@ -11,20 +11,21 @@ ButtonBar.prototype.createButtons = function () {
     const buttonDivId = "buttonDiv";
     div.attribute("id", buttonDivId);
     const buttonBar = this;
-    const button4 = createButton("4s").id("4s");
-    this.allButtons.push(button4.parent(buttonDivId).mousePressed(function () {
+    createDiv("Breath cycle time").parent(buttonDivId).id("buttonLegend");
+    const buttonParent = createDiv("").parent(buttonDivId).id("buttonParent");
+    this.allButtons.push(createButton("4s").id("4s").parent(buttonParent).mousePressed(function () {
         buttonBar.highlightButton(buttonBar.allButtons[0]);
         restartAnimation(4, 4);
     }));
-    this.allButtons.push(createButton("5s").parent(buttonDivId).mousePressed(function () {
+    this.allButtons.push(createButton("5s").parent(buttonParent).mousePressed(function () {
         buttonBar.highlightButton(buttonBar.allButtons[1]);
         restartAnimation(5, 5);
     }));
-    this.allButtons.push(createButton("8s").parent(buttonDivId).mousePressed(function () {
+    this.allButtons.push(createButton("8s").parent(buttonParent).mousePressed(function () {
         restartAnimation(8, 8);
         buttonBar.highlightButton(buttonBar.allButtons[2]);
     }));
-    this.allButtons.push(createButton("10s").parent(buttonDivId).mousePressed(function () {
+    this.allButtons.push(createButton("10s").parent(buttonParent).mousePressed(function () {
         restartAnimation(10, 10);
         buttonBar.highlightButton(buttonBar.allButtons[3]);
     }));

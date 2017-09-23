@@ -42,14 +42,23 @@ body {
 }
 
 #buttonDiv {
-    display: flex;
     position: absolute;
     width: 100%;
     bottom: 0;
+}
+
+#buttonParent {
+    display: flex;
     background-color: white;
 }
 
-#buttonDiv > button {
+#buttonLegend {
+    color: white;
+    text-align: center;
+    margin-bottom: 0.8em;
+}
+
+#buttonParent > button {
     width: 25%;
     border: none;
     background-color: #4bc6d5;
@@ -110,12 +119,12 @@ body {
     z-index: 100;
 }
 
-#buttonDiv > button:active, #buttonDiv > button:focus, .activeB {
+#buttonParent > button:active, #buttonParent > button:focus, .activeB {
     background-color: #4cd0d5 !important;
 }
 
 @media screen and (max-width: 1024px) and (orientation: portrait) {
-    #buttonDiv > button {
+    #buttonParent > button {
         font-family: FilsonProBook, sans-serif;
         font-size: 1.2rem;
         width: 25%;
@@ -128,9 +137,7 @@ body {
         color: white;
     }
 
-
-
-    #buttonDiv > button {
+    #buttonParent > button {
         padding-top: 0;
         height: 5em;
     }
