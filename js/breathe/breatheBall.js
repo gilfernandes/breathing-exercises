@@ -41,7 +41,6 @@ BreathBall.prototype.incrementDecrement = function () {
 };
 
 BreathBall.prototype.drawInit = function () {
-    // background(color(0xff, 0xff, 0xff));
     clear();
     noStroke();
 };
