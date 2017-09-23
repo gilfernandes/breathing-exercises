@@ -1,7 +1,8 @@
-function BreathBall(width, maxWidth) {
+function BreathBall(width, maxWidth, canvasSize) {
     this.width = width;
     this.dir = 1;
-    this.maxWidth = maxWidth;
+    this.multiCircles = new MultiCircles(width, 5, canvasSize);
+    this.maxWidth = this.multiCircles.getWidthMinusLast();
     this.sprite = new Sprite("../assets/images/breathe/breathing-bubble-big.png");
     this.theta = 0;
     this.noiseRed = 0;
@@ -12,7 +13,6 @@ function BreathBall(width, maxWidth) {
     this.noiseGreenVelocity = 0.03;
     this.YDiff = random(0, 5);
     this.detailFactor = 1.0;
-    this.multiCircles = new MultiCircles(width, maxWidth, 5);
 }
 
 BreathBall.prototype.move = function () {

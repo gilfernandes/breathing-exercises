@@ -97,9 +97,9 @@ function mousePressed() {
 }
 
 let createBreatheBall = function () {
-    let maxWidth = calcMaxWidth(canvasWidth(), window.innerHeight);
+    let maxWidth = calcMaxWidth(canvasWidth(), window.innerHeight) * 0.85;
     startWidth = maxWidth - maxWidth * 0.5;
-    breathBall = new BreathBall(startWidth, maxWidth);
+    breathBall = new BreathBall(startWidth, maxWidth, canvasWidth());
 };
 
 let calcMaxWidth = function (width, height) {
@@ -108,24 +108,18 @@ let calcMaxWidth = function (width, height) {
 };
 
 let createBreathingCanvas = function () {
-    function extractCanvasHeight() {
-        return window.innerHeight > window.innerWidth ? window.innerWidth : window.innerHeight;
-    }
-    const canvasHeight = extractCanvasHeight();
+    const canvasHeight = canvasWidth();
     let canvas = createCanvas(canvasWidth(), canvasHeight).id("mainCanvas");
     canvas.parent("#mainDiv");
     document.getElementById("mainCanvas").style.position = "absolute";
     document.getElementById("mainCanvas").style.top = "50%";
     document.getElementById("mainCanvas").style.left = ((window.innerWidth - canvasWidth()) / 2) + "px";
-    console.log("margin left: " + document.getElementById("mainCanvas").style.left);
     document.getElementById("mainCanvas").style.marginTop = (canvasHeight / 2 * -1) + "px";
     return canvas;
 };
 
-
-
 let canvasWidth = function () {
-    return window.innerWidth * 0.96;
+    return (window.innerHeight > window.innerWidth ? window.innerWidth : window.innerHeight) * 0.97;
 };
 
 let stopAnimation = function () {
