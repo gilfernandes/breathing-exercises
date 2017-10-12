@@ -119,7 +119,7 @@ let createBreathingCanvas = function () {
 };
 
 let canvasWidth = function () {
-    return (window.innerHeight > window.innerWidth ? window.innerWidth : window.innerHeight) * 0.97;
+    return (window.innerHeight > window.innerWidth ? window.innerWidth : window.innerHeight) * 0.90;
 };
 
 let stopAnimation = function () {
