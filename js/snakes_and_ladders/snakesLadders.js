@@ -11,7 +11,8 @@ const sl = {
       const size = window.innerWidth * 9 / 10;
       return {width: size, height: size};
     }
-  }
+  },
+  virtuesGenerated: false
 };
 
 sl.player = new Player(sl.tiles);
@@ -28,8 +29,11 @@ sl.placeQualities = function(cols, qualities) {
 };
 
 sl.placeVirtuesAndWeaknesses = function() {
-  sl.placeQualities(sl.resolution, virtues);
-  sl.placeQualities(sl.resolution, weaknesses);
+  if(!sl.virtuesGenerated) {
+    sl.placeQualities(sl.resolution, virtues);
+    sl.placeQualities(sl.resolution, weaknesses);
+    sl.virtuesGenerated = true;
+  }
 };
 
 sl.createBoard = function () {

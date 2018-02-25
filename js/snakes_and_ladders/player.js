@@ -9,6 +9,7 @@ class Player {
   show() {
     this.dice.createUI();
     const pos = this.tiles[this._spot].center();
+    noStroke();
     fill(color(255));
     ellipse(pos.x, pos.y, 50);
   }

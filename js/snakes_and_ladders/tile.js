@@ -20,8 +20,8 @@ class Tile {
 
   show() {
     fill(this.color);
+    noStroke();
     rect(this.x, this.y, this.wh, this.wh);
-    this.displayQuality();
   }
 
   displayQuality() {
