@@ -33,6 +33,7 @@ class Tile {
       const qualityColor = this._quality.boost > 0 ? color(100, 255, 0) : color(255, 0, 0);
       fill(qualityColor);
       strokeWeight(0);
+      textAlign(LEFT);
       textSize(15);
       text(this._quality.title, this.x + 5, this.y + 15);
       this.displaySnadder(qualityColor);
@@ -54,6 +55,7 @@ class Tile {
   set quality(quality) {
     this._quality = quality;
     this.displayQuality();
+    this.next = this.index + this._quality.boost;
   }
 
   get quality() {

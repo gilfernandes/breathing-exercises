@@ -14,15 +14,34 @@ const sl = {
   }
 };
 
-sl.player = new Player(sl.tiles);
+function askHowManyPlayers() {
+  let playerNum = prompt("How many players?", "1");
+
+  if (playerNum !== null && playerNum.match(/\d+/)) {
+    sl.players = [];
+    for(let i = 1; i <= playerNum; i++) {
+      sl.players.push(new Player(sl.tiles, i));
+    }
+  }
+  else {
+    askHowManyPlayers();
+  }
+}
+
+askHowManyPlayers();
 
 sl.placeQualities = function (cols, qualities) {
+  const positions = [];
+  function exists(position) {
+    return positions.some(p => p === position);
+  }
   for (let quality of qualities) {
     quality.calculateBoost(sl.resolution);
     let position = -1;
     do {
       position = floor(random(cols, sl.tiles.length - 1));
-    } while (!quality.place(position, sl.resolution));
+    } while (exists(position) || !quality.place(position, sl.resolution));
+    positions.push(position);
     sl.tiles[quality.start].quality = quality;
   }
 };
