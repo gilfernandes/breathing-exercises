@@ -15,3 +15,14 @@ function draw() {
   sl.player.show();
   noLoop();
 }
+
+function mousePressed() {
+  // Check if mouse is inside the circle
+  for (let tile of sl.tiles) {
+    if(tile.containsPoint(mouseX, mouseY) && tile.quality) {
+      tile.quality.displayDetails();
+      break;
+    }
+  }
+
+}

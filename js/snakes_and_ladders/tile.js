@@ -18,6 +18,10 @@ class Tile {
     return {"x": x, "y": y};
   }
 
+  containsPoint(x, y) {
+    return this.x <= x && this.x + this.wh > x && this.y < y && this.y + this.wh > y;
+  }
+
   show() {
     fill(this.color);
     noStroke();
@@ -50,5 +54,9 @@ class Tile {
   set quality(quality) {
     this._quality = quality;
     this.displayQuality();
+  }
+
+  get quality() {
+    return this._quality;
   }
 }

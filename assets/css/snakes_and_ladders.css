@@ -6,3 +6,11 @@
     float: left;
     margin-right: 10px;
 }
+
+.virtue {
+    color: #87cc01;
+}
+
+.weakness {
+    color: crimson;
+}

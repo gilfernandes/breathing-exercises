@@ -11,29 +11,25 @@ const sl = {
       const size = window.innerWidth * 9 / 10;
       return {width: size, height: size};
     }
-  },
-  virtuesGenerated: false
+  }
 };
 
 sl.player = new Player(sl.tiles);
 
-sl.placeQualities = function(cols, qualities) {
-  for(let quality of qualities) {
+sl.placeQualities = function (cols, qualities) {
+  for (let quality of qualities) {
     quality.calculateBoost(sl.resolution);
     let position = -1;
     do {
       position = floor(random(cols, sl.tiles.length - 1));
-    } while(!quality.place(position, sl.resolution));
+    } while (!quality.place(position, sl.resolution));
     sl.tiles[quality.start].quality = quality;
   }
 };
 
-sl.placeVirtuesAndWeaknesses = function() {
-  if(!sl.virtuesGenerated) {
-    sl.placeQualities(sl.resolution, virtues);
-    sl.placeQualities(sl.resolution, weaknesses);
-    sl.virtuesGenerated = true;
-  }
+sl.placeVirtuesAndWeaknesses = function () {
+  sl.placeQualities(sl.resolution, virtues);
+  sl.placeQualities(sl.resolution, weaknesses);
 };
 
 sl.createBoard = function () {

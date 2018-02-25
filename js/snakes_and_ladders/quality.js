@@ -7,6 +7,7 @@ class Quality {
     this._boost = 0;
     this.start = 0;
     this.end = 0;
+    this.isVirtue = false;
   }
 
   place(position, resolution) {
@@ -31,5 +32,16 @@ class Quality {
 
   calculateBoost(resolution) {
     this._boost = (resolution * resolution) * this.boostPercent / 100;
+    this.isVirtue = this._boost > 0;
+  }
+
+  displayDetails() {
+    let qualityDetails = document.getElementById("qualityDetails");
+    if(!qualityDetails) {
+      createDiv("").id("qualityDetails");
+      qualityDetails = document.getElementById("qualityDetails");
+    }
+    const clazz = this.isVirtue ? "virtue" : "weakness";
+    qualityDetails.innerHTML = `<h3 class="${clazz}">${this.title}</h3><div class="${clazz}">${this.description}</div>`;
   }
 }
