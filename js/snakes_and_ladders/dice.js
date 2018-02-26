@@ -58,7 +58,7 @@ class Dice {
   createUI() {
     if(!document.getElementById("dice" + this.player.id)) {
       createDiv(`Player ${this.player.id}`);
-      this.diceDiv = createDiv('').id("dice" + this.player.id);
+      this.diceDiv = createDiv('').id("dice" + this.player.id).class("dice");
       const button = createButton('Roll dice').id("diceButton" + this.player.id);
       const dice = this;
       button.mousePressed(function () {
