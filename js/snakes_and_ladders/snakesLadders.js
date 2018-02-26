@@ -17,14 +17,15 @@ const sl = {
 
 function askHowManyPlayers() {
   const playerNumDiv = createDiv("").id("playerNumDiv");
-  createSpan("How many players?").id("playerNumQuestion").parent(playerNumDiv);
+  createSpan("How many players? ").id("playerNumQuestion").parent(playerNumDiv);
   createInput("1").id("playerNumInput").parent(playerNumDiv);
+  createSpan(" ").parent(playerNumDiv);
   const playerNumButton = createButton("Start").parent(playerNumDiv);
 
   function processPlayerNum() {
     const playerNumInput = document.getElementById("playerNumInput");
     const playerNum = playerNumInput.value;
-    if (playerNum !== null && playerNum.match(/\d+/)) {
+    if (playerNum !== null && playerNum.match(/^\d+$/)) {
       sl.players = [];
       for (let i = 1; i <= playerNum; i++) {
         sl.players.push(new Player(sl.tiles, i));
@@ -34,7 +35,14 @@ function askHowManyPlayers() {
       loop();
     }
     else {
-      processPlayerNum();
+      const playerNumError = document.getElementById("playerNumError");
+      const errMessage = `Not a valid number: '${playerNum}'`;
+      if(!playerNumError) {
+        createDiv(errMessage).id("playerNumError").parent(playerNumDiv);
+      }
+      else {
+        playerNumError.textContent = errMessage;
+      }
     }
   }
 
