@@ -9,24 +9,27 @@ class Dice {
   }
 
   roll() {
-    let time = 1000;
+    let times = 10;
     const dice = this;
     this.diceDiv.style("color: #aaaaaa");
     const rollingInterval = setInterval(function() {
-      dice.throwDice();
-      dice.show();
-    }, 100);
-    setTimeout(function() {
-      clearInterval(rollingInterval);
-      dice.diceDiv.style("color: black");
-      dice.movePosition(dice.value);
-      if(dice.player.finished) {
-        dice.player.showFinished();
+      if(times > 0) {
+        dice.throwDice();
+        dice.show();
+        times--;
       }
       else {
-        dice.correctIfQuality(dice.player.spot);
+        clearInterval(rollingInterval);
+        dice.diceDiv.style("color: black");
+        dice.movePosition(dice.value);
+        if(dice.player.finished) {
+          dice.player.showFinished();
+        }
+        else {
+          dice.correctIfQuality(dice.player.spot);
+        }
       }
-    }, time);
+    }, 100);
   }
 
   movePosition(value) {
