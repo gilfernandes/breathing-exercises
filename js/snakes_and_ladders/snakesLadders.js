@@ -19,9 +19,15 @@ function askHowManyPlayers() {
   const playerNumDiv = createDiv("").id("playerNumDiv");
   createSpan("How many players? ").id("playerNumQuestion").parent(playerNumDiv);
   createInput("1").id("playerNumInput").parent(playerNumDiv);
+
   createSpan(" ").parent(playerNumDiv);
   const playerNumButton = createButton("Start").parent(playerNumDiv);
-
+  // handle also ENTER event.
+  document.getElementById("playerNumInput").onkeydown = function(e) {
+    if(event.keyCode === 13) {
+      processPlayerNum()
+    }
+  };
   function processPlayerNum() {
     const playerNumInput = document.getElementById("playerNumInput");
     const playerNum = playerNumInput.value;
