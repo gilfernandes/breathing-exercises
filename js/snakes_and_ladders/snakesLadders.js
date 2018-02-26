@@ -1,6 +1,7 @@
 const sl = {
   tiles: [],
   resolution: 10,
+  started: false,
   createDimension: function () {
     const widthLarger = window.innerWidth > window.innerHeight;
     if (widthLarger) {
@@ -15,26 +16,38 @@ const sl = {
 };
 
 function askHowManyPlayers() {
-  let playerNum = prompt("How many players?", "1");
+  const playerNumDiv = createDiv("").id("playerNumDiv");
+  createSpan("How many players?").id("playerNumQuestion").parent(playerNumDiv);
+  createInput("1").id("playerNumInput").parent(playerNumDiv);
+  const playerNumButton = createButton("Start").parent(playerNumDiv);
 
-  if (playerNum !== null && playerNum.match(/\d+/)) {
-    sl.players = [];
-    for(let i = 1; i <= playerNum; i++) {
-      sl.players.push(new Player(sl.tiles, i));
+  function processPlayerNum() {
+    const playerNumInput = document.getElementById("playerNumInput");
+    const playerNum = playerNumInput.value;
+    if (playerNum !== null && playerNum.match(/\d+/)) {
+      sl.players = [];
+      for (let i = 1; i <= playerNum; i++) {
+        sl.players.push(new Player(sl.tiles, i));
+      }
+      sl.started = true;
+      document.getElementById("playerNumDiv").style.display = "none";
+      loop();
+    }
+    else {
+      processPlayerNum();
     }
   }
-  else {
-    askHowManyPlayers();
-  }
-}
 
-askHowManyPlayers();
+  playerNumButton.mousePressed(processPlayerNum);
+}
 
 sl.placeQualities = function (cols, qualities) {
   const positions = [];
+
   function exists(position) {
     return positions.some(p => p === position);
   }
+
   for (let quality of qualities) {
     quality.calculateBoost(sl.resolution);
     let position = -1;

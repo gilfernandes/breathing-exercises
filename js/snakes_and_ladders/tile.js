@@ -68,7 +68,6 @@ class Tile {
     let index = row * sl.resolution + (row % 2 === 0 ? 9 - col : col);
     const center = sl.tiles[index].center();
 
-    // End debug code
     let myIndexCenter = sl.tiles[myIndex].center();
     let otherIndexCenter = sl.tiles[otherIndex].center();
     const distIndexCenter = dist(center.x, center.y, myIndexCenter.x, myIndexCenter.y);
@@ -77,6 +76,7 @@ class Tile {
     const angleIncrement = this.isVirtue() ? 45 : 90 + 45;
     let angle = atan(angleCorrection > 0 ? distIndexCenter / distOtherIndexCenter : distOtherIndexCenter / distIndexCenter)
       + 2 * PI * (angleCorrection * angleIncrement / 360);
+
     push();
     strokeWeight(10);
     this.chooseStroke();
@@ -93,7 +93,6 @@ class Tile {
 
   set quality(quality) {
     this._quality = quality;
-    this.displayQuality();
     this.next = this.index + this._quality.boost;
   }
 

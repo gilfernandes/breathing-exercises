@@ -12,10 +12,11 @@ class Player {
     this.dice.createUI();
     this.generateColor();
     if(!this._finished) {
-      const pos = this.tiles[this._spot].center();
+      const tile = this.tiles[this._spot];
+      const pos = tile.center();
       noStroke();
       fill(color(this.color));
-      ellipse(pos.x, pos.y, 50);
+      ellipse(pos.x, pos.y, tile.wh * 0.8);
       fill(color(255));
       textSize(26);
       textAlign(CENTER, CENTER);
