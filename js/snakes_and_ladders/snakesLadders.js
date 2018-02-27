@@ -12,10 +12,11 @@ const sl = {
       const size = window.innerWidth * 9 / 10;
       return {width: size, height: size};
     }
-  }
+  },
+  currentPlayer: 0
 };
 
-function askHowManyPlayers() {
+sl.askHowManyPlayers = function() {
   const playerNumDiv = createDiv("").id("playerNumDiv");
   createSpan("How many players? ").id("playerNumQuestion").parent(playerNumDiv);
   createInput("1").id("playerNumInput").parent(playerNumDiv);
@@ -31,8 +32,9 @@ function askHowManyPlayers() {
   function processPlayerNum() {
     const playerNumInput = document.getElementById("playerNumInput");
     const playerNum = playerNumInput.value;
-    if (playerNum !== null && playerNum.match(/^\d+$/)) {
+    if (playerNum !== null && playerNum.match(/^\d+$/) && parseInt(playerNum) > 0) {
       sl.players = [];
+      sl.currentPlayer = 1;
       for (let i = 1; i <= playerNum; i++) {
         sl.players.push(new Player(sl.tiles, i));
       }
@@ -53,7 +55,7 @@ function askHowManyPlayers() {
   }
 
   playerNumButton.mousePressed(processPlayerNum);
-}
+};
 
 sl.placeQualities = function (cols, qualities) {
   const positions = [];

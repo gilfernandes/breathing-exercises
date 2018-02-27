@@ -10,7 +10,7 @@ class Dice {
   }
 
   roll() {
-    if(!this.diceRolling) {
+    if (!this.diceRolling) {
       this.diceRolling = true;
       let times = 10;
       const dice = this;
@@ -46,7 +46,7 @@ class Dice {
 
   correctIfQuality(index) {
     const currentTile = this.tiles[index];
-    if(currentTile.quality) {
+    if (currentTile.quality) {
       const boost = currentTile.quality.boost;
       this.movePosition(boost);
     }
@@ -58,20 +58,32 @@ class Dice {
 
   show() {
     const diceDiv = this.diceDiv;
-    if(diceDiv) {
+    if (diceDiv) {
       diceDiv.html(this.value);
     }
   }
 
   createUI() {
-    if(!document.getElementById("dice" + this.player.id)) {
-      createDiv(`Player ${this.player.id}`);
-      this.diceDiv = createDiv('').id("dice" + this.player.id).class("dice");
-      const button = createButton('Roll dice').id("diceButton" + this.player.id);
+    const playerId = this.player.id;
+    if (!document.getElementById("dice" + playerId)) {
+      createDiv(`Player ${playerId}`);
+      this.diceDiv = createDiv('').id("dice" + playerId).class("dice");
+      const buttonId = "diceButton" + playerId;
+      const button = createButton('Roll dice').id(buttonId);
+      document.getElementById(buttonId).disabled = !(playerId === sl.currentPlayer);
       const dice = this;
       button.mousePressed(function () {
         dice.roll();
+        sl.currentPlayer = (sl.currentPlayer) % sl.players.length + 1;
+        dice.activateButtons(buttonId);
       });
+    }
+  }
+
+  activateButtons() {
+    for (let player of sl.players) {
+      const buttonId = "diceButton" + player.id;
+      document.getElementById(buttonId).disabled = !(player.id === sl.currentPlayer);
     }
   }
 }

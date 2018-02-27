@@ -1,6 +1,6 @@
 function setup() {
   const dim = sl.createDimension();
-  askHowManyPlayers();
+  sl.askHowManyPlayers();
   createCanvas(dim.width, dim.height);
   noLoop();
   sl.createBoard();
