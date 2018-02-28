@@ -66,7 +66,7 @@ class Dice {
   createUI() {
     const playerId = this.player.id;
     if (!document.getElementById("dice" + playerId)) {
-      createDiv(`Player ${playerId}`);
+      createDiv(`Player ${playerId}`).id("playerTitle" + playerId);
       this.diceDiv = createDiv('').id("dice" + playerId).class("dice");
       const buttonId = "diceButton" + playerId;
       const button = createButton('Roll dice').id(buttonId);
@@ -83,7 +83,20 @@ class Dice {
   activateButtons() {
     for (let player of sl.players) {
       const buttonId = "diceButton" + player.id;
-      document.getElementById(buttonId).disabled = !(player.id === sl.currentPlayer);
+      const active = player.id === sl.currentPlayer;
+      document.getElementById(buttonId).disabled = !(active);
+      this.addArrow(player.id, active);
+    }
+  }
+
+  addArrow(playerId, active) {
+    const playerTitleId = "playerTitle" + playerId;
+    const textContent = document.getElementById(playerTitleId).textContent;
+    if(active) {
+      document.getElementById(playerTitleId).textContent = "\u27a1" + textContent
+    }
+    else {
+      document.getElementById(playerTitleId).textContent = textContent.replace(/[\u27a1]/g, "");
     }
   }
 }
