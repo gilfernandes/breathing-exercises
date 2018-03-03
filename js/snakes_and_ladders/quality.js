@@ -43,5 +43,10 @@ class Quality {
     }
     const clazz = this.isVirtue ? "virtue" : "weakness";
     qualityDetails.innerHTML = `<h3 class="${clazz}">${this.title}</h3><div class="${clazz}">${this.description}</div>`;
+    if(sl.hideQualityThread) {
+      clearTimeout(sl.hideQualityThread);
+    }
+    document.getElementById("qualityDetails").className="visible";
+    sl.hideQualityThread = sl.hideQuality();
   }
 }

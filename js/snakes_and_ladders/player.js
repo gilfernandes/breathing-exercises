@@ -35,13 +35,15 @@ class Player {
 
   showFinished() {
     document.getElementById("diceButton" + this.id).disabled = true;
-    createDiv(`Player ${this.id} finished the game!`).class("finished");
+    createDiv(`Player ${this.id} won the game!`).class("finished");
   }
 
   set spot(value) {
     this._spot = value;
     if(this._spot >= this.tiles.length - 1) {
       this._finished = true;
+      // hide the players
+      sl.processFinish();
     }
   }
 

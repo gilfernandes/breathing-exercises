@@ -97,3 +97,20 @@ sl.createBoard = function () {
     sl.tiles.push(tile);
   }
 };
+
+sl.processFinish = function() {
+  function displayNone(prefix, player) {
+    document.getElementById(prefix + player.id).style.display = "none";
+  }
+  for (let player of sl.players) {
+    displayNone("diceButton", player);
+    displayNone("playerTitle", player);
+    displayNone("dice", player);
+  }
+};
+
+sl.hideQuality = function() {
+  return setTimeout(function() {
+    document.getElementById("qualityDetails").className="hiddenFadeout";
+  }, 5000);
+};
