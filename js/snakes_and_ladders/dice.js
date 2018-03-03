@@ -40,7 +40,6 @@ class Dice {
   movePosition(value) {
     this.player.spot = this.player.spot + value;
     loop();
-    this.player.show();
     noLoop();
   }
 

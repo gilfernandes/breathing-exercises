@@ -91,6 +91,17 @@ class Tile {
     return this._quality.boost > 0;
   }
 
+  displayMultiplayers(players) {
+    let a = players.reduce(function(a, p) {
+      a.push(p.id);
+      return a;
+    }, []);
+    fill(color(255));
+    textSize(11);
+    textAlign(LEFT);
+    text(a.join(), this.x + 5, this.y + this.wh - 15);
+  }
+
   set quality(quality) {
     this._quality = quality;
     this.next = this.index + this._quality.boost;

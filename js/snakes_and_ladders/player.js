@@ -1,11 +1,10 @@
 class Player {
-
   constructor(tiles, id) {
     this._spot = 0;
     this.dice = new Dice(this, tiles);
     this.tiles = tiles;
     this._finished = false;
-    this.id = id;
+    this._id = id;
   }
 
   show() {
@@ -20,7 +19,7 @@ class Player {
       fill(color(255));
       textSize(26);
       textAlign(CENTER, CENTER);
-      text(this.id, pos.x, pos.y);
+      text(this._id, pos.x, pos.y);
     }
   }
 
@@ -34,8 +33,8 @@ class Player {
   }
 
   showFinished() {
-    document.getElementById("diceButton" + this.id).disabled = true;
-    createDiv(`Player ${this.id} won the game!`).class("finished");
+    document.getElementById("diceButton" + this._id).disabled = true;
+    createDiv(`Player ${this._id} won the game!`).class("finished");
   }
 
   set spot(value) {
@@ -53,5 +52,9 @@ class Player {
 
   get finished() {
     return this._finished;
+  }
+
+  get id() {
+    return this._id;
   }
 }
