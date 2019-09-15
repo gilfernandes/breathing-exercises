@@ -12,19 +12,13 @@
     </style>
 
     <meta charset="UTF-8">
-    <script language="javascript" type="text/javascript" src="../js/p5/p5.js"></script>
-    <script language="javascript" type="text/javascript" src="../js/p5/addons/p5.dom.js"></script>
-    <script language="javascript" type="text/javascript" src="../js/p5/addons/p5.sound.js"></script>
-    <script language="javascript" type="text/javascript" src="../js/jquery/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="../js/p5/p5.js"></script>
+    <script type="text/javascript" src="../js/p5/addons/p5.dom.js"></script>
+    <script type="text/javascript" src="../js/p5/addons/p5.sound.js"></script>
+    <script type="text/javascript" src="../js/jquery/jquery-3.2.1.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
 
-    <script language="javascript" type="text/javascript" src="../js/memory/grid.js"></script>
-    <script language="javascript" type="text/javascript" src="../js/memory/parameters.js"></script>
-    <script language="javascript" type="text/javascript" src="../js/memory/gameControls.js"></script>
-    <script language="javascript" type="text/javascript" src="../js/memory/history.js"></script>
-    <script language="javascript" type="text/javascript" src="../js/memory/successStory.js"></script>
-    <script language="javascript" type="text/javascript" src="../js/memory/resultPanel.js"></script>
-    <script language="javascript" type="text/javascript" src="../js/memory/footerProgress.js"></script>
+    <script type="text/javascript" src="../js/common/loader_support.js"></script>
 
     <!-- this line removes any default padding and style. you might only need one of these values set. -->
     <link rel="stylesheet" type="text/css" href="../assets/css/memory.css">
@@ -35,7 +29,33 @@
     <div id="mainDiv">
         <div id="mainMessage">Memorize the pattern that appears on the screen and tap when it disappears to play this game</div>
     </div>
-    <script language="javascript" type="text/javascript" src="../js/memory/sketch.js"></script>
+
+    <script>
+
+        const defaultLanguageDefinition = "en_BZ";
+
+        const languageMappings = {
+            "en": defaultLanguageDefinition,
+            "pt": "pt_BZ"
+        };
+
+        const languageFile = loaderSupport.loadLanguageFromParameter(languageMappings, defaultLanguageDefinition);
+
+        const loadScriptPromise = loaderSupport.loadScriptPromise;
+
+        loadScriptPromise("../js/memory/" + languageFile + ".js")
+            .then(() => loadScriptPromise("../js/memory/grid.js"))
+            .then(() => loadScriptPromise("../js/memory/parameters.js"))
+            .then(() => loadScriptPromise("../js/memory/gameControls.js"))
+            .then(() => loadScriptPromise("../js/memory/history.js"))
+            .then(() => loadScriptPromise("../js/memory/successStory.js"))
+            .then(() => loadScriptPromise("../js/memory/resultPanel.js"))
+            .then(() => loadScriptPromise("../js/memory/footerProgress.js"))
+            .then(() => loadScriptPromise("../js/memory/sketch.js"))
+            .then(() => jQuery('#mainMessage').text(i18n['initialMainMessage']))
+    </script>
+
     <!--<div id="footerProgress"></div>-->
+
 </body>
 </html>

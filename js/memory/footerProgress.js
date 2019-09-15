@@ -6,7 +6,7 @@ function FooterProgress() {
 }
 
 FooterProgress.prototype.display = function () {
-    //document.getElementById("footerProgress").style["width"] = this.width + "%";
+    // document.getElementById("footerProgress").style["width"] = this.width + "%";
 };
 
 FooterProgress.prototype.startDescending = function(seconds) {

@@ -1,8 +1,8 @@
 const colourDiv = "colourDiv";
 const buttonDivId = "buttonDiv";
 
-const initialMainMessage = "Memorize the pattern that appears on the screen and tap when it disappears to play this game";
-const redrawPatternMessage = "Please redraw the pattern by first selecting the colour and then the balls";
+const initialMainMessage = i18n['initialMainMessage'];
+const redrawPatternMessage = i18n['redrawPatternMessage'];
 
 function GameControls(grid, gameHistory, successStory) {
     this.startButton = null;
@@ -22,7 +22,7 @@ function GameControls(grid, gameHistory, successStory) {
 
 GameControls.prototype.init = function () {
     this.createDivWithId(buttonDivId);
-    this.startButton = createButton("Begin").id("restartButton").parent(buttonDivId);
+    this.startButton = createButton(i18n['begin']).id("restartButton").parent(buttonDivId);
     handleStartButtonClick.call(this, this);
 };
 
@@ -54,7 +54,7 @@ GameControls.prototype.quizStart = function () {
         gc.gameHistory.markGuessDrawHistory();
         gc.emptyGrid();
         redraw();
-        gc.writeMessage(`${redrawPatternMessage}`);
+        gc.writeMessage(redrawPatternMessage);
         gc.removeColorDiv();
         gc.colourDiv = gc.createDivWithId(colourDiv).parent("mainDiv");
         gc.colourButtons = [];
@@ -87,7 +87,7 @@ GameControls.prototype.quizStart = function () {
 GameControls.prototype.printSuccess = function () {
     this.removeColorDiv();
     this.writeMessage("<div class='success' id='successMessage'><div id='successIcon'><img src='" + this.imageFolder + "/success.png'/></div>" +
-        "<div id='successText'>Well done!<br />Your guess is correct!</div><p id='successCountdown'></p>");
+        "<div id='successText'>" + i18n['wellDone'] + "<br />" + i18n['guessCorrect'] + "</div><p id='successCountdown'></p>");
     let counter = 1;
     const gc = this;
     const countdown = setInterval(function () {
@@ -106,7 +106,7 @@ GameControls.prototype.printSuccess = function () {
 GameControls.prototype.printError = function () {
     this.removeColorDiv();
     this.writeMessage("<div class='fail'><div id='failIcon'><img src='" + this.imageFolder + "/icon-cross.png'/></div>" +
-        "<div id='errorText'>That was not the right pattern.<br />Try again</div></div>");
+        "<div id='errorText'>"+ i18n['notRightPattern'] + "<br />" + i18n['tryAgain'] + "</div></div>");
     this.showStartButton();
 };
 

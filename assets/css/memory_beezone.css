@@ -1,0 +1,294 @@
+/** Memory CSS for Beezone */
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: FilsonProBook, sans-serif;
+}
+
+/* Fonts */
+@font-face {
+    font-family: FilsonProBook;
+    src: url("../fonts/Mostardesign%20-%20FilsonProBook.otf") format("opentype");
+}
+
+h1 {
+    text-align: center;
+    padding-top: 50px;
+    font-size: 4rem;
+}
+
+#mainTitle {
+    display: none;
+}
+
+#mainDiv {
+    margin-top: 60px;
+}
+
+#mainDiv, canvas {
+    display: block;
+}
+
+canvas, #buttonDiv {
+    margin: auto auto;
+}
+
+#buttonDiv {
+    width: 100px;
+}
+
+#buttonDiv button {
+    margin: 20px 0 0 0;
+    width: 100%;
+}
+
+#mainMessage {
+    font-family: FilsonProBook, sans-serif;
+    text-align: center;
+}
+
+#colourDiv {
+    width: 100%;
+    text-align: center;
+}
+
+#colourDiv > button {
+    width: 20%;
+    height: 4em;
+    border: 0;
+    margin: 10px 0;
+}
+
+#colourDiv > button:active {
+    filter: brightness(40%);
+}
+
+#buttonDiv {
+    width: 100%;
+    text-align: center;
+}
+
+#buttonDiv > button {
+    width: 50%;
+    font-size: 2em;
+    background-color: #45d0d7;
+    border: 0;
+    color: white;
+    border-radius: 50px;
+}
+
+.fail {
+    display: flex;
+    background-color: #fce4e1;
+}
+
+#successIcon {
+    padding: 0.8em 0.2em 0 0.3em;
+}
+
+#failIcon {
+    padding: 1em 0.2em 0 0.3em;
+}
+
+#successText, #errorText {
+    margin: auto 0;
+}
+
+#failIcon img {
+    width: 56px;
+    height: 56px
+}
+
+.success, .fail {
+    background-repeat: no-repeat;
+    background-size: 2em, 2em;
+    border-radius: 50px;
+    color: black;
+    margin-bottom: 0;
+    width: 100%;
+    padding: 0.3em 0 0.3em 0;
+    background-position-x: 20px;
+    text-align: left;
+    height: 5em
+}
+
+.fail {
+    background-position-y: 2.0em;
+}
+
+.success {
+    display: flex;
+    background-color: #f2fae3;
+    background-position-y: 1.7em;
+    height: 4.5em;
+}
+
+.success span, .fail span {
+    display: block;
+}
+
+.fail span {
+    top: 0.6em;
+    padding: 0.4em 0 0 3.3em;
+}
+
+.success span {
+    top: 0.9em;
+    padding: 0.7em 0 0 3em;
+}
+
+#successCountdown {
+    margin-top: 0;
+    color: white;
+    display: none;
+}
+
+#resultPanel {
+    position: fixed;
+    top: 0;
+    right: 1em;
+    padding: 1em;
+    font-size: 1em;
+    font-family: FilsonProBook, cursive;
+}
+
+#resultPanel .successful {
+    background-color: #8adce2;
+}
+
+#resultPanel .failed {
+    background-color: #eeeeee;
+}
+
+#resultPanel .successful, #resultPanel .failed {
+    border-radius: 60px;
+    margin: 1px 1px;
+    padding: 0.5em 0.5em;
+}
+
+#resultPanelGrid {
+    display: flex;
+    margin: -0.5em 0 0 0;
+}
+
+#resultPanelGrid span {
+    width: 20px;
+    text-align: center;
+    padding: 12px 3px 0 6px;
+}
+
+#resultPanelGrid .sep {
+    padding-top: 0.6em;
+}
+
+#yourScore {
+    font-size: 1em;
+    color: #abd3d5;
+    text-align: center;
+    margin-top: 1px;
+}
+
+#footerProgress {
+    position: fixed;
+    bottom: 0;
+    height: 20px;
+    background-color: #45d0d7;
+    width: 100%
+}
+
+/* Portrait and Landscape */
+@media screen and (max-width: 1024px) and (orientation: portrait) {
+
+    #colourDiv {
+        margin: 1.7em 0 0 0;
+    }
+
+    #colourDiv > button {
+        height: 4em;
+        width: 30%;
+        border: 0;
+    }
+
+    #mainMessage {
+        font-size: 1.2em !important;
+        height: 4.5em;
+        line-height: 1.3;
+        margin: 4em auto 1.5rem 0;
+    }
+
+    #buttonDiv, #buttonDiv > button {
+        width: 95%;
+        margin: 0.5em auto 0 auto;
+    }
+
+    #buttonDiv > button {
+        background-color: #45d0d7;
+        border: 0;
+        color: white;
+        border-radius: 100px;
+        padding: 0.5em 0;
+        font-size: 2.0rem;
+    }
+
+    .firstButton {
+        border-radius: 3em 0 0 3em;
+    }
+
+    .lastButton {
+        border-radius: 0 100px 100px 0;
+    }
+
+    #mainDiv {
+        margin: 1em 3% 0 3%;
+    }
+}
+
+/* For iPhone 5 */
+@media screen and (device-aspect-ratio: 40/71) {
+
+    #buttonDiv > button {
+        background-color: #45d0d7;
+        border: 0;
+        color: white;
+        border-radius: 1em;
+        padding: 0.5em 0;
+        font-size: 2rem;
+    }
+
+    #mainMessage, #mainMessage > p {
+        font-size: 1.2em !important;
+        height: 5em;
+        line-height: 1.3em;
+        margin: 3em auto 0.5rem 0;
+    }
+}
+
+/* For iPhone 6 */
+@media only screen
+and (min-device-width: 375px)
+and (max-device-width: 667px)
+and (orientation: portrait) {
+    #mainMessage, #mainMessage > p {
+        font-size: 1.2em !important;
+        height: 5em;
+        line-height: 1.2;
+        margin: 3.7em auto 2em 0;
+    }
+}
+
+/* iPhone 5 & 5S in portrait */
+@media only screen
+and (min-device-width : 320px)
+and (max-device-width : 568px)
+and (orientation : portrait) {
+    #mainMessage > p {
+        font-size: 0.9em !important;
+        margin: 3.8em auto 2em 0;
+    }
+}
+
+
+

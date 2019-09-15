@@ -1,0 +1,37 @@
+task memory
+
+memory.doFirst({
+
+    def targetFolderJs = "D:/dev/bk/beezone/BeeZone/app/src/main/assets/js/memory"
+    def targetFolderCss = "D:/dev/bk/beezone/BeeZone/app/src/main/assets/css"
+
+    print ("Target JS folder ${targetFolderJs}")
+
+    copy {
+        from "js/memory"
+        include "footerProgress.js"
+        include "gestures.js"
+        include "grid.js"
+        include "history.js"
+        include "parameters.js"
+        include "resultPanel.js"
+        include "sketch.js"
+        into targetFolderJs
+    }
+
+    copy {
+        from "js/memory"
+        include "gameControls.js"
+        filter{ it.replaceFirst("\\.\\./assets/images/memory", "../images/memory")}
+        into targetFolderJs
+    }
+
+    copy {
+        from "assets/css"
+        include "memory_beezone.css"
+        into targetFolderCss
+        rename { fileName ->
+            "memory.css"
+        }
+    }
+})
