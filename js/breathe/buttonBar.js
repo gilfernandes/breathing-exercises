@@ -11,7 +11,7 @@ ButtonBar.prototype.createButtons = function () {
     const buttonDivId = "buttonDiv";
     div.attribute("id", buttonDivId);
     const buttonBar = this;
-    createDiv("Breath cycle time").parent(buttonDivId).id("buttonLegend");
+    createDiv(i18n['breathCycleTime']).parent(buttonDivId).id("buttonLegend");
     const buttonParent = createDiv("").parent(buttonDivId).id("buttonParent");
     this.allButtons.push(createButton("4s").id("4s").parent(buttonParent).mousePressed(function () {
         buttonBar.highlightButton(buttonBar.allButtons[0]);

@@ -1,9 +1,9 @@
 let startWidth = 50; // TODO: put this variable into the BreatheBall class.
 const buttonDivHeight = window.innerHeight * 0.2;
 
-const textInhale = "Breathe in";
-const textExhale = "Breathe out";
-const textHold = "Hold";
+const textInhale = i18n["breatheIn"];
+const textExhale = i18n["breatheOut"];
+const textHold = i18n["hold"];
 
 let totalTime = 100000000.0; // means the breathing exercises never ever stops
 
