@@ -3,9 +3,18 @@ task memory
 memory.doFirst({
 
     def targetFolderJs = "D:/dev/bk/beezone/BeeZone/app/src/main/assets/js/memory"
+    def targetFolderCommon = "D:/dev/bk/beezone/BeeZone/app/src/main/assets/js/common"
+    def targetFolderHtml = "D:/dev/bk/beezone/BeeZone/app/src/main/assets/memory"
     def targetFolderCss = "D:/dev/bk/beezone/BeeZone/app/src/main/assets/css"
 
     print ("Target JS folder ${targetFolderJs}")
+
+    copy {
+        from "memory"
+        include "memory.html"
+        filter{ it.replaceFirst("\\.\\./assets/css/memory.css", "../css/memory.css")}
+        into targetFolderHtml
+    }
 
     copy {
         from "js/memory"
@@ -16,7 +25,16 @@ memory.doFirst({
         include "parameters.js"
         include "resultPanel.js"
         include "sketch.js"
+        include "en_BZ.js"
+        include "pt_BZ.js"
+        include "successStory.js"
         into targetFolderJs
+    }
+
+    copy {
+        from "js/common"
+        include "loader_support.js"
+        into targetFolderCommon
     }
 
     copy {
