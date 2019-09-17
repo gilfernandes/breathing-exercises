@@ -15,7 +15,10 @@ MultiCircles.prototype.draw = function () {
         ctx.beginPath();
         ctx.fillStyle = "rgba(255, 255, 255, " + alphaIndent + ")";
         let r = (this.startWidth + this.increment * i ) / 2;
-        ctx.ellipse(0, 0, r, r, 45 * Math.PI / 180, 0, 2 * Math.PI);
+        try {
+            ctx.ellipse(0, 0, r, r, 45 * Math.PI / 180, 0, 2 * Math.PI);
+        } catch(e) {
+        }
         ctx.fill();
     }
 };

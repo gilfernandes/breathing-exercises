@@ -1,9 +1,10 @@
 task memory
 
+def targetFolderCommon = "D:/dev/bk/beezone/BeeZone/app/src/main/assets/js/common"
+
 memory.doFirst({
 
     def targetFolderJs = "D:/dev/bk/beezone/BeeZone/app/src/main/assets/js/memory"
-    def targetFolderCommon = "D:/dev/bk/beezone/BeeZone/app/src/main/assets/js/common"
     def targetFolderHtml = "D:/dev/bk/beezone/BeeZone/app/src/main/assets/memory"
     def targetFolderCss = "D:/dev/bk/beezone/BeeZone/app/src/main/assets/css"
 
@@ -51,5 +52,53 @@ memory.doFirst({
         rename { fileName ->
             "memory.css"
         }
+    }
+})
+
+task breathe
+
+breathe.doFirst({
+
+    def targetFolderJs = "D:/dev/bk/beezone/BeeZone/app/src/main/assets/js/breathe"
+    def targetFolderHtml = "D:/dev/bk/beezone/BeeZone/app/src/main/assets/breathe"
+
+    print ("Target JS folder ${targetFolderJs}")
+
+    copy {
+        from "breathe"
+        include "breathing.html"
+        filter{ it.replaceFirst("\\.\\./assets/css/breathe.css", "../css/breathe.css")}
+        into targetFolderHtml
+    }
+
+    copy {
+        from "js/common"
+        include "loader_support.js"
+        include "sprite.js"
+        into targetFolderCommon
+    }
+
+    copy {
+        from "js/breathe"
+        include "en_BZ.js"
+        include "pt_BZ.js"
+        include "gradients.js"
+        include "breatheCalculations.js"
+        include "progress.js"
+        include "buttonBar.js"
+        include "soundPlayer.js"
+        include "counter.js"
+        include "breatheText.js"
+        include "multiCircles.js"
+        include "breathPause.js"
+        include "sketch.js"
+        into targetFolderJs
+    }
+
+    copy {
+        from "js/breathe"
+        include "breatheBall.js"
+        filter{ it.replaceFirst("\\.\\./assets/images/breathe/breathing-bubble-big.png", "../images/breathe/breathing-bubble-big.png")}
+        into targetFolderJs
     }
 })

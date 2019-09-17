@@ -52,6 +52,11 @@ var loaderSupport = (function() {
         document.head.appendChild(script);
     };
 
+    /**
+     * Returns a promise to load a script.
+     * @param url The URL of the script to load.
+     * @returns {Promise<unknown>}
+     */
     pub.loadScriptPromise = function (url) {
         return new Promise(function(resolve, reject) {
             var script = document.createElement('script');
