@@ -82,6 +82,7 @@ breathe.doFirst({
         from "js/breathe"
         include "en_BZ.js"
         include "pt_BZ.js"
+        include "hi_IN.js"
         include "gradients.js"
         include "breatheCalculations.js"
         include "progress.js"
